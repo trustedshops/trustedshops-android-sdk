@@ -19,11 +19,11 @@
         android:id="@+id/textView" />
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/trustbadgeTestImageView"
-        android:layout_below="@+id/textView"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="48dp" />
+        android:layout_marginBottom="5dp" />
 </RelativeLayout>
