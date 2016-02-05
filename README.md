@@ -7,13 +7,11 @@ Integrate your Trustbadge within your shopping app. Show the Trusted Shops trust
 Add the following to your build.gradle:
 ```
 repositories {
-    maven {
-        url  "http://dl.bintray.com/trustedshops/maven"
-    }
+    jcenter()
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:0.0.2'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:0.0.1'
 }
 ```
 
