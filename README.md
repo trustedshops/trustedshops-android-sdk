@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:0.0.1'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:0.0.2'
 }
 ```
 

@@ -30,27 +30,49 @@ public class Trustbadge {
         this._tsId = tsId;
     }
 
+    /**
+     * @param tsId - your Trusted Shops ID
+     * @param clientToken - your client token
+     */
     public Trustbadge(String tsId, String clientToken) {
         this._tsId = tsId;
         this._clientToken = clientToken;
     }
 
+    /**
+     * @param tsId - set your trusted shops id
+     */
     public void setTsId(String tsId) {
         this._tsId = tsId;
     }
 
+    /**
+     * @return - your trusted shops id that is currently set
+     */
     public String getTsId() {
         return this._tsId;
     }
+
+    /**
+     * @param clientToken - your api client tokenok
+     */
 
     public void setClientToken(String clientToken) {
         this._clientToken = clientToken;
     }
 
+    /**
+     * @return - the clientToken that is currently set
+     */
     public String getClinetToken() {
         return this._clientToken;
     }
 
+    /**
+     * @param view - ImageView to inject trustmark into
+     * @throws TrustbadgeException
+     * @throws IllegalArgumentException
+     */
     public void getTrustbadge(ImageView view) throws TrustbadgeException, IllegalArgumentException {
         if (!Validator.validateTsId(getTsId())) {
             throw new IllegalArgumentException("Wrong TSID provided");
