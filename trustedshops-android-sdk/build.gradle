@@ -1,4 +1,27 @@
 apply plugin: 'com.android.library'
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'trustedshops-android-sdk'
+
+    publishedGroupId = 'com.trustedshops.androidsdk'
+    libraryName = 'Trusted Shops SDK'
+    artifact = 'trustedshops-android-sdk'
+
+    libraryDescription = 'Trusted Shops SDK for Android'
+
+    siteUrl = 'https://github.com/trustedshops/trustedshops-android-sdk'
+    gitUrl = 'https://github.com/trustedshops/trustedshops-android-sdk.git'
+
+    libraryVersion = '0.0.2'
+
+    developerId = 'trustedshops'
+    developerName = 'Timur Olzhabayev'
+    developerEmail = 'timur.olzhabayev@trustedshops.de'
+
+    licenseName = 'The MIT License (MIT)'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ["MIT"]
+}
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -7,7 +30,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 0
-        versionName "0.0.2"
+        versionName libraryVersion
     }
     buildTypes {
         release {
@@ -23,6 +46,49 @@ dependencies {
 }
 
 apply plugin: 'com.github.dcendents.android-maven'
+
+group = publishedGroupId                               // Maven Group ID for the artifact
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                groupId publishedGroupId
+                artifactId artifact
+
+                // Add your description here
+                name libraryName
+                description libraryDescription
+                url siteUrl
+
+                // Set your license
+                licenses {
+                    license {
+                        name licenseName
+                        url licenseUrl
+                    }
+                }
+                developers {
+                    developer {
+                        id developerId
+                        name developerName
+                        email developerEmail
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+
+                }
+            }
+        }
+    }
+}
+
+version = libraryVersion
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -46,34 +112,11 @@ artifacts {
 
 apply plugin: 'com.jfrog.bintray'
 
+// Bintray
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 bintray {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-    ext {
-        bintrayRepo = 'maven'
-        bintrayName = 'trustedshops-android-sdk'
-
-        publishedGroupId = 'com.trustedshops.androidsdk'
-        libraryName = 'Trusted Shops SDK'
-        artifact = 'trustedshops-android-sdk'
-
-        libraryDescription = 'Trusted Shops SDK for Android'
-
-        siteUrl = 'https://github.com/trustedshops/trustedshops-android-sdk'
-        gitUrl = 'https://github.com/trustedshops/trustedshops-android-sdk.git'
-
-        libraryVersion = '0.0.2'
-
-        developerId = 'trustedshops'
-        developerName = 'Timur Olzhabayev'
-        developerEmail = 'timur.olzhabayev@trustedshops.de'
-
-        licenseName = 'The MIT License (MIT)'
-        licenseUrl = 'https://opensource.org/licenses/MIT'
-        allLicenses = ["MIT"]
-    }
-
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
 
@@ -89,8 +132,6 @@ bintray {
         publish = true
         publicDownloadNumbers = false
         version {
-            name = libraryVersion
-            vcsTag = libraryVersion
             desc = libraryDescription
             gpg {
                 sign = true //Determines whether to GPG sign the files. The default is false
