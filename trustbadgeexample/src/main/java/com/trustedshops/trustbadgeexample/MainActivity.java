@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         Trustbadge trustbadge = new Trustbadge("XA2A8D35838AF5F63E5EB0E05847B1CB8");
 
         try {
-            trustbadge.getTrustbadge(testImageView);
+            trustbadge.setClientToken("c46adf9a6880ebf033baaa5c505acae20889527dcfb3063821296ebf5fdb7684");
+            trustbadge.getTrustbadge(testImageView, this);
         } catch(IllegalArgumentException exception) {
             Log.d("TSDEBUG", exception.getMessage());
         } catch (TrustbadgeException exception) {
@@ -72,5 +73,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void gotoSecondScreen(MenuItem item) {
+        Intent intent = new Intent(this, Main2Activity.class);
+        startActivity(intent);
     }
 }

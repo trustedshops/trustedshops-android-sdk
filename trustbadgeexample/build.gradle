@@ -18,7 +18,6 @@ android {
         }
     }
 }
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':trustedshops-android-sdk') // remove this if you only imported the example project

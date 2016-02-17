@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="left"
+    android:orientation="vertical">
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:id="@+id/trustcardTitleTableRow"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ts_seal"
+                android:maxWidth="55dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center_vertical"
+                />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Trusted Shops zertifiziert"
+                android:singleLine="false"
+                android:textSize="25dp"
+                android:layout_weight="2"
+                android:paddingLeft="10dp"
+                android:layout_gravity="left">
+            </TextView>
+        </TableRow>
+
+        <TableRow android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="My text with lines above and below"
+                android:background="@drawable/hr_line"
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:layout_span="2"
+                android:id="@+id/trustcardTieleLineBreak"
+                android:layout_marginTop="10dp"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_marginTop="15dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="48sp"
+                android:id="@+id/trustcard_icon_1"
+                android:text="\uf00c"
+                />
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:stretchColumns="*"
+
+                android:layout_weight="2"
+                android:layout_height="wrap_content">
+                <TableRow android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="Geprüfter Shop"
+                        />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="12sp"
+                        android:singleLine="false"
+
+                        android:text="Dieser Shop erfüllt die Trusted Shops Qualitätskriterien"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+            </TableLayout>
+
+        </TableRow>
+        <TableRow
+            android:layout_marginTop="15dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="48sp"
+                android:id="@+id/trustcard_icon_2"
+                android:text="\uf023"
+                />
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:stretchColumns="*"
+
+                android:layout_weight="2"
+                android:layout_height="wrap_content">
+                <TableRow android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="Geld-zurück-Garantie"
+                        />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="12sp"
+                        android:singleLine="false"
+
+                        android:text="Abgesichert durch die Trusted Shops Garantie"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+            </TableLayout>
+
+        </TableRow>
+        <TableRow
+            android:layout_marginTop="15dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="48sp"
+                android:id="@+id/trustcard_icon_3"
+                android:text="\uf0e6"
+                />
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:stretchColumns="*"
+
+                android:layout_weight="2"
+                android:layout_height="wrap_content">
+                <TableRow android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="Kundenservice"
+                        />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="12sp"
+                        android:singleLine="false"
+
+                        android:text="Bei Fragen kontaktieren Sie diesen Shop und bei Bedarf Trusted Shops!"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+            </TableLayout>
+
+        </TableRow>
+
+    </TableLayout>
+</RelativeLayout>
