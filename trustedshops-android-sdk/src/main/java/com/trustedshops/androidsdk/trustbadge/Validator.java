@@ -1,8 +1,6 @@
 package com.trustedshops.androidsdk.trustbadge;
 
 
-import android.util.Log;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

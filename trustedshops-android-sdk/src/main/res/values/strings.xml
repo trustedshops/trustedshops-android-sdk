@@ -1,3 +1,14 @@
 <resources>
+    <string name="trustedshops_sdk_fa_check">\uf00c</string>
+    <string name="trustedshops_sdk_fa_lock">\uf023</string>
+    <string name="trustedshops_sdk_fa_service">\uf0e6</string>
     <string name="app_name">Trustedshops Android SDK</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_certified_title">Trusted Shops certified</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_certified_point1_title">Certified shop</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_certified_point1_description">This shop fulfils the Trusted Shops quality criteria</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_certified_point2_title">Money-back guarantee</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_certified_point2_description">Protected by the Trusted Shops guarantee</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_title">Customer service</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_description">If you have any questions, contact the online shop or, if necessary, Trusted Shops</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_negative_button_text">SHOW CERTIFICATE</string>
 </resources>
