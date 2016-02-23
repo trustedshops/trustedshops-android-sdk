@@ -1,10 +1,10 @@
 <resources>
-    <string name="trustedshops_sdk_trustbadge_dialog_certified_title">Trusted Shops zertifiziert</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_certified_title">Trusted Shops keurmerk</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point1_title">Gecertificeerde webwinkel</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point1_description">Deze webwinkel voldoet aan de Trusted Shops kwaliteitscriteria</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point2_title">Geld-terug-garantie</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point2_description">Zekerheid met de Trusted Shops garantie</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_title">Klantenservice</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_description">Neem bij vragen contact op met deze webwinkel of zo nodig met Trusted Shops</string>
-    <string name="trustedshops_sdk_trustbadge_dialog_negative_button_text">ZUM ZERTIFIKAT</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_negative_button_text">CERTIFICAAT</string>
 </resources>

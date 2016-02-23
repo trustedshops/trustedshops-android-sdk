@@ -1,10 +1,10 @@
 <resources>
-    <string name="trustedshops_sdk_trustbadge_dialog_certified_title">Trusted Shops zertifiziert</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_certified_title">Marque de confiance Trusted Shops</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point1_title">Boutique vérifiée</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point1_description">Cette boutique remplit les critères de qualité Trusted Shops</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point2_title">La garantie de remboursement</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point2_description">Couvert par la garantie Trusted Shops</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_title">Service client</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_description">Si vous avez des questions, merci de contacter cette boutique ou, si nécessaire, Trusted Shops</string>
-    <string name="trustedshops_sdk_trustbadge_dialog_negative_button_text">ZUM ZERTIFIKAT</string>
+    <string name="trustedshops_sdk_trustbadge_dialog_negative_button_text">AFFICHER LE PROFIL</string>
 </resources>

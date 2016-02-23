@@ -24,12 +24,12 @@ public class UrlManager {
     }};
 
     public static String getShopProfileUrl(Shop shop) {
-        String urlListKey = getUrlListKeyFromCountryCodeAndLanguage(shop.get_targetMarketISO3(), shop.get_languageISO2());
+        String urlListKey = getUrlListKeyFromCountryCodeAndLanguage(shop.getTargetMarketISO3(), shop.getLanguageISO2());
 
         if (urlList.containsKey(urlListKey) && urlList.get(urlListKey).containsKey("reviewProfile")) {
-            return String.format(urlList.get(urlListKey).get("reviewProfile").toString(), shop.get_tsId());
+            return String.format(urlList.get(urlListKey).get("reviewProfile").toString(), shop.getTsId());
         }
-        return String.format(urlList.get("EUO_en").get("reviewProfile").toString(), shop.get_tsId());
+        return String.format(urlList.get("EUO_en").get("reviewProfile").toString(), shop.getTsId());
     }
 
     protected static String getUrlListKeyFromCountryCodeAndLanguage(String targetMarketISO3, String languageISO2) {

@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             //trustbadge.setIconColor("#F98222");
+            //trustbadge.setLoggingActive(true);
+            //trustbadge.setClientToken("");
             trustbadge.getTrustbadge(testImageView, this);
 
         } catch(IllegalArgumentException exception) {

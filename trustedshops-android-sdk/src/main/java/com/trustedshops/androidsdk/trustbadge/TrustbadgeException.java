@@ -12,7 +12,6 @@ public class TrustbadgeException extends Exception
     }
 
     public TrustbadgeException(Throwable cause)
-
     {
         super(cause);
     }

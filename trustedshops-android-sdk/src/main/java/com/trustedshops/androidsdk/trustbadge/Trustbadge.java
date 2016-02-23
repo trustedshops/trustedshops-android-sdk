@@ -37,10 +37,13 @@ public class Trustbadge {
     protected int _iconColor;
     protected Shop _shop;
 
-    public Trustbadge() {
 
+    public Trustbadge() {
     }
 
+    /**
+     * @param tsId
+     */
     public Trustbadge(String tsId) {
         this._tsId = tsId;
     }
@@ -81,23 +84,44 @@ public class Trustbadge {
      */
     public String getClinetToken() {
         return this._clientToken;
+
     }
 
+    /**
+     *
+     * @param loggingActive boolean
+     */
     public void setLoggingActive(boolean loggingActive) {
-        _loggingActive = loggingActive;
+        this._loggingActive = loggingActive;
     }
 
+    /**
+     *
+     * @param iconColor String
+     */
     public void setIconColor(String iconColor) {
         this._iconColor = Color.parseColor(iconColor);
-    }
-    public int getIconColor() {
-        return _iconColor;
+
     }
 
+    /**
+     * @return Integer Icon Color
+     */
+    public int getIconColor() {
+        return _iconColor;
+
+    }
+
+    /**
+     * @param shop Shop
+     */
     public void setShop(Shop shop) {
         _shop = shop;
     }
 
+    /**
+     * @return loggingActive boolean
+     */
     public boolean isLoggingActive() {
         return _loggingActive;
     }
@@ -111,6 +135,10 @@ public class Trustbadge {
         if (!Validator.validateTsId(getTsId())) {
             throw new IllegalArgumentException("Wrong TSID provided");
         }
+
+        if (getClinetToken() == null) {
+            throw new IllegalArgumentException("Client Token is Missing");
+        }
         //view.setImageResource(R.drawable.ts_seal);
         _imageView = view;
         _activity = activity;
@@ -121,14 +149,14 @@ public class Trustbadge {
             if (isLoggingActive()) {
                 Log.d("TSDEBUG", e.getMessage());
             }
-
             throw new TrustbadgeException("Could not verify Trustmark");
         }
-
     }
 
 
-
+    /**
+     * Trustcard onClick Listener
+     */
     protected ImageView.OnClickListener showTrustcard = new ImageView.OnClickListener() {
         public void onClick(View v) {
             boolean wrapInScrollView = true;
@@ -174,9 +202,12 @@ public class Trustbadge {
     };
 
 
+    /**
+     * API CALL Async
+     * @throws Exception
+     */
+
     public void run() throws Exception {
-
-
         final Request request = new Request.Builder()
                 .url(UrlManager.getTrustMarkAPIUrl(getTsId()))
                 .addHeader("client-token", getClinetToken())
@@ -191,14 +222,20 @@ public class Trustbadge {
 
         _client.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+                if (isLoggingActive()) {
+                    Log.d("TSDEBUG", e.getMessage());
+                }
             }
 
             @Override public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                if (!response.isSuccessful())  {
+                    if (isLoggingActive()) {
+                        Log.d("TSDEBUG", "Trustmark API call unsuccessfull " + response);
+                    }
+                }
                 String jsonData = response.body().string();
                 Shop parsedShopObject = parseApiResponse(jsonData);
-                if (parsedShopObject != null && parsedShopObject.get_trustMark()!= null && parsedShopObject.get_trustMark().get_status().equals("VALID")) {
+                if (parsedShopObject != null && parsedShopObject.getTrustMark()!= null && parsedShopObject.getTrustMark().getStatus().equals("VALID")) {
                     setShop(parsedShopObject);
                     _activity.runOnUiThread(new Runnable() {
                         @Override
@@ -217,6 +254,10 @@ public class Trustbadge {
         });
     }
 
+    /**
+     * @param jsonData
+     * @return Parsed API Response
+     */
     protected Shop parseApiResponse(String jsonData) {
         Shop s = null;
 
@@ -227,11 +268,11 @@ public class Trustbadge {
             JSONObject dataJsonObject = responseJsonObject.getJSONObject("data");
             JSONObject shopJsonObject = dataJsonObject.getJSONObject("shop");
 
-            _responseShop.set_languageISO2(shopJsonObject.getString("languageISO2"));
-            _responseShop.set_targetMarketISO3(shopJsonObject.getString("targetMarketISO3"));
-            _responseShop.set_url(shopJsonObject.getString("url"));
-            _responseShop.set_tsId(shopJsonObject.getString("tsId"));
-            _responseShop.set_name(shopJsonObject.getString("name"));
+            _responseShop.setLanguageISO2(shopJsonObject.getString("languageISO2"));
+            _responseShop.setTargetMarketISO3(shopJsonObject.getString("targetMarketISO3"));
+            _responseShop.setUrl(shopJsonObject.getString("url"));
+            _responseShop.setTsId(shopJsonObject.getString("tsId"));
+            _responseShop.setName(shopJsonObject.getString("name"));
 
             TrustMark _responseTrustMark = new TrustMark();
 
@@ -239,18 +280,18 @@ public class Trustbadge {
                 JSONObject trustMarkJsonObject = shopJsonObject.getJSONObject("trustMark");
 
                 if (trustMarkJsonObject.has("status")) {
-                    _responseTrustMark.set_status(trustMarkJsonObject.getString("status"));
+                    _responseTrustMark.setStatus(trustMarkJsonObject.getString("status"));
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
                     if (trustMarkJsonObject.has("validFrom")) {
-                        _responseTrustMark.set_validFrom(format.parse(trustMarkJsonObject.getString("validFrom")));
+                        _responseTrustMark.setValidFrom(format.parse(trustMarkJsonObject.getString("validFrom")));
                     }
 
                     if (trustMarkJsonObject.has("validTo")) {
-                        _responseTrustMark.set_validTo(format.parse(trustMarkJsonObject.getString("validTo")));
+                        _responseTrustMark.setValidTo(format.parse(trustMarkJsonObject.getString("validTo")));
                     }
                 }
-                _responseShop.set_trustMark(_responseTrustMark);
+                _responseShop.setTrustMark(_responseTrustMark);
             }
 
             return _responseShop;
