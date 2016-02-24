@@ -36,7 +36,7 @@ public class UrlManager {
         return targetMarketISO3.toUpperCase()+"_"+languageISO2.toLowerCase();
     }
 
-    public static String getTrustMarkAPIUrl(String tsId) {
-        return String.format("https://api.trustedshops.com/rest/internal/v2/shops/%s/trustmarks.json", tsId);
+    public static String getTrustMarkAPIUrl(String tsId, String apiEndPoint) {
+        return String.format("https://"+apiEndPoint+"/rest/internal/v2/shops/%s/trustmarks.json", tsId);
     }
 }

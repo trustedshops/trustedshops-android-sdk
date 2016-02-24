@@ -36,6 +36,7 @@ public class Trustbadge {
     protected boolean _loggingActive = false;
     protected int _iconColor;
     protected Shop _shop;
+    protected String _endPoint = "api.trustedshops.com";
 
 
     public Trustbadge() {
@@ -110,6 +111,22 @@ public class Trustbadge {
     public int getIconColor() {
         return _iconColor;
 
+    }
+
+    /**
+     *
+     * @param endPoint for API to use
+     */
+    public void setEndPoint(String endPoint) {
+        _endPoint = endPoint;
+    }
+
+    /**
+     *
+     * @return String endPoint
+     */
+    public String getEndPoint() {
+        return _endPoint;
     }
 
     /**
@@ -209,7 +226,7 @@ public class Trustbadge {
 
     public void run() throws Exception {
         final Request request = new Request.Builder()
-                .url(UrlManager.getTrustMarkAPIUrl(getTsId()))
+                .url(UrlManager.getTrustMarkAPIUrl(getTsId(), getEndPoint()))
                 .addHeader("client-token", getClinetToken())
                 .build();
 
