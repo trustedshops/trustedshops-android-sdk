@@ -266,6 +266,10 @@ public class Trustbadge {
                         }
                     });
 
+                } else {
+                    if (isLoggingActive()) {
+                        Log.d("TSDEBUG", "No valid certificate found");
+                    }
                 }
             }
         });
