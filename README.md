@@ -1,6 +1,6 @@
 # Trusted Shops SDK for Android
 
-Integrate your Trustbadge within your shopping app. Show the Trusted Shops trustmark to new and existing customers when they use your app.
+Integrate your Trustbadge within your shopping app. Show the Trusted Shops trustmark to new and existing customers when they use your app. The SDK currently supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
 ## Usage
 
