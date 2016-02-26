@@ -32,15 +32,15 @@ ImageView imageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
 
 ## Parameters
 
+```
 .setIconColor("#F98222");
 ```
 Sets the icon color in HEX Format
-```
 
+```
 .setLoggingActive(true);
 ```
 Enables DEBUG-Logging
-```
 
 ## Requirements
 We support Android API 16 and above.
