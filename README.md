@@ -42,6 +42,13 @@ Sets the icon color in HEX Format
 Enables DEBUG-Logging
 ```
 
+## Requirements
+We support Android API 16 and above.
+
+## Dependencies
+Trustedshops Android SDK depends on:
+* Square's popular [OkHTTP](http://square.github.io/okhttp/) library
+
 ## About Trusted Shops
 
 Today more than 20,000 online sellers are using Trusted Shops to collect, show, and manage genuine feedback from their customers. A large community of online buyers has already contributed over 6 million reviews.
