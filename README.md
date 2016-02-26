@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:0.0.2'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.0'
 }
 ```
 
@@ -21,12 +21,25 @@ See Example Project for how to use Trusted Shops Android SDK
 Trustbadge trustbadge = new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
   try {
     trustbadge.getTrustbadge(imageView);
+    trustbadge.setClientToken("YOUR-TRUSTED-SHOPS-CLIENT-TOKEN");    
   } catch(IllegalArgumentException exception) {
       Log.d("TSDEBUG", exception.getMessage());
   } catch (TrustbadgeException exception) {
       Log.d("TSDEBUG", exception.getMessage());
 }
 ```    
+
+## Parameters
+
+.setIconColor('#F98222');
+```
+Sets the icon color in HEX Format
+```
+
+.setLoggingActive(true);
+```
+Enables DEBUG-Logging
+```
 
 ## About Trusted Shops
 
