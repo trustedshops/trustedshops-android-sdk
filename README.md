@@ -19,9 +19,10 @@ See Example Project for how to use Trusted Shops Android SDK
 
 ```
 Trustbadge trustbadge = new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
+ImageView imageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
   try {
-    trustbadge.getTrustbadge(imageView);
     trustbadge.setClientToken("YOUR-TRUSTED-SHOPS-CLIENT-TOKEN");    
+    trustbadge.getTrustbadge(imageView, activity);        
   } catch(IllegalArgumentException exception) {
       Log.d("TSDEBUG", exception.getMessage());
   } catch (TrustbadgeException exception) {
@@ -31,7 +32,7 @@ Trustbadge trustbadge = new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 
 ## Parameters
 
-.setIconColor('#F98222');
+.setIconColor("#F98222");
 ```
 Sets the icon color in HEX Format
 ```
