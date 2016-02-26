@@ -1,6 +1,6 @@
 # Trusted Shops SDK for Android
 
-Integrate your Trustbadge within your shopping app. Show the Trusted Shops trustmark together with your seller rating and stars to new and existing customers when they use your app.
+Integrate your Trustbadge within your shopping app. Show the Trusted Shops trustmark to new and existing customers when they use your app.
 
 ## Usage
 
