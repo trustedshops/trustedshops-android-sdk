@@ -3,7 +3,7 @@
 Integrate your Trustbadge in your shopping app and show the Trusted Shops trustmark to your user and lift your conversion rate.
 
 
-![Lightbox](https://github.com/trustedshops/trustedshops-android-sdk/blob/master/trustbadgeexample/screenshots/Advantages.png)
+<!-- ![Lightbox](https://github.com/trustedshops/trustedshops-android-sdk/blob/master/trustbadgeexample/screenshots/Advantages.png) -->
 
 The SDK currently supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
