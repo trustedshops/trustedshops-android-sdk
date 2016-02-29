@@ -2,7 +2,7 @@
 
 Integrate your Trustbadge in your shopping app and show the Trusted Shops trustmark to your user and lift your conversion rate.
 
-
+<!--
 <table>
     <tr>
         <td>
@@ -28,7 +28,7 @@ Integrate your Trustbadge in your shopping app and show the Trusted Shops trustm
     </tr>
 
 </table>
-
+-->
 
 The SDK currently supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
