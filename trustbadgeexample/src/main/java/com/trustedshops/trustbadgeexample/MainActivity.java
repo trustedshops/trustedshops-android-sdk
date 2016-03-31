@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ImageView testImageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
-        Trustbadge trustbadge = new Trustbadge("XA2A8D35838AF5F63E5EB0E05847B1CB8");
+        Trustbadge trustbadge = new Trustbadge("X330A2E7D449E31E467D2F53A55DDD070");
 
         try {
             //trustbadge.setIconColor("#F98222");

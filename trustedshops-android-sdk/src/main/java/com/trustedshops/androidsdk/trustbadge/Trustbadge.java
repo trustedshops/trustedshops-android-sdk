@@ -30,32 +30,23 @@ import okhttp3.Response;
 public class Trustbadge {
     OkHttpClient _client;
     private String _tsId;
-    private String _clientToken;
     protected ImageView _imageView;
     protected Activity _activity;
     protected boolean _loggingActive = false;
     protected int _iconColor;
     protected Shop _shop;
-    protected String _endPoint = "api.trustedshops.com";
+    protected String _endPoint = "cdn1.api.trustedshops.com";
 
 
     public Trustbadge() {
     }
 
-    /**
-     * @param tsId
-     */
-    public Trustbadge(String tsId) {
-        this._tsId = tsId;
-    }
 
     /**
      * @param tsId - your Trusted Shops ID
-     * @param clientToken - your client token
      */
-    public Trustbadge(String tsId, String clientToken) {
+    public Trustbadge(String tsId) {
         this._tsId = tsId;
-        this._clientToken = clientToken;
     }
 
     /**
@@ -72,21 +63,6 @@ public class Trustbadge {
         return this._tsId;
     }
 
-    /**
-     * @param clientToken - your api client tokenok
-     */
-
-    public void setClientToken(String clientToken) {
-        this._clientToken = clientToken;
-    }
-
-    /**
-     * @return - the clientToken that is currently set
-     */
-    public String getClinetToken() {
-        return this._clientToken;
-
-    }
 
     /**
      *
@@ -153,9 +129,6 @@ public class Trustbadge {
             throw new IllegalArgumentException("Wrong TSID provided");
         }
 
-        if (getClinetToken() == null) {
-            throw new IllegalArgumentException("Client Token is Missing");
-        }
         //view.setImageResource(R.drawable.ts_seal);
         _imageView = view;
         _activity = activity;
@@ -227,7 +200,6 @@ public class Trustbadge {
     public void run() throws Exception {
         final Request request = new Request.Builder()
                 .url(UrlManager.getTrustMarkAPIUrl(getTsId(), getEndPoint()))
-                .addHeader("client-token", getClinetToken())
                 .build();
 
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
