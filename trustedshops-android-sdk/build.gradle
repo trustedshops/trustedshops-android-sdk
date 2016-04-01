@@ -12,11 +12,11 @@ ext {
     siteUrl = 'https://github.com/trustedshops/trustedshops-android-sdk'
     gitUrl = 'https://github.com/trustedshops/trustedshops-android-sdk.git'
 
-    libraryVersion = '1.0'
+    libraryVersion = '1.1'
 
     developerId = 'trustedshops'
-    developerName = 'Timur Olzhabayev'
-    developerEmail = 'timur.olzhabayev@trustedshops.de'
+    developerName = 'Mohamed Galala'
+    developerEmail = 'mohamed.galala@trustedshops.com'
 
     licenseName = 'The MIT License (MIT)'
     licenseUrl = 'https://opensource.org/licenses/MIT'

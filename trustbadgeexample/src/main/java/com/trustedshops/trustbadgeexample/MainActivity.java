@@ -37,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ImageView testImageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
+        /* Please insert your Trusted Shops ID */
         Trustbadge trustbadge = new Trustbadge("X330A2E7D449E31E467D2F53A55DDD070");
 
         try {
             //trustbadge.setIconColor("#F98222");
             //trustbadge.setLoggingActive(true);
-            //trustbadge.setClientToken("");
             trustbadge.getTrustbadge(testImageView, this);
 
         } catch(IllegalArgumentException exception) {
