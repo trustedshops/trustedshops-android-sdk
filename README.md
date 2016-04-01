@@ -58,16 +58,17 @@ ImageView imageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
 }
 ```    
 
-#### Contact us for authorization
+#### Authorization
 
-Contact us for authorization
+To use this SDK in your own mobile app Trusted Shops need to authorize the app. 
+Please contact us via productfeedback@trustedshops.com to get your apps authorized.  
 
 #### Mandatory Parameters
 
 ```
 new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 ```
-TS-ID
+This is your app's TS-ID which will be provided by Trusted Shops.
 
 #### Optional Parameters
 
