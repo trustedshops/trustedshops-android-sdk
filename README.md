@@ -37,6 +37,7 @@ Add the following to your build.gradle:
 ```
 repositories {
     jcenter()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
