@@ -40,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.0'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.1'
 }
 ```
 
