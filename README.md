@@ -71,8 +71,7 @@ import com.trustedshops.androidsdk.trustbadge.TrustbadgeException;
 ```
 new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 ```
-This is your app's TS-ID which will be provided by Trusted Shops.
-For testing purposes the following TS-ID can be used:
+This is your app's TS-ID which will be provided by Trusted Shops. In order to get your TS-ID authorized please see the "Authorization" section below. For testing purposes the following TS-ID can be used:
 ```
 new Trustbadge("X330A2E7D449E31E467D2F53A55DDD070");
 ```
@@ -92,7 +91,7 @@ Enables DEBUG-Logging
 ## Authorization
 
 To use this SDK in your own mobile app Trusted Shops needs to authorize your app. 
-Please contact us via productfeedback@trustedshops.com to get your apps authorized.  
+Please contact us via [productfeedback@trustedshops.com](mailto:productfeedback@trustedshops.com) to get your apps authorized.  
 
 ## Requirements
 We support Android API 16 and above.
@@ -109,7 +108,7 @@ Whether you are a start-up entrepreneur, a professional seller or an internation
 ## Questions and Feedback
 
 Your feedback helps us to improve this library. 
-If you have any questions concerning this product or the implementation, please contact productfeedback@trustedshops.com
+If you have any questions concerning this product or the implementation, please contact [productfeedback@trustedshops.com](mailto:productfeedback@trustedshops.com)
 
 ## License
 
