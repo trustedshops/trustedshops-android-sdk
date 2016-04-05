@@ -79,7 +79,7 @@ new Trustbadge("X330A2E7D449E31E467D2F53A55DDD070");
 #### Optional Parameters
 
 ```
-.setIconColor("#F98222");
+.setIconColor("#27AE60");
 ```
 Sets the icon color in HEX Format
 
