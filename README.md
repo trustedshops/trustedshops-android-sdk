@@ -1,6 +1,10 @@
 # Trusted Shops SDK for Android
 
-Integrate your Trustbadge in your shopping app and show the Trusted Shops trustmark to your user and lift your conversion rate.
+Integrate your Trustbadge in your shopping app and show the Trusted Shops trustmark to your users and lift your conversion rate. Our SDK
+- checks the validity of your certificate in the background, 
+- shows the trustbadge whereever you want in your app and 
+- allows the user to get more information of the certificate's advantages by tapping on the trustbadge (a lightbox appears from which the user can access your detailled review profile)
+- currently supports the following languages: DE, EN, FR, ES, IT, NL, PL
 
 <table>
     <tr>
@@ -27,12 +31,6 @@ Integrate your Trustbadge in your shopping app and show the Trusted Shops trustm
     </tr>
 
 </table>
-
-The SDK 
-- checks the validity of your certificate in the background, 
-- shows the trustbadge whereever you want in your app and 
-- allows the user to get more information of the certificate's advantages by tapping on the trustbadge (a lightbox appears from which the user can access your detailled review profile)
-- currently supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
 ## Usage
 
