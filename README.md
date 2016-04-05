@@ -60,7 +60,7 @@ ImageView imageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
       Log.d("TSDEBUG", exception.getMessage());
 }
 ```
-When you’ve finished entering the above code, you will probably see some red warning text from Android Studio. This is because we haven’t yet imported some of the classes we’re referencing. You can automatically import these classes by pressing Alt + Enter (Alt + Return on Mac). Alternatively, manually add the following to the top of your java file:
+When you’ve finished entering the above code, you will probably see some red warning text from Android Studio. This is because some of the classes we’re referencing are not imported yet. You can automatically import these classes by pressing Alt + Enter (Alt + Return on Mac). Alternatively, manually add the following to the top of your java file:
 ```
 import com.trustedshops.androidsdk.trustbadge.Trustbadge;
 import com.trustedshops.androidsdk.trustbadge.TrustbadgeException;
