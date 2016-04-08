@@ -90,7 +90,7 @@ Enables DEBUG-Logging
 
 ## Authorization
 
-To use this SDK in your own mobile app Trusted Shops needs to authorize your app. 
+To use this SDK in your own mobile app Trusted Shops needs to authorize your app.<br>
 Please contact us via [productfeedback@trustedshops.com](mailto:productfeedback@trustedshops.com) to get your apps authorized.  
 
 ## Requirements
