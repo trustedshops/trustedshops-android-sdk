@@ -113,3 +113,6 @@ If you have any questions concerning this product or the implementation, please 
 ## License
 
 Trusted Shops Android SDK is available under the MIT license. See the LICENSE file for more info.
+
+## Looking for iOS SDK?
+https://github.com/trustedshops/trustbadge_iOS
