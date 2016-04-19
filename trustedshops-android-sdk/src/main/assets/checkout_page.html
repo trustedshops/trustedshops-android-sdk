@@ -1,0 +1,68 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <base href="https://www.trustedshops.com">
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #checkoutTrustcardResponsive_db8d3657bdbe440c985ae127463eaad4node {
+        border-bottom: 0!important;
+        }
+    </style>
+</head>
+<body>
+<div id="trustedShopsCheckout">
+    <span id="tsCheckoutOrderNr">5213123213215454121</span>
+    <span id="tsCheckoutBuyerId">4444</span>
+    <span id="tsCheckoutBuyerEmail">acidrat+unbekannt225213121@gmail.com</span>
+    <span id="tsCheckoutOrderAmount">144</span>
+    <span id="tsCheckoutOrderCurrency">EUR</span>
+    <span id="tsCheckoutOrderPaymentType">credit_card</span>
+    <span id="tsCheckoutOrderEstDeliveryDate">2016-04-18</span>
+</div>
+<script>
+    var checkoutOrderId = document.getElementById("tsCheckoutOrderNr");
+    var randomNumber = Math.floor(Math.random() * 60000) + 1;
+    checkoutOrderId.innerHTML = "blsad2134" + randomNumber;
+
+    var tsCheckoutBuyerEmail = document.getElementById("tsCheckoutBuyerEmail");
+    var randomNumber = Math.floor(Math.random() * 60000) + 1;
+    tsCheckoutBuyerEmail.innerHTML = "acidat+unbekannt" + randomNumber+"@gmail.com";
+
+</script>
+<script type="text/javascript">
+            (function () {
+                var _tsid = 'XCD7B06A865895BD55F9B86C6BE099CC7';
+                _tsConfig =
+                {
+                    'yOffset': '', //offset from page bottom
+                    'variant' : 'reviews',
+                    'sourceUrl': 'https://widgets.trustedshops.com/'
+
+                };
+                var _ts = document.createElement('script');
+                _ts.type = 'text/javascript';
+                _ts.charset = 'utf-8';
+                _ts.async = true;
+                _ts.src = 'https://qa.trustedshops.com/trustbadge/js/'+ _tsid + '.js';
+                var __ts = document.getElementsByTagName('script')[0];
+                __ts.parentNode.insertBefore(_ts, __ts);
+            })();
+</script>
+
+<script>
+setTimeout(function(){
+    var closeButton = document.getElementsByClassName("consumerMembershipResponsiveClose_db8d3657bdbe440c985ae127463eaad4")[0];
+    closeButton.addEventListener("click", function() {
+        jsInterface.dialogDismiss();
+    });
+
+ }, 500);
+
+
+
+</script>
+</body>
+</html>
