@@ -18,11 +18,6 @@ public class JsInterface {
         mOrder = order;
     }
 
-    @JavascriptInterface
-    protected String getTrustbadgeCheckoutDataHtml() {
-        Log.d("TSDEBUG", mOrder.getTrustbadgeCheckoutDataHtml());
-        return mOrder.getTrustbadgeCheckoutDataHtml();
-    }
 
     @JavascriptInterface
     protected void log(String log) {

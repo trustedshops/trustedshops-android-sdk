@@ -12,6 +12,12 @@
         }
     </style>
     <script>
+    window.addEventListener("trustbadge_event_card_closed", function(){
+        jsInterface.dialogDismiss();
+        console.log("adding event listener");
+    });
+
+
     function logToAndroid(message) {
         jsInterface.log(message);
      }
@@ -25,7 +31,7 @@
             _ts.type = 'text/javascript';
             _ts.charset = 'utf-8';
             _ts.async = true;
-            _ts.src = '//widgets.trustedshops.com/js/' + _tsid + '.js';
+            _ts.src = '//integr.trustedshops.com/trustbadge/js/' + _tsid + '.js';
             var __ts = document.getElementsByTagName('script')[0];
             __ts.parentNode.insertBefore(_ts, __ts);
     }

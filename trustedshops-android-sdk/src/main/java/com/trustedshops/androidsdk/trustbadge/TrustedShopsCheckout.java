@@ -7,12 +7,14 @@ import android.webkit.WebView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.util.Random;
+
 import okhttp3.OkHttpClient;
 
 public class TrustedShopsCheckout {
     OkHttpClient _client;
     private String _tsId;
-    protected TrustbadgeOrder _Trustbadge_order;
+    protected TrustbadgeOrder _trustbadgeOrder;
     protected Activity _activity;
     protected boolean _alreadyInjected = false;
 
@@ -20,7 +22,7 @@ public class TrustedShopsCheckout {
     }
 
     public TrustedShopsCheckout(TrustbadgeOrder tsCheckoutTrustbadgeOrder) {
-        _Trustbadge_order = tsCheckoutTrustbadgeOrder;
+        _trustbadgeOrder = tsCheckoutTrustbadgeOrder;
     }
 
     public void setActivity(Activity activity) {
@@ -36,17 +38,16 @@ public class TrustedShopsCheckout {
 
         //@TODO Validate parameters before starting dialog
 
-
-
-
         WebView webView = new WebView(getActivity());
+        webView.clearCache(true);
         webView.setWebChromeClient(new WebChromeClient(){
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress == 100 && !_alreadyInjected) {
-                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutBuyerEmail('asdasdsa@sadasas.com')");
-                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderNr('BNG12312321')");
-                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderCurrency('EUR')");
-                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderPaymentType('PAYPAL')");
+                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutBuyerEmail('"+ _trustbadgeOrder.getTsCheckoutBuyerEmail()  +"')");
+                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderNr('"+ _trustbadgeOrder.getTsCheckoutOrderNr() +"')");
+                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderCurrency('"+ _trustbadgeOrder.getTsCheckoutOrderCurrency() +"')");
+                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderAmount('"+_trustbadgeOrder.getTsCheckoutOrderAmount() +"')");
+                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderPaymentType('"+_trustbadgeOrder.getTsCheckoutOrderPaymentType() +"')");
                     view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().addProduct('www.google.de', 'Bügeleisen', 'ART-123312', 'http://image.google.com/image/product.png', 'NFS512321321', 'JSDSADSA', 'TEFAL')");
                     view.loadUrl("javascript:document.body.appendChild(window.trustbadgeCheckoutManager.getOrderManager().getTrustedShopsCheckoutElement())");
                     view.loadUrl("javascript:injectTrustbadge('XCD7B06A865895BD55F9B86C6BE099CC7')");
@@ -67,12 +68,10 @@ public class TrustedShopsCheckout {
                 .build();
 
         //webView.loadUrl("http://www.google.de");
-        JsInterface jsInterface = new JsInterface(dialog, _Trustbadge_order);
+        JsInterface jsInterface = new JsInterface(dialog, _trustbadgeOrder);
         webView.addJavascriptInterface(jsInterface, "jsInterface");
         webView.setMinimumHeight(125);
         webView.loadUrl("file:///android_asset/checkout_page.html");
-        webView.loadUrl("javascript:testEcho('Hello World!')");
-
         dialog.show();
 
     }

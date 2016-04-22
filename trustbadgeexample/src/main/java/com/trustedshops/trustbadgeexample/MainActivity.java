@@ -20,6 +20,8 @@ import com.trustedshops.androidsdk.trustbadge.TrustbadgeException;
 import com.trustedshops.androidsdk.trustbadge.TrustbadgeOrder;
 import com.trustedshops.androidsdk.trustbadge.TrustedShopsCheckout;
 
+import java.util.Random;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,7 +71,20 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
                     TrustbadgeOrder tsCheckoutTrustbadgeOrder = new TrustbadgeOrder();
+
+
+                    //@TODO - remove random order id generation after testing
+                    int orderNumber = new Random().nextInt((3000 - 1) + 1) + 1;
+                    String checkoutOrderNumber = "SDKTEST1000" + orderNumber;
+
+                    tsCheckoutTrustbadgeOrder.setTsCheckoutOrderNr(checkoutOrderNumber);
+                    tsCheckoutTrustbadgeOrder.setTsCheckoutBuyerEmail("tester@example.com");
+                    tsCheckoutTrustbadgeOrder.setTsCheckoutOrderAmount("150");
+                    tsCheckoutTrustbadgeOrder.setTsCheckoutOrderCurrency("EUR");
+                    tsCheckoutTrustbadgeOrder.setTsCheckoutOrderPaymentType("PAYPAL");
+
                     TrustedShopsCheckout tsCheckout = new TrustedShopsCheckout(tsCheckoutTrustbadgeOrder);
+
                     try {
                         tsCheckout.init(MainActivity.this);
                     } catch (TrustbadgeException exception) {
