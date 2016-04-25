@@ -25,7 +25,14 @@ public class TrustbadgeOrder {
      */
     protected String tsCheckoutOrderPaymentType;
     protected String tsCheckoutOrderEstDeliveryDate;
-    protected ArrayList<Product> tsCheckoutProductItems;
+    protected ArrayList<Product> tsCheckoutProductItems = new ArrayList<Product>();
+
+
+    /**
+     * @required
+     */
+    protected String tsId;
+
 
     public String getTsCheckoutOrderNr() {
         return tsCheckoutOrderNr;
@@ -67,4 +74,27 @@ public class TrustbadgeOrder {
         this.tsCheckoutOrderCurrency = orderCurrency;
     }
 
+    public String getTsCheckoutOrderEstDeliveryDate() {
+        return tsCheckoutOrderEstDeliveryDate;
+    }
+
+    public void setTsCheckoutOrderEstDeliveryDate(String orderEstDeliveryDate) {
+        this.tsCheckoutOrderEstDeliveryDate = orderEstDeliveryDate;
+    }
+
+    public ArrayList<Product> getTsCheckoutProductItems() {
+        return this.tsCheckoutProductItems;
+    }
+
+    public void addCheckoutProductItem(Product checkoutProductItem) {
+        this.tsCheckoutProductItems.add(checkoutProductItem);
+    }
+
+    public String getTsId() {
+        return tsId;
+    }
+
+    public void setTsId(String tsId) {
+        this.tsId = tsId;
+    }
 }

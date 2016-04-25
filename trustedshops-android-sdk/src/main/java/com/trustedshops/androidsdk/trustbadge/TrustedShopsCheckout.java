@@ -1,13 +1,14 @@
 package com.trustedshops.androidsdk.trustbadge;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-
-import java.util.Random;
 
 import okhttp3.OkHttpClient;
 
@@ -17,6 +18,8 @@ public class TrustedShopsCheckout {
     protected TrustbadgeOrder _trustbadgeOrder;
     protected Activity _activity;
     protected boolean _alreadyInjected = false;
+    public static final int _dismissCallNumber = 1;
+    public static final int _errorCallNumber = 2;
 
     public TrustedShopsCheckout() {
     }
@@ -33,8 +36,12 @@ public class TrustedShopsCheckout {
         return _activity;
     }
 
-    public void init(Activity activity) throws TrustbadgeException {
+    public void init(Activity activity, final Callback checkoutCallback) throws TrustbadgeException {
         setActivity(activity);
+
+        if (checkoutCallback != null && !(checkoutCallback instanceof Callback)) {
+            throw new TrustbadgeException("Please provide dialog dismiss callback of type Callback");
+        }
 
         //@TODO Validate parameters before starting dialog
 
@@ -43,14 +50,39 @@ public class TrustedShopsCheckout {
         webView.setWebChromeClient(new WebChromeClient(){
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress == 100 && !_alreadyInjected) {
-                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutBuyerEmail('"+ _trustbadgeOrder.getTsCheckoutBuyerEmail()  +"')");
-                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderNr('"+ _trustbadgeOrder.getTsCheckoutOrderNr() +"')");
-                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderCurrency('"+ _trustbadgeOrder.getTsCheckoutOrderCurrency() +"')");
-                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderAmount('"+_trustbadgeOrder.getTsCheckoutOrderAmount() +"')");
-                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderPaymentType('"+_trustbadgeOrder.getTsCheckoutOrderPaymentType() +"')");
-                    view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().addProduct('www.google.de', 'Bügeleisen', 'ART-123312', 'http://image.google.com/image/product.png', 'NFS512321321', 'JSDSADSA', 'TEFAL')");
+
+                    if (_trustbadgeOrder.getTsCheckoutBuyerEmail() != null) {
+                        view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutBuyerEmail('"+ _trustbadgeOrder.getTsCheckoutBuyerEmail()  +"')");
+                    }
+
+                    if (_trustbadgeOrder.getTsCheckoutOrderNr() != null) {
+                        view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderNr('"+ _trustbadgeOrder.getTsCheckoutOrderNr() +"')");
+                    }
+
+                    if (_trustbadgeOrder.getTsCheckoutOrderCurrency() != null) {
+                        view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderCurrency('"+ _trustbadgeOrder.getTsCheckoutOrderCurrency() +"')");
+                    }
+
+                    if (_trustbadgeOrder.getTsCheckoutOrderAmount() != null) {
+                        view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderAmount('"+_trustbadgeOrder.getTsCheckoutOrderAmount() +"')");
+                    }
+
+                    if (_trustbadgeOrder.getTsCheckoutOrderPaymentType() != null) {
+                        view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderPaymentType('"+_trustbadgeOrder.getTsCheckoutOrderPaymentType() +"')");
+                    }
+
+                    if (_trustbadgeOrder.getTsCheckoutOrderEstDeliveryDate() != null) {
+                        view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().setTsCheckoutOrderEstDeliveryDate('"+ _trustbadgeOrder.getTsCheckoutOrderEstDeliveryDate() +"')");
+                    }
+
+                    if (_trustbadgeOrder.getTsCheckoutProductItems().size() > 0) {
+                        for (Product checkoutProductItem : _trustbadgeOrder.getTsCheckoutProductItems() ) {
+                            view.loadUrl("javascript:window.trustbadgeCheckoutManager.getOrderManager().addProduct('"+ checkoutProductItem.getTsCheckoutProductUrl() +"', '"+ checkoutProductItem.getTsCheckoutProductName() +"', '"+ checkoutProductItem.getTsCheckoutProductSKU() +"', '" + checkoutProductItem.getTsCheckoutProductImageUrl() +"', '" + checkoutProductItem.getTsCheckoutProductGTIN() +"', '" + checkoutProductItem.getTsCheckoutProductMPN() +"', '" + checkoutProductItem.getTsCheckoutProductBrand() +"')");
+                        }
+                    }
+
                     view.loadUrl("javascript:document.body.appendChild(window.trustbadgeCheckoutManager.getOrderManager().getTrustedShopsCheckoutElement())");
-                    view.loadUrl("javascript:injectTrustbadge('XCD7B06A865895BD55F9B86C6BE099CC7')");
+                    view.loadUrl("javascript:injectTrustbadge('"+_trustbadgeOrder.getTsId()+"')");
                     _alreadyInjected = true;
                     Log.d("TSDEBUG","Page loaded");
 
@@ -65,12 +97,22 @@ public class TrustedShopsCheckout {
         //@TODO build and pass parameters to WebView
         MaterialDialog dialog = new MaterialDialog.Builder(_activity)
                 .customView(webView, true)
+                .dismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        if (checkoutCallback != null) {
+                            Message test = Message.obtain();
+                            //dialog closed
+                            test.what = _dismissCallNumber;
+                            checkoutCallback.handleMessage(test);
+                        }
+                    }
+                })
                 .build();
 
         //webView.loadUrl("http://www.google.de");
-        JsInterface jsInterface = new JsInterface(dialog, _trustbadgeOrder);
+        JsInterface jsInterface = new JsInterface(dialog, _trustbadgeOrder, checkoutCallback);
         webView.addJavascriptInterface(jsInterface, "jsInterface");
-        webView.setMinimumHeight(125);
         webView.loadUrl("file:///android_asset/checkout_page.html");
         dialog.show();
 

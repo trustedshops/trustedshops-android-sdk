@@ -2,7 +2,8 @@ package com.trustedshops.androidsdk.trustbadge;
 
 
 import android.content.Context;
-import android.util.Log;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.webkit.JavascriptInterface;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -12,22 +13,21 @@ public class JsInterface {
     Context mContext;
     MaterialDialog mDialog;
     TrustbadgeOrder mOrder;
+    Callback mCallback;
 
-    public JsInterface(MaterialDialog dialog, TrustbadgeOrder order) {
+    public JsInterface(MaterialDialog dialog, TrustbadgeOrder order, Callback checkoutCallback) {
         mDialog = dialog;
         mOrder = order;
-    }
-
-
-    @JavascriptInterface
-    protected void log(String log) {
-        Log.d("TSDEBUG", log);
+        mCallback = checkoutCallback;
     }
 
     @JavascriptInterface
-    public String dialogDismiss(){
-        Log.v("TSDEBUG","Dismissing dialog");
+    public void dialogDismiss(){
         mDialog.dismiss();
-        return someString;
+        if (mCallback != null) {
+            Message dismissMessage = Message.obtain();
+            dismissMessage.what = TrustedShopsCheckout._dismissCallNumber;
+            mCallback.handleMessage(dismissMessage);
+        }
     }
 }
