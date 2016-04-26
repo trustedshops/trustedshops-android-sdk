@@ -115,6 +115,13 @@ tsCheckoutTrustbadgeOrder.setTsCheckoutOrderPaymentType("PAYPAL");
 
 /* optional */
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderEstDeliveryDate("2016-06-30");
+
+try {
+    TrustedShopsCheckout tsCheckout = new TrustedShopsCheckout(tsCheckoutTrustbadgeOrder);
+    tsCheckout.init(this, null);
+} catch (TrustbadgeException e) {
+    Log.d("TSDEBUG", "Something went wrong " + e);
+}
 ```
 If you are also collection product reviews, you have to provide the product list
 ```
