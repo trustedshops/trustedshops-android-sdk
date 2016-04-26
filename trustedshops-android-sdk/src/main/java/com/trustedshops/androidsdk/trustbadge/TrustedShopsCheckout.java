@@ -18,8 +18,14 @@ public class TrustedShopsCheckout {
     protected TrustbadgeOrder _trustbadgeOrder;
     protected Activity _activity;
     protected boolean _alreadyInjected = false;
+    protected final String _trustbadgeEndpointDefault = "widgets.trustedshops.com";
+    protected final String _trustbadgeEndpointDebug = "widgets-qa.trustedshops.com";
+    protected String _trustbadgeEndpoint = "widgets.trustedshops.com";
+    protected boolean _debugmode = false;
     public static final int _dismissCallNumber = 1;
     public static final int _errorCallNumber = 2;
+
+
 
     public TrustedShopsCheckout() {
     }
@@ -34,6 +40,28 @@ public class TrustedShopsCheckout {
 
     public Activity getActivity() {
         return _activity;
+    }
+
+    public void setTrustbadgeEndpoint(String endpoint) {
+        _trustbadgeEndpoint = endpoint;
+    }
+
+    public String getTrustbadgeEndpoint() {
+        return _trustbadgeEndpoint;
+    }
+
+    public void enableDebugmode() {
+        _debugmode = true;
+        setTrustbadgeEndpoint(_trustbadgeEndpointDebug);
+    }
+
+    public void disableDebugmode() {
+        _debugmode = false;
+        setTrustbadgeEndpoint(_trustbadgeEndpointDefault);
+    }
+
+    public boolean isDebugmodeEnabled() {
+        return _debugmode;
     }
 
     public void init(Activity activity, final Callback checkoutCallback) throws TrustbadgeException {
@@ -82,9 +110,13 @@ public class TrustedShopsCheckout {
                     }
 
                     view.loadUrl("javascript:document.body.appendChild(window.trustbadgeCheckoutManager.getOrderManager().getTrustedShopsCheckoutElement())");
-                    view.loadUrl("javascript:injectTrustbadge('"+_trustbadgeOrder.getTsId()+"')");
+                    view.loadUrl("javascript:injectTrustbadge('"+_trustbadgeOrder.getTsId()+"', '"+ getTrustbadgeEndpoint() +"')");
                     _alreadyInjected = true;
-                    Log.d("TSDEBUG","Page loaded");
+
+                    if (isDebugmodeEnabled()) {
+                        Log.d("TSDEBUG","Page loaded");
+                    }
+
 
                 }
             }
@@ -100,6 +132,9 @@ public class TrustedShopsCheckout {
                 .dismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
+                        if (isDebugmodeEnabled()) {
+                            Log.d("TSDEBUG","Dialog dismissed");
+                        }
                         if (checkoutCallback != null) {
                             Message test = Message.obtain();
                             //dialog closed

@@ -15,8 +15,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView" />
+        android:text="This is a view inside your app before checkout process.\n\nTo see how trustbadge works on the &apos;Thank you&apos; page - click the shopping cart symbol on the bottom."
+
+        android:id="@+id/textView"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
         android:layout_width="50dp"
@@ -26,13 +28,4 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Checkout"
-        android:id="@+id/checkout_button"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp" />
 </RelativeLayout>
