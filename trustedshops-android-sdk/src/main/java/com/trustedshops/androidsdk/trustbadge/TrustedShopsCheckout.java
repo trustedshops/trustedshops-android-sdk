@@ -10,6 +10,8 @@ import android.webkit.WebView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.util.ArrayList;
+
 import okhttp3.OkHttpClient;
 
 public class TrustedShopsCheckout {
@@ -71,6 +73,17 @@ public class TrustedShopsCheckout {
             throw new TrustbadgeException("Please provide dialog dismiss callback of type Callback");
         }
 
+        if (_trustbadgeOrder == null) {
+            throw new TrustbadgeException("Please provide Trustbadge Order");
+        }
+
+        ArrayList<Error> validationErrors = Validator.validateTrustbadgeOrder(_trustbadgeOrder);
+
+        if (validationErrors.size() > 0) {
+            throw new TrustbadgeException("Order is invalid " + validationErrors);
+        }
+
+
         //@TODO Validate parameters before starting dialog
 
         WebView webView = new WebView(getActivity());
@@ -124,7 +137,10 @@ public class TrustedShopsCheckout {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDisplayZoomControls(false);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        webView.setWebContentsDebuggingEnabled(true);
+
+        if (isDebugmodeEnabled()) {
+            webView.setWebContentsDebuggingEnabled(true);
+        }
 
         //@TODO build and pass parameters to WebView
         MaterialDialog dialog = new MaterialDialog.Builder(_activity)

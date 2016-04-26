@@ -1,9 +1,9 @@
 package com.trustedshops.trustbadgeexample;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.trustedshops.androidsdk.trustbadge.Product;
@@ -17,6 +17,7 @@ public class CheckoutPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_page);
 
@@ -78,7 +79,7 @@ public class CheckoutPageActivity extends AppCompatActivity {
 
         try {
 
-            /*
+           /*
             @TODO - remove this before going live!
              */
             tsCheckout.enableDebugmode();
