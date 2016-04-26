@@ -17,6 +17,9 @@ Integrate your Trustbadge in your shopping app and show the Trusted Shops trustm
         <td>
             Certificate is opened in external browser.
         </td>
+        <td>
+            After purchase transaction to offer guarantee and collect reviews
+        </td>
     </tr>
     <tr>
         <td>

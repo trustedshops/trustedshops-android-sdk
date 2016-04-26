@@ -12,11 +12,11 @@ ext {
     siteUrl = 'https://github.com/trustedshops/trustedshops-android-sdk'
     gitUrl = 'https://github.com/trustedshops/trustedshops-android-sdk.git'
 
-    libraryVersion = '1.1'
+    libraryVersion = '1.5-beta-01'
 
     developerId = 'trustedshops'
-    developerName = 'Mohamed Galala'
-    developerEmail = 'mohamed.galala@trustedshops.com'
+    developerName = 'Timur Olzhabayev'
+    developerEmail = 'timur.olzhabayev@trustedshops.com'
 
     licenseName = 'The MIT License (MIT)'
     licenseUrl = 'https://opensource.org/licenses/MIT'
@@ -100,17 +100,7 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
 artifacts {
-    archives javadocJar
     archives sourcesJar
 }
 
@@ -139,9 +129,7 @@ bintray {
         version {
             desc = libraryDescription
             gpg {
-                sign = true //Determines whether to GPG sign the files. The default is false
-                passphrase = properties.getProperty("bintray.gpg.password")
-                //Optional. The passphrase for GPG signing'
+                sign = false //Determines whether to GPG sign the files. The default is false
             }
         }
     }
