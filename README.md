@@ -28,6 +28,9 @@ Integrate your Trustbadge in your shopping app and show the Trusted Shops trustm
         <td>
             <img src="https://github.com/trustedshops/trustedshops-android-sdk/blob/master/trustbadgeexample/screenshots/certificate2.png" alt="Certificate in Browser" width="240">
         </td>
+        <td>
+            <img src="https://github.com/trustedshops/trustedshops-android-sdk/blob/checkout_card/trustbadgeexample/screenshots/checkout.png" alt="Certificate in Browser" width="240">
+        </td>
     </tr>
 
 </table>
