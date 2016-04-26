@@ -116,9 +116,28 @@ tsCheckoutTrustbadgeOrder.setTsCheckoutOrderPaymentType("PAYPAL");
 /* optional */
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderEstDeliveryDate("2016-06-30");
 
+
+/* Add callback for dialog dismiss */
+    Handler.Callback dialogClosedCallback = new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message callBackResponse) {
+            switch (callBackResponse.what) {
+                case TrustedShopsCheckout._dismissCallNumber:
+                //Card closed
+                Log.d("TSDEBUG","Case 1 called");
+                break;
+                case TrustedShopsCheckout._errorCallNumber:
+                //Failure
+                Log.d("TSDEBUG","Case 2 called");
+                break;
+             }
+             return true;
+         }
+    };
+
 try {
     TrustedShopsCheckout tsCheckout = new TrustedShopsCheckout(tsCheckoutTrustbadgeOrder);
-    tsCheckout.init(this, null);
+    tsCheckout.init(this, dialogClosedCallback);
 } catch (TrustbadgeException e) {
     Log.d("TSDEBUG", "Something went wrong " + e);
 }
