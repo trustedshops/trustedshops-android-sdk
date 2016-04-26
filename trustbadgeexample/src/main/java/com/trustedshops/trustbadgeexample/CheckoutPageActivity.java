@@ -36,6 +36,9 @@ public class CheckoutPageActivity extends AppCompatActivity {
         tsCheckoutTrustbadgeOrder.setTsCheckoutOrderCurrency("EUR");
         tsCheckoutTrustbadgeOrder.setTsCheckoutOrderPaymentType("PAYPAL");
 
+        /* optional*/
+        tsCheckoutTrustbadgeOrder.setTsCheckoutOrderEstDeliveryDate("2016-06-30");
+
         Product checkoutProduct1 = new Product();
         checkoutProduct1.setTsCheckoutProductName("Brother TN-241C");
         checkoutProduct1.setTsCheckoutProductSKU("4123123");
