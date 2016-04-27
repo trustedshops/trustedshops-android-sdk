@@ -100,14 +100,17 @@ In oder to display the trustbadge after purchase to offer guarantee and collect 
 
 ```     
 TrustbadgeOrder tsCheckoutTrustbadgeOrder = new TrustbadgeOrder();
+
 /* Set your Trusted Shops ID here */
 tsCheckoutTrustbadgeOrder.setTsId("X330A2E7D449E31E467D2F53A55DDD070");
+
 /* Mandatory shopping cart parameter*/
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderNr("checkoutOrderNumber");
 tsCheckoutTrustbadgeOrder.setTsCheckoutBuyerEmail("tester@example.com");
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderAmount("150");
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderCurrency("EUR");
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderPaymentType("PAYPAL");
+
 /* Optional shopping cart parameter */
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderEstDeliveryDate("2016-06-30");
 
