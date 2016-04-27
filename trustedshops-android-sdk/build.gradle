@@ -12,11 +12,11 @@ ext {
     siteUrl = 'https://github.com/trustedshops/trustedshops-android-sdk'
     gitUrl = 'https://github.com/trustedshops/trustedshops-android-sdk.git'
 
-    libraryVersion = '1.1'
+    libraryVersion = '1.5'
 
     developerId = 'trustedshops'
-    developerName = 'Mohamed Galala'
-    developerEmail = 'mohamed.galala@trustedshops.com'
+    developerName = 'Timur Olzhabayev'
+    developerEmail = 'timur.olzhabayev@trustedshops.com'
 
     licenseName = 'The MIT License (MIT)'
     licenseUrl = 'https://opensource.org/licenses/MIT'
@@ -44,8 +44,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.squareup.okhttp3:okhttp:3.1.1'
-    compile('com.afollestad.material-dialogs:core:0.8.4.2@aar') {
+    compile 'com.squareup.okhttp3:okhttp:3.1.2'
+    compile('com.github.afollestad.material-dialogs:core:0.8.+@aar') {
         transitive = true
     }
 }
@@ -100,17 +100,7 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
 artifacts {
-    archives javadocJar
     archives sourcesJar
 }
 
@@ -139,9 +129,7 @@ bintray {
         version {
             desc = libraryDescription
             gpg {
-                sign = true //Determines whether to GPG sign the files. The default is false
-                passphrase = properties.getProperty("bintray.gpg.password")
-                //Optional. The passphrase for GPG signing'
+                sign = false //Determines whether to GPG sign the files. The default is false
             }
         }
     }

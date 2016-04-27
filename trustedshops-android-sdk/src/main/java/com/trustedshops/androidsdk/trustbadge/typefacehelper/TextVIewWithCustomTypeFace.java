@@ -29,7 +29,6 @@ public class TextVIewWithCustomTypeFace extends TextView {
         Typeface tf = FontCache.get(font, context);
         if(tf != null) {
             textview.setTypeface(tf);
-            Log.d("TSDEBUT","Setting typeface");
         }
     }
 }
