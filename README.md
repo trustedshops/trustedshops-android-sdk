@@ -1,5 +1,7 @@
 # Trusted Shops SDK for Android #
 
+[![CI Status](https://travis-ci.org/trustedshops/trustedshops-android-sdk.svg?branch=master)](https://travis-ci.org/trustedshops/trustedshops-android-sdk)
+
 Integrate our SDK in your shopping app and boost your conversion with **your Trustbadge** and **our money-back guarantee**.
 ![TrustedShopsAndroidSDK](https://github.com/trustedshops/trustedshops-android-sdk/blob/checkout_card/trustbadgeexample/screenshots/Android-SDK.png?raw=true "Boost your conversion with Trustbadge and money-back guarantee")
 
