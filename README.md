@@ -94,19 +94,6 @@ try {
     Log.d("TSDEBUG", "Something went wrong " + e);
 }
 ```
-If you are also collecting product reviews via Trusted Shops, you have to provide the product list
-```
-Product checkoutProduct1 = new Product();
-checkoutProduct1.setTsCheckoutProductName("Brother TN-241C");
-checkoutProduct1.setTsCheckoutProductSKU("4123123");
-checkoutProduct1.setTsCheckoutProductUrl("http://www.brother.de/verbrauchsmaterial/laser/toner/tn/tn241c");
-checkoutProduct1.setTsCheckoutProductBrand("Brother");
-checkoutProduct1.setTsCheckoutProductGTIN("4977766718400");
-checkoutProduct1.setTsCheckoutProductImageUrl("http://www.brother.de/~/media/Product%20Images/Supplies/Laser/Toner/TN/TN241C/TN241C_main.png");
-checkoutProduct1.setTsCheckoutProductMPN("TN241C");
-tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
-```      
-
 #### Mandatory Parameters ####
 ```
 setTsId
@@ -118,11 +105,24 @@ This is your app's TS-ID which will be provided by Trusted Shops. In order to ge
 .setTsCheckoutOrderEstDeliveryDate("Y-m-d");
 ```
 Sets the estimated delivery date for your order
-
 ```
 .enableDebugmode();
 ```
 Enables DEBUG-Logging and uses different endpoint
+
+#### Product Reviews (optional) ####
+If you are also collecting product reviews via Trusted Shops, you have to provide the product list as following
+```
+Product checkoutProduct1 = new Product();
+checkoutProduct1.setTsCheckoutProductName("Brother TN-241C");
+checkoutProduct1.setTsCheckoutProductSKU("4123123");
+checkoutProduct1.setTsCheckoutProductUrl("http://www.brother.de/verbrauchsmaterial/laser/toner/tn/tn241c");
+checkoutProduct1.setTsCheckoutProductBrand("Brother");
+checkoutProduct1.setTsCheckoutProductGTIN("4977766718400");
+checkoutProduct1.setTsCheckoutProductImageUrl("http://www.brother.de/~/media/Product%20Images/Supplies/Laser/Toner/TN/TN241C/TN241C_main.png");
+checkoutProduct1.setTsCheckoutProductMPN("TN241C");
+tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
+```      
 
 - - - -
 
