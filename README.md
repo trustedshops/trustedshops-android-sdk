@@ -1,8 +1,7 @@
 # Trusted Shops SDK for Android #
 
-Integrate your Trustbadge in your shopping app and boost your conversion with the Trustbadge and our money-back guarantee. By integrating a few lines of code you can easily
-* display the **trustbadge** whereever you want in your app
-* allow your your customers to benefit from our **money-back guarantee**
+Integrate your Trustbadge in your shopping app and **boost your conversion with the Trustbadge and our money-back guarantee**.
+![TrustedShopsAndroidSDK](https://github.com/trustedshops/trustedshops-android-sdk/blob/checkout_card/trustbadgeexample/screenshots/Android-SDK.png?raw=true "Title is optional")
 
 Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
