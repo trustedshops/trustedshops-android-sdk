@@ -79,10 +79,7 @@ import com.trustedshops.androidsdk.trustbadge.TrustbadgeException;
 ```
 new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 ```
-This is your app's TS-ID which will be provided by Trusted Shops. In order to get your TS-ID authorized please see the "Authorization" section below. For testing purposes the following TS-ID can be used:
-```
-new Trustbadge("X330A2E7D449E31E467D2F53A55DDD070");
-```
+This is your app's TS-ID which will be provided by Trusted Shops. In order to get your TS-ID authorized please see the "Authorization" section below. For testing and certification purposes the following TS-ID can be used: X330A2E7D449E31E467D2F53A55DDD070
 
 #### Optional Parameters
 
@@ -98,7 +95,6 @@ Enables DEBUG-Logging
 
 
 ## Usage to initialize after purchase trustbadge 
-
 In oder to display the trustbadge after purchase to offer guarantee and collect reviews you have to provide following checkout parameters:
 
 
@@ -106,16 +102,14 @@ In oder to display the trustbadge after purchase to offer guarantee and collect 
 TrustbadgeOrder tsCheckoutTrustbadgeOrder = new TrustbadgeOrder();
 /* Set your Trusted Shops ID here */
 tsCheckoutTrustbadgeOrder.setTsId("X330A2E7D449E31E467D2F53A55DDD070");
-  
+/* Mandatory shopping cart parameter*/
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderNr("checkoutOrderNumber");
 tsCheckoutTrustbadgeOrder.setTsCheckoutBuyerEmail("tester@example.com");
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderAmount("150");
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderCurrency("EUR");
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderPaymentType("PAYPAL");
-
-/* optional */
+/* Optional shopping cart parameter */
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderEstDeliveryDate("2016-06-30");
-
 
 /* Add callback for dialog dismiss */
     Handler.Callback dialogClosedCallback = new Handler.Callback() {
@@ -156,15 +150,17 @@ tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
 ```      
 
 #### Mandatory Parameters
-
 ```
 setTsId
+```
+This is your app's TS-ID which will be provided by Trusted Shops. In order to get your TS-ID authorized please see the "Authorization" section below. For testing and certification purposes the following TS-ID can be used: X330A2E7D449E31E467D2F53A55DDD070
+
+```
 setTsCheckoutOrderNr
 setTsCheckoutBuyerEmail
 setTsCheckoutOrderAmount
 setTsCheckoutOrderCurrency
 setTsCheckoutOrderPaymentType
-
 ```
 
 #### Optional Parameters
@@ -178,7 +174,6 @@ Sets the estimated delivery date for your order
 .enableDebugmode();
 ```
 Enables DEBUG-Logging and usess different endpoint
-
 
 ## Authorization
 
