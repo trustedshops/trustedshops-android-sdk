@@ -1,7 +1,7 @@
 # Trusted Shops SDK for Android #
 
 Integrate our SDK in your shopping app and boost your conversion with **your Trustbadge** and **our money-back guarantee**.
-![TrustedShopsAndroidSDK](https://github.com/trustedshops/trustedshops-android-sdk/blob/checkout_card/trustbadgeexample/screenshots/Android-SDK.png?raw=true "Title is optional")
+![TrustedShopsAndroidSDK](https://github.com/trustedshops/trustedshops-android-sdk/blob/checkout_card/trustbadgeexample/screenshots/Android-SDK.png?raw=true "Boost your conversion with Trustbadge and money-back guarantee")
 
 Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
