@@ -140,7 +140,7 @@ For testing and certification purposes the following TS-ID can be used: ```X330A
  * afollestad [material dialogs](https://github.com/afollestad/material-dialogs) library*
 
 ## Data Privacy ##
-Our SDK does not send or collect any user related data without prior permission. 
+Our SDK does not send or collect any user related data without prior permission from the buyer. Only if the buyer opt-in after checkout or opted-in to take advantage of the Trusted Shops guarantee in general, order information are stored for guarantee handling. Before opt-in, e-mail addresses are transmitted in hashed encryption.
 
 ## License ##
 Trusted Shops Android SDK is available under the MIT license. See the LICENSE file for more info.
