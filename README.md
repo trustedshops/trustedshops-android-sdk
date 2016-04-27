@@ -52,7 +52,7 @@ This is your app's TS-ID which will be provided by Trusted Shops. In order to ge
 
 ## Money-Back Guarantee after checkout ##
 
-In order to allow your customers to benefit from our money-back guarantee the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling.
+In order to allow your customers to benefit from our money-back guarantee the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling. You can decide if you want to show the guarantee dialogue automatically after your checkout is finished or if you want the user to tab on a button for that.
 
 ```     
 TrustbadgeOrder tsCheckoutTrustbadgeOrder = new TrustbadgeOrder();
