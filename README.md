@@ -138,7 +138,7 @@ For testing and certification purposes the following TS-ID can be used: ```X330A
 * Trustedshops Android SDK depends on:
  * Square's popular [OkHTTP](http://square.github.io/okhttp/) library
  * afollestad [material dialogs](https://github.com/afollestad/material-dialogs) library*
- * 
+
 ## Data Privacy ##
 Our SDK does not send or collect any user related data without prior permission. 
 
