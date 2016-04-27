@@ -3,7 +3,6 @@ package com.trustedshops.androidsdk.trustbadge.typefacehelper;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.TextView;
 
 public class TextVIewWithCustomTypeFace extends TextView {
