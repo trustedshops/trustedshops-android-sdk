@@ -108,11 +108,12 @@ artifacts {
 apply plugin: 'com.jfrog.bintray'
 
 // Bintray
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//Properties properties = new Properties()
+//properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-def bintrayUser = properties.hasProperty("bintray.user") ? properties.getProperty("bintray.user") : System.getenv("bintray.user")
-def bintrayApiKey = properties.hasProperty("bintray.apikey") ? properties.getProperty("bintray.apikey") : System.getenv("bintray.apikey")
+def bintrayUser = hasProperty("bintray.user") ? properties.getProperty("bintray.user") : System.getenv("bintray.user")
+def bintrayApiKey = hasProperty("bintray.apikey") ? properties.getProperty("bintray.apikey") : System.getenv("bintray.apikey")
+def bintrayOrg = hasProperty("bintray.org") ? properties.getProperty("bintray.org") : System.getenv("bintray.org")
 bintray {
     user = bintrayUser
     key = bintrayApiKey
@@ -121,7 +122,7 @@ bintray {
     pkg {
         repo = bintrayRepo
         name = bintrayName
-        userOrg = properties.getProperty("bintray.org")
+        userOrg = bintrayOrg
         desc = libraryDescription
         websiteUrl = siteUrl
         vcsUrl = gitUrl
