@@ -79,8 +79,7 @@ import com.trustedshops.androidsdk.trustbadge.TrustbadgeException;
 ```
 new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 ```
-This is your app's TS-ID which will be provided by Trusted Shops. In order to get your TS-ID authorized please see the "Authorization" section below. 
-For testing and certification purposes the following TS-ID can be used: X330A2E7D449E31E467D2F53A55DDD070
+This is your app's TS-ID which will be provided by Trusted Shops. In order to get your TS-ID authorized please see the "Authorization" section below.<br>For testing and certification purposes the following TS-ID can be used: X330A2E7D449E31E467D2F53A55DDD070
 
 #### Optional Parameters
 
@@ -154,8 +153,7 @@ tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
 ```
 setTsId
 ```
-This is your app's TS-ID which will be provided by Trusted Shops. In order to get your TS-ID authorized please see the "Authorization" section below. 
-For testing and certification purposes the following TS-ID can be used: X330A2E7D449E31E467D2F53A55DDD070
+This is your app's TS-ID which will be provided by Trusted Shops. In order to get your TS-ID authorized please see the "Authorization" section below.<br>For testing and certification purposes the following TS-ID can be used: X330A2E7D449E31E467D2F53A55DDD070
 
 ```
 setTsCheckoutOrderNr
