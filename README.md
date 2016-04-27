@@ -138,6 +138,12 @@ For testing and certification purposes the following TS-ID can be used: ```X330A
 * Trustedshops Android SDK depends on:
  * Square's popular [OkHTTP](http://square.github.io/okhttp/) library
  * afollestad [material dialogs](https://github.com/afollestad/material-dialogs) library*
+ * 
+## Data Privacy ##
+Our SDK does not send or collect any user related data without prior permission. 
+
+## License ##
+Trusted Shops Android SDK is available under the MIT license. See the LICENSE file for more info.
 
 ## About Trusted Shops ##
 
@@ -148,10 +154,6 @@ Whether you are a start-up entrepreneur, a professional seller or an internation
 
 Your feedback helps us to improve this library. 
 If you have any questions concerning this product or the implementation, please contact [productfeedback@trustedshops.com](mailto:productfeedback@trustedshops.com)
-
-## License ##
-
-Trusted Shops Android SDK is available under the MIT license. See the LICENSE file for more info.
 
 ## Looking for iOS SDK? ##
 https://github.com/trustedshops/trustbadge_iOS
