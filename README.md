@@ -142,7 +142,7 @@ try {
     Log.d("TSDEBUG", "Something went wrong " + e);
 }
 ```
-If you are also collection product reviews, you have to provide the product list
+If you are also collecting product reviews via Trusted Shops, you have to provide the product list
 ```
 Product checkoutProduct1 = new Product();
 checkoutProduct1.setTsCheckoutProductName("Brother TN-241C");
