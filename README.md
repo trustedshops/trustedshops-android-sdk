@@ -3,7 +3,7 @@
 [![CI Status](https://travis-ci.org/trustedshops/trustedshops-android-sdk.svg?branch=master)](https://travis-ci.org/trustedshops/trustedshops-android-sdk)
 [![Bintray](https://img.shields.io/bintray/v/trustedshops/maven/trustedshops-android-sdk.svg?maxAge=2592000)]()
 
-Integrate our SDK in your shopping app and boost your conversion with **your Trustbadge** and **our money-back guarantee**.
+Integrate our SDK in your shopping app and boost your conversion with **your Trustbadge** and **our buyer protection**.
 ![TrustedShopsAndroidSDK](https://github.com/trustedshops/trustedshops-android-sdk/blob/checkout_card/trustbadgeexample/screenshots/Android-SDK.png?raw=true "Boost your conversion with Trustbadge and money-back guarantee")
 
 Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
@@ -48,13 +48,13 @@ ImageView imageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
 ```
 new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 ```
-This is your app's TS-ID which will be provided by Trusted Shops. In order to get your TS-ID authorized please see the "Authorization" section below.
+This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below.
 
 - - - -
 
-## Money-Back Guarantee after checkout ##
+## Buyer protection after checkout ##
 
-In order to allow your customers to benefit from our money-back guarantee the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling. You can decide if you want to show the guarantee dialogue automatically after your checkout is finished or if you want the user to tab on a button for that.
+In order to allow your customers to benefit from our buyer protection the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling. You can decide if you want to show the guarantee dialogue automatically after your checkout is finished or if you want the user to tab on a button for that.
 
 ```     
 TrustbadgeOrder tsCheckoutTrustbadgeOrder = new TrustbadgeOrder();
@@ -101,7 +101,7 @@ try {
 ```
 setTsId
 ```
-This is your app's TS-ID which will be provided by Trusted Shops. In order to get your TS-ID authorized please see the "Authorization" section below.
+This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below.
 
 #### Optional Parameters ####
 ```
