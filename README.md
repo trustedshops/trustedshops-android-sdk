@@ -37,8 +37,8 @@ ImageView imageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
   try {
     trustbadge.getTrustbadge(imageView, this);
     /* Optional parameters */
-    // trustbadge.setIconColor("#27AE60"); // Sets the icon color in HEX Format
-    // trustbadge.setLoggingActive(true); // Enables DEBUG-Logging
+    trustbadge.setIconColor("#27AE60"); // Sets the icon color in HEX Format
+    trustbadge.setLoggingActive(true); // Enables DEBUG-Logging
   } catch(IllegalArgumentException exception) {
       Log.d("TSDEBUG", exception.getMessage());
   } catch (TrustbadgeException exception) {
@@ -51,6 +51,17 @@ ImageView imageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
 new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 ```
 This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below. There you also find a TS-ID for testing.
+
+#### Optional Paramters ####
+ ```Java
+ .setIconColor("#F98222");
+ ```
+ Sets the icon color in the lightbox in HEX Format.
+ 
+ ```Java
+ .setLoggingActive(true);
+  ```
+  Enables DEBUG-Logging.
 
 - - - -
 
