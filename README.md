@@ -112,7 +112,7 @@ Sets the estimated delivery date for your order
 ```Java
 .enableDebugmode();
 ```
-Enables DEBUG-Logging and uses different endpoint
+Enables DEBUG-Logging and uses different endpoint. If set, data are loaded from the Trusted Shops development API instead of the production API (example TS-ID works for debug and normal mode).
 
 #### Product Reviews (optional) ####
 If you are also collecting product reviews via Trusted Shops, you have to provide the product list as following
