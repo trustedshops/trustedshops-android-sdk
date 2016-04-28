@@ -111,7 +111,7 @@ try {
 ```
 #### Mandatory Parameters ####
 ```Java
-setTsId
+.setTsId
 ```
 This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below.  There you also find a TS-ID for testing.
 
