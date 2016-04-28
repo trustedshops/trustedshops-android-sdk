@@ -14,7 +14,7 @@ Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
 ## Integration ##
 To install the current version add this to your Module Build File (build.gradle):
-```
+```Java
 repositories {
     jcenter()
     maven { url "https://jitpack.io" }
@@ -30,7 +30,7 @@ dependencies {
 ## Display the Trustbadge ##
 
 To display the trustbadge you have to create a view container (here with the ID "trustbadgeTestImageView") in your layout.xml and add the following code in the respective java file: 
-```
+```Java
 /* Set your Trusted Shops ID here */
 Trustbadge trustbadge = new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 ImageView imageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
@@ -47,18 +47,17 @@ ImageView imageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
 ```
 
 #### Mandatory Parameters ####
-```
+```Java
 new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 ```
-This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below.
+This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below. There you also find a TS-ID for testing.
 
 - - - -
 
 ## Buyer protection after checkout ##
 
 In order to allow your customers to benefit from our buyer protection the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling. You can decide if you want to show the guarantee dialogue automatically after your checkout is finished or if you want the user to tab on a button for that.
-
-```     
+```Java
 TrustbadgeOrder tsCheckoutTrustbadgeOrder = new TrustbadgeOrder();
 
 /* Set your Trusted Shops ID here */
@@ -100,24 +99,24 @@ try {
 }
 ```
 #### Mandatory Parameters ####
-```
+```Java
 setTsId
 ```
-This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below.
+This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below.  There you also find a TS-ID for testing.
 
 #### Optional Parameters ####
-```
+```Java
 .setTsCheckoutOrderEstDeliveryDate("Y-m-d");
 ```
 Sets the estimated delivery date for your order
-```
+```Java
 .enableDebugmode();
 ```
 Enables DEBUG-Logging and uses different endpoint
 
 #### Product Reviews (optional) ####
 If you are also collecting product reviews via Trusted Shops, you have to provide the product list as following
-```
+```Java
 Product checkoutProduct1 = new Product();
 checkoutProduct1.setTsCheckoutProductName("Brother TN-241C");
 checkoutProduct1.setTsCheckoutProductSKU("4123123");
@@ -131,34 +130,36 @@ tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
 
 - - - -
 
-## Authorization ##
+## About this SDK ##
+
+#### Authorization ####
 
 To use this SDK in your own mobile app Trusted Shops needs to authorize your app.<br>
 Please contact us via [productfeedback@trustedshops.com](mailto:productfeedback@trustedshops.com) to get your apps authorized.  
 
 For testing and certification purposes the following TS-ID can be used: ```X330A2E7D449E31E467D2F53A55DDD070```
 
-## Requirements & Dependencies ##
+#### Requirements & Dependencies ####
 * We support Android API 16 and above.
 * Trustedshops Android SDK depends on:
  * Square's popular [OkHTTP](http://square.github.io/okhttp/) library
  * afollestad [material dialogs](https://github.com/afollestad/material-dialogs) library*
 
-## Data Privacy ##
+#### Data Privacy ####
 Our SDK does not send or collect any user related data without prior permission from the buyer. Only if the buyer opt-in after checkout or opted-in to take advantage of the Trusted Shops guarantee in general, order information are stored for guarantee handling. Before opt-in e-mail addresses are transmitted in irreversible hashed encryption.
 
-## License ##
+#### License ####
 Trusted Shops Android SDK is available under the MIT license. See the LICENSE file for more info.
 
-## About Trusted Shops ##
+#### About Trusted Shops ####
 
 Today more than 20,000 online sellers are using Trusted Shops to collect, show, and manage genuine feedback from their customers. A large community of online buyers has already contributed over 6 million reviews.
 Whether you are a start-up entrepreneur, a professional seller or an international retail brand, consumer trust is a key ingredient for your business. Trusted Shops offers services that will give you the ability to highlight your trustworthiness, improve your service, and, consequently, increase your conversion rate. 
 
-## Questions and Feedback ##
+#### Questions and Feedback ####
 
 Your feedback helps us to improve this library. 
 If you have any questions concerning this product or the implementation, please contact [productfeedback@trustedshops.com](mailto:productfeedback@trustedshops.com)
 
-## Looking for iOS SDK? ##
+#### Looking for iOS SDK? ####
 https://github.com/trustedshops/trustbadge_iOS
