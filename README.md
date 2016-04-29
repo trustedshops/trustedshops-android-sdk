@@ -6,6 +6,7 @@
 Integrate our SDK in your shopping app and boost your conversion with **your Trustbadge** and **our buyer protection**:
 * Show the Trustbadge in any view and size and provide additional information along with a link to your certificate. 
 * Integrate the Trusted Shops buyer protection and review collecting services into your app.
+
 ![TrustedShopsAndroidSDK](https://raw.githubusercontent.com/trustedshops/trustedshops-android-sdk/master/trustbadgeexample/screenshots/Android-SDK-woText.png?raw=true "Boost your conversion with Trustbadge and money-back guarantee")
 
 Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
