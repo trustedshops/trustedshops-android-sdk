@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.5.1'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.5'
 }
 ```
 
@@ -80,7 +80,7 @@ tsCheckoutTrustbadgeOrder.setTsCheckoutOrderNr("checkoutOrderNumber");
 tsCheckoutTrustbadgeOrder.setTsCheckoutBuyerEmail("tester@example.com"); 
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderAmount("150,00"); 
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderCurrency("EUR"); 
-tsCheckoutTrustbadgeOrder.setTsCheckoutOrderPaymentType("PAYPAL"); // free format
+tsCheckoutTrustbadgeOrder.setTsCheckoutOrderPaymentType("PAYPAL");
 
 /* Optional shopping cart parameter */
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderEstDeliveryDate("2016-06-30");
@@ -112,9 +112,40 @@ try {
 ```
 #### Mandatory Parameters ####
 ```Java
-.setTsId
+.setTsId("YOUR-TRUSTED-SHOPS-ID");
 ```
 This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below.  There you also find a TS-ID for testing.
+
+```Java
+.setTsCheckoutOrderNr("0123456789"); 
+.setTsCheckoutBuyerEmail("testbuyer@testprovider.com"); 
+.setTsCheckoutOrderAmount("150,00"); 
+.setTsCheckoutOrderCurrency("EUR"); 
+```
+ISO 4217 Currency code: https://en.wikipedia.org/wiki/ISO_4217
+```Java
+.setTsCheckoutOrderPaymentType("CREDIT_CARD");
+```
+Allowed payment type values are:
+"DIRECT_DEBIT",
+"CASH_ON_PICKUP",
+"CLICKANDBUY",
+"FINANCING",
+"GIROPAY",
+"GOOGLE_CHECKOUT",
+"CREDIT_CARD",
+"LEASING",
+"MONEYBOOKERS",
+"CASH_ON_DELIVERY",
+"PAYBOX",
+"PAYPAL",
+"INVOICE",
+"CHEQUE",
+"SHOP_CARD",
+"DIRECT_E_BANKING",
+"T_PAY",
+"PREPAYMENT",
+"AMAZON_PAYMENTS"
 
 #### Optional Parameters ####
 ```Java
