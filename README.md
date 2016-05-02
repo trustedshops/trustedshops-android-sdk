@@ -204,4 +204,4 @@ If you have any questions concerning this product or the implementation, please 
 #### Looking for iOS? ####
 https://github.com/trustedshops/trustbadge_iOS
 
-![TrustedShopsLogo](https://raw.githubusercontent.com/trustedshops/trustedshops-android-sdk/master/trustbadgeexample/screenshots/e_trusted_shops-rgb.png "Trusted Shops - Cologne")
+<img src="https://raw.githubusercontent.com/trustedshops/trustedshops-android-sdk/master/trustbadgeexample/screenshots/e_trusted_shops-rgb.png" alt="Trusted Shops - Cologne" width="100">
