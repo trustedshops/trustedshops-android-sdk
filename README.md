@@ -126,7 +126,7 @@ ISO 4217 Currency code: https://en.wikipedia.org/wiki/ISO_4217
 ```Java
 .setTsCheckoutOrderPaymentType("CREDIT_CARD");
 ```
-Allowed payment type values are:
+Allowed payment type values are:<br>
 "DIRECT_DEBIT",
 "CASH_ON_PICKUP",
 "CLICKANDBUY",
