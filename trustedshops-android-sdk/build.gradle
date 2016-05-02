@@ -115,9 +115,9 @@ apply plugin: 'com.jfrog.bintray'
 //Properties properties = new Properties()
 //properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-def bintrayUser = hasProperty("bintray.user") ? properties.getProperty("bintray.user") : System.getenv("bintray.user")
-def bintrayApiKey = hasProperty("bintray.apikey") ? properties.getProperty("bintray.apikey") : System.getenv("bintray.apikey")
-def bintrayOrg = hasProperty("bintray.org") ? properties.getProperty("bintray.org") : System.getenv("bintray.org")
+def bintrayUser = hasProperty("bintray.user") ? getProperty("bintray.user") : System.getenv("bintray.user")
+def bintrayApiKey = hasProperty("bintray.apikey") ? getProperty("bintray.apikey") : System.getenv("bintray.apikey")
+def bintrayOrg = hasProperty("bintray.org") ? getProperty("bintray.org") : System.getenv("bintray.org")
 bintray {
     user = bintrayUser
     key = bintrayApiKey

@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.5'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.5.1'
 }
 ```
 
