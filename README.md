@@ -13,7 +13,7 @@ Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
 - - - -
 
-## Integration ##
+## Installation ##
 To install the current version add this to your Module Build File (build.gradle):
 ```Java
 repositories {
