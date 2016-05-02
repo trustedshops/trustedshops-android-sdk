@@ -127,25 +127,25 @@ ISO 4217 Currency code: https://en.wikipedia.org/wiki/ISO_4217
 .setTsCheckoutOrderPaymentType("CREDIT_CARD");
 ```
 Allowed payment type values are:<br>
-"DIRECT_DEBIT",
-"CASH_ON_PICKUP",
-"CLICKANDBUY",
-"FINANCING",
-"GIROPAY",
-"GOOGLE_CHECKOUT",
-"CREDIT_CARD",
-"LEASING",
-"MONEYBOOKERS",
-"CASH_ON_DELIVERY",
-"PAYBOX",
-"PAYPAL",
-"INVOICE",
-"CHEQUE",
-"SHOP_CARD",
-"DIRECT_E_BANKING",
-"T_PAY",
-"PREPAYMENT",
-"AMAZON_PAYMENTS"
+`"DIRECT_DEBIT"`,
+`"CASH_ON_PICKUP"`,
+`"CLICKANDBUY"`,
+`"FINANCING"`,
+`"GIROPAY"`,
+`"GOOGLE_CHECKOUT"`,
+`"CREDIT_CARD"`,
+`"LEASING"`,
+`"MONEYBOOKERS"`,
+`"CASH_ON_DELIVERY"`,
+`"PAYBOX"`,
+`"PAYPAL"`,
+`"INVOICE"`,
+`"CHEQUE"`,
+`"SHOP_CARD"`,
+`"DIRECT_E_BANKING"`,
+`"T_PAY"`,
+`"PREPAYMENT"`,
+`"AMAZON_PAYMENTS"`
 
 #### Optional Parameters ####
 ```Java
@@ -186,7 +186,7 @@ For testing and certification purposes the following TS-ID can be used: ```X330A
 * We support Android API 16 and above.
 * Trustedshops Android SDK depends on:
  * Square's popular [OkHTTP](http://square.github.io/okhttp/) library
- * afollestad [material dialogs](https://github.com/afollestad/material-dialogs) library*
+ * afollestad [material dialogs](https://github.com/afollestad/material-dialogs) library
 
 #### Data Privacy ####
 Our SDK does not send or collect any user related data without prior permission from the buyer. Only if the buyer opt-in after checkout or opted-in to take advantage of the Trusted Shops guarantee in general, order information are stored for guarantee handling. Before opt-in e-mail addresses are transmitted in irreversible hashed encryption.
