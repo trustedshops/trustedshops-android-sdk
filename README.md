@@ -176,7 +176,6 @@ tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
 ## About this SDK ##
 
 #### Authorization ####
-
 To use this SDK in your own mobile app Trusted Shops needs to authorize your app.<br>
 Please contact us via [productfeedback@trustedshops.com](mailto:productfeedback@trustedshops.com) to get your apps authorized.  
 
@@ -195,14 +194,12 @@ Our SDK does not send or collect any user related data without prior permission 
 Trusted Shops Android SDK is available under the MIT license. See the LICENSE file for more info.
 
 #### About Trusted Shops ####
-
 Today more than 20,000 online sellers are using Trusted Shops to collect, show, and manage genuine feedback from their customers. A large community of online buyers has already contributed over 6 million reviews.
 Whether you are a start-up entrepreneur, a professional seller or an international retail brand, consumer trust is a key ingredient for your business. Trusted Shops offers services that will give you the ability to highlight your trustworthiness, improve your service, and, consequently, increase your conversion rate. 
 
 #### Questions and Feedback ####
-
 Your feedback helps us to improve this library. 
 If you have any questions concerning this product or the implementation, please contact [productfeedback@trustedshops.com](mailto:productfeedback@trustedshops.com)
 
-#### Looking for iOS SDK? ####
+#### Looking for iOS? ####
 https://github.com/trustedshops/trustbadge_iOS
