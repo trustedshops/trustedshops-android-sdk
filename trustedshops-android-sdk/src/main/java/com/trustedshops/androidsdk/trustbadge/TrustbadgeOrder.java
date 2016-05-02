@@ -67,7 +67,7 @@ public class TrustbadgeOrder {
     }
 
     public String getTsCheckoutOrderCurrency() {
-        return tsCheckoutOrderPaymentType;
+        return tsCheckoutOrderCurrency;
     }
 
     public void setTsCheckoutOrderCurrency(String orderCurrency) {
