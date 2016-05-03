@@ -13,7 +13,7 @@ Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
 1. [Installation](#installation)
 2. [Display the Trustbadge](#display-the-trustbadge)
-3. [After Checkout Buyer Protection](#buyer-protection-after-checkout)
+3. [After Checkout Buyer Protection](#after-checkout-buyer-protection)
 4. [About this SDK](#about-this-sdk)
 
 - - - -
