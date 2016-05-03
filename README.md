@@ -13,7 +13,7 @@ Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
 1. [Installation](#installation)
 2. [Display the Trustbadge](#display-the-trustbadge)
-3. [After Checkout Buyer Protection](#after-checkout-buyer-protection)
+3. [After Checkout Process](#after-checkout-process)
 4. [About this SDK](#about-this-sdk)
 
 - - - -
@@ -71,7 +71,7 @@ This is your app's TS-ID which will be provided by Trusted Shops. <br>In order t
 
 - - - -
 
-## After Checkout Buyer Protection ##
+## After Checkout Process ##
 
 In order to allow your customers to benefit from our buyer protection the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling. You can decide if you want to show the guarantee dialogue automatically after your checkout is finished or if you want the user to tab on a button for that.
 ```Java
