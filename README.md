@@ -11,10 +11,10 @@ Integrate our SDK in your shopping app and boost your conversion with **your Tru
 
 Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
-1. [Installation](https://github.com/trustedshops/trustedshops-android-sdk#installation)
-2. [Display the Trustbadge](https://github.com/trustedshops/trustedshops-android-sdk#display-the-trustbadge)
-3. [After Checkout Buyer Protection](https://github.com/trustedshops/trustedshops-android-sdk#buyer-protection-after-checkout)
-4. [About this SDK](https://github.com/trustedshops/trustedshops-android-sdk#about-this-sdk)
+1. [Installation](#installation)
+2. [Display the Trustbadge](#display-the-trustbadge)
+3. [After Checkout Buyer Protection](#buyer-protection-after-checkout)
+4. [About this SDK](#about-this-sdk)
 
 - - - -
 
