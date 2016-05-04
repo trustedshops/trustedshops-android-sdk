@@ -3,7 +3,7 @@
 [![CI Status](https://travis-ci.org/trustedshops/trustedshops-android-sdk.svg?branch=master)](https://travis-ci.org/trustedshops/trustedshops-android-sdk)
 [![Bintray](https://img.shields.io/bintray/v/trustedshops/maven/trustedshops-android-sdk.svg?maxAge=2592000)]()
 
-Integrate our SDK in your shopping app and boost your conversion with **your Trustbadge** and **our buyer protection**:
+Integrate our SDK into your shopping app and boost your conversion with **your Trustbadge** and **our buyer protection**:
 * Show the Trustbadge in any view and size and provide additional information along with a link to your certificate. 
 * Integrate the Trusted Shops buyer protection and review collecting services into your app.
 
