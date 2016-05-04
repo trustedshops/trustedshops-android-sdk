@@ -11,14 +11,14 @@ Integrate our SDK in your shopping app and boost your conversion with **your Tru
 
 Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
-1. [Installation](#installation)
-2. [Display the Trustbadge](#display-the-trustbadge)
-3. [After Checkout Process](#after-checkout-process)
-4. [About this SDK](#about-this-sdk)
+1. [Installation](#1-installation)
+2. [Display the Trustbadge](#2-display-the-trustbadge)
+3. [After Checkout Process](#3-after-checkout-process)
+4. [About this SDK](#4-about-this-sdk)
 
 - - - -
 
-## Installation ##
+## 1. Installation ##
 To install the current version add this to your Module Build File (build.gradle):
 ```Java
 repositories {
@@ -33,7 +33,7 @@ dependencies {
 
 - - - -
 
-## Display the Trustbadge ##
+## 2. Display the Trustbadge ##
 
 To display the trustbadge you have to create a view container (here with the ID "trustbadgeTestImageView") in your layout.xml and add the following code in the respective java file: 
 ```Java
@@ -71,7 +71,7 @@ This is your app's TS-ID which will be provided by Trusted Shops. <br>In order t
 
 - - - -
 
-## After Checkout Process ##
+## 3. After Checkout Process ##
 
 In order to allow your customers to benefit from our buyer protection the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling. You can decide if you want to show the guarantee dialogue automatically after your checkout is finished or if you want the user to tab on a button for that.
 ```Java
@@ -178,7 +178,7 @@ tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
 
 - - - -
 
-## About this SDK ##
+## 4. About this SDK ##
 
 #### Authorization ####
 To use this SDK in your own mobile app Trusted Shops needs to authorize your app.<br>
