@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         testImageView.setImageResource(0);
         /* Please insert your Trusted Shops ID */
         String tsId = getSelectedTsId();
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + tsId);
 
         Trustbadge trustbadge = new Trustbadge(tsId);
         try {
