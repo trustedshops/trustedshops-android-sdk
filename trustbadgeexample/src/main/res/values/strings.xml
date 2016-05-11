@@ -1,4 +1,79 @@
 <resources>
     <string name="app_name">Trustbadge SDK Example</string>
     <string name="action_settings">Settings</string>
+    <string name="order_number">Order number</string>
+
+    <string-array name="tsId_list">
+        <item>X330A2E7D449E31E467D2F53A55DDD070</item>
+        <item>XFD9974BBC558C007CD46431D056DF230</item>
+        <item>XA2A8D35838AF5F63E5EB0E05847B1CB8</item>
+    </string-array>
+
+    <string-array name="currency_list">
+        <item>EUR</item>
+        <item>CHF</item>
+        <item>USD</item>
+        <item>DKK</item>
+        <item>GBP</item>
+        <item>SEK</item>
+        <item>PLN</item>
+        <item>NOK</item>
+        <item>BGN</item>
+        <item>CAD</item>
+        <item>CZK</item>
+        <item>HUF</item>
+        <item>LTL</item>
+        <item>LVL</item>
+        <item>RON</item>
+        <item>RUB</item>
+        <item>TRY</item>
+        <item>AUD</item>
+        <item>NZD</item>
+    </string-array>
+
+    <!--NOTE: any update payment_method_list means update in payment_method_Key_list in the same order -->
+    <string-array name="payment_method_list">
+        <item>Direct debit</item>
+        <item>Cach on pickup</item>
+        <item>Click and buy</item>
+        <item>Financing</item>
+        <item>Giro</item>
+        <item>Google checkout</item>
+        <item>Credit card</item>
+        <item>Leasing</item>
+        <item>Money bookers</item>
+        <item>Cach on delivery</item>
+        <item>Paybox</item>
+        <item>Paypal</item>
+        <item>Invoice</item>
+        <item>Cheque</item>
+        <item>Shop card</item>
+        <item>Direct e-banking</item>
+        <item>TPAY</item>
+        <item>Prepayment</item>
+        <item>Amazon payments</item>
+    </string-array>
+
+    <string-array name="payment_method_Key_list">
+        <item>DIRECT_DEBIT</item>
+        <item>CASH_ON_PICKUP</item>
+        <item>CLICKANDBUY</item>
+        <item>FINANCING</item>
+        <item>GIROPAY</item>
+        <item>GOOGLE_CHECKOUT</item>
+        <item>CREDIT_CARD</item>
+        <item>LEASING</item>
+        <item>MONEYBOOKERS</item>
+        <item>CASH_ON_DELIVERY</item>
+        <item>PAYBOX</item>
+        <item>PAYPAL</item>
+        <item>INVOICE</item>
+        <item>CHEQUE</item>
+        <item>SHOP_CARD</item>
+        <item>DIRECT_E_BANKING</item>
+        <item>T_PAY</item>
+        <item>PREPAYMENT</item>
+        <item>AMAZON_PAYMENTS</item>
+    </string-array>
+
 </resources>

@@ -3,13 +3,16 @@ package com.trustedshops.trustbadgeexample;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.trustedshops.androidsdk.trustbadge.Product;
 import com.trustedshops.androidsdk.trustbadge.TrustbadgeException;
 import com.trustedshops.androidsdk.trustbadge.TrustbadgeOrder;
 import com.trustedshops.androidsdk.trustbadge.TrustedShopsCheckout;
+import com.trustedshops.trustbadgeexample.util.JsonUtil;
 
 import java.util.Random;
 
@@ -20,8 +23,52 @@ public class CheckoutPageActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_page);
+        TrustbadgeOrder tsCheckoutTrustbadgeOrder = getTrustbadgeOrder(savedInstanceState);
+        if (tsCheckoutTrustbadgeOrder == null) {
+            tsCheckoutTrustbadgeOrder = getDefaultTrustbadgeOrder();
+        }
 
-        TrustbadgeOrder tsCheckoutTrustbadgeOrder = new TrustbadgeOrder();
+        TextView ordertextView = (TextView) findViewById(R.id.thankYouOrderNumber_id);
+        ordertextView.setText(tsCheckoutTrustbadgeOrder.getTsCheckoutOrderNr());
+        TrustedShopsCheckout tsCheckout = new TrustedShopsCheckout(tsCheckoutTrustbadgeOrder);
+
+
+        /* Add callback for dialog dismiss */
+        Handler.Callback dialogClosedCallback = new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message callBackResponse) {
+
+                switch (callBackResponse.what) {
+                    case TrustedShopsCheckout._dismissCallNumber:
+                        //Card closed
+                        Log.d("TSDEBUG", "Case 1 called");
+
+                        break;
+                    case TrustedShopsCheckout._errorCallNumber:
+                        //Failure
+                        Log.d("TSDEBUG", "Case 2 called");
+                        break;
+                }
+                return true;
+            }
+        };
+
+        try {
+
+           /*
+            @TODO - remove this before going live!
+             */
+            tsCheckout.enableDebugmode();
+            tsCheckout.init(CheckoutPageActivity.this, dialogClosedCallback);
+        } catch (TrustbadgeException exception) {
+            Log.d("TSDEBUG", "Checkout Exception: " + exception.getMessage());
+        }
+    }
+
+    @NonNull
+    private TrustbadgeOrder getDefaultTrustbadgeOrder() {
+        TrustbadgeOrder tsCheckoutTrustbadgeOrder;
+        tsCheckoutTrustbadgeOrder = new TrustbadgeOrder();
 
         /* Set your Trusted Shops ID here */
         tsCheckoutTrustbadgeOrder.setTsId("X330A2E7D449E31E467D2F53A55DDD070");
@@ -56,39 +103,26 @@ public class CheckoutPageActivity extends AppCompatActivity {
         checkoutProduct2.setTsCheckoutProductSKU("41231661");
         checkoutProduct2.setTsCheckoutProductUrl("http://www.brother.de/verbrauchsmaterial/laser/toner/tn/tn241c");
         tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct2);
+        return tsCheckoutTrustbadgeOrder;
+    }
 
-        TrustedShopsCheckout tsCheckout = new TrustedShopsCheckout(tsCheckoutTrustbadgeOrder);
-
-
-        /* Add callback for dialog dismiss */
-        Handler.Callback dialogClosedCallback = new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message callBackResponse) {
-
-                switch (callBackResponse.what) {
-                    case TrustedShopsCheckout._dismissCallNumber:
-                        //Card closed
-                        Log.d("TSDEBUG","Case 1 called");
-
-                        break;
-                    case TrustedShopsCheckout._errorCallNumber:
-                        //Failure
-                        Log.d("TSDEBUG","Case 2 called");
-                        break;
-                }
-                return true;
+    private TrustbadgeOrder getTrustbadgeOrder(Bundle savedInstanceState) {
+        String newString;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras == null) {
+                newString = null;
+            } else {
+                newString = extras.getString("TrustbadgeOrder");
             }
-        };
+        } else {
+            newString = (String) savedInstanceState.getSerializable("TrustbadgeOrder");
+        }
 
-        try {
-
-           /*
-            @TODO - remove this before going live!
-             */
-            tsCheckout.enableDebugmode();
-            tsCheckout.init(CheckoutPageActivity.this, dialogClosedCallback);
-        } catch (TrustbadgeException exception) {
-            Log.d("TSDEBUG", "Checkout Exception: " + exception.getMessage());
+        if (newString != null) {
+            return JsonUtil.fromJson(TrustbadgeOrder.class, newString);
+        } else {
+            return null;
         }
     }
 }
