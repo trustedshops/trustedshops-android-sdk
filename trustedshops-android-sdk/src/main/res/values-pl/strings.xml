@@ -7,4 +7,11 @@
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_title">Dział obsługi klienta</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_description">W przypadku pytań skontaktuj się z tym sklepem lub Trusted Shops</string>
     <string name="trustedshops_sdk_trustbadge_dialog_negative_button_text">CERTYFIKAT</string>
+    <plurals
+        name="reviewDescriptionLong">
+        <item  quantity="one">%d opinia</item>
+        <item  quantity="few">%d opinii</item>
+        <item  quantity="many">%d opinii</item>
+        <item  quantity="other">%d opinii</item>
+    </plurals>
 </resources>

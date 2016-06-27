@@ -7,6 +7,7 @@ public class Shop {
     protected String _languageISO2 = "en";
     protected String _targetMarketISO3 = "EUO";
     protected TrustMark _trustMark;
+    protected ReviewIndicator _reviewIndicator;
 
     public String getTsId() {
         return _tsId;
@@ -47,5 +48,16 @@ public class Shop {
 
     }
 
+    public ReviewIndicator getReviewIndicator() {
+        return _reviewIndicator;
+    }
+
+    public void setReviewIndicator(ReviewIndicator reviewIndicator) {
+        this._reviewIndicator =reviewIndicator;
+    }
+
+    public String getShopProfileUrl() {
+        return UrlManager.getShopProfileUrl(this);
+    }
 
 }

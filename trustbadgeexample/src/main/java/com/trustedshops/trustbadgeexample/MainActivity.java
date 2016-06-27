@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.Rating;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.trustedshops.androidsdk.trustbadge.Trustbadge;
 import com.trustedshops.androidsdk.trustbadge.TrustbadgeException;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new BuyButtonClickListener(this));
 
         showTrustbadge();
+        showReviews();
         addTsIdChangeListener();
     }
 
@@ -62,6 +66,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showReviews() {
+        RatingBar reviewStarsBar = (RatingBar) findViewById(R.id.trustedShopReviewStars);
+        TextView trustedShopReviewStarsMarkDescription = (TextView) findViewById(R.id.trustedShopReviewStarsMarkDescription);
+        TextView trustedShopReviewMark = (TextView) findViewById(R.id.trustedShopReviewMark);
+        TextView trustedShopReviewCountLong = (TextView) findViewById(R.id.trustedShopsReviewCountLong);
+        TextView trustedShopsReviewCount = (TextView) findViewById(R.id.trustedShopsReviewCount);
+        String tsId = getSelectedTsId();
+        Trustbadge trustbadge =new Trustbadge(tsId);
+        try {
+            //trustbadge.setIconColor("#F98222");
+            trustbadge.setLoggingActive(true);
+            trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, trustedShopsReviewCount, trustedShopReviewCountLong);
+        } catch (IllegalArgumentException exception) {
+            Log.d("TSDEBUG", exception.getMessage());
+        } catch (TrustbadgeException exception) {
+            Log.d("TSDEBUG", exception.getMessage());
+        }
+
+    }
+
     private void addTsIdChangeListener() {
         Spinner spinner = (Spinner) findViewById(R.id.tsId_id);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -69,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 showTrustbadge();
+                showReviews();
             }
 
             @Override

@@ -1,0 +1,8 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+<style name="tsRatingBar" parent="@android:style/Widget.RatingBar">
+    <item name="android:progressDrawable">@drawable/ts_ratingbar_full</item>
+    <item name="android:minHeight">57dip</item>
+    <item name="android:maxHeight">57dip</item>
+</style>
+</resources>

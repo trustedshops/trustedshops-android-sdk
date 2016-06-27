@@ -11,225 +11,272 @@
     tools:context="com.trustedshops.trustbadgeexample.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/tsId_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="TSID:" />
+
+        <Spinner
+            android:id="@+id/tsId_id"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tsId_text"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
 
-            <TextView
-                android:id="@+id/tsId_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="TSID:" />
+        <TextView
+            android:id="@+id/order_number_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tsId_id"
+            android:text="Order number:" />
 
-            <Spinner
-                android:id="@+id/tsId_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tsId_text"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
+        <EditText
+            android:id="@+id/order_number_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/order_number_text"
+            android:gravity="top"
+            android:inputType="text"
+            android:lines="@integer/input_line" />
 
-            <TextView
-                android:id="@+id/order_number_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tsId_id"
-                android:text="Order number:" />
+        <TextView
+            android:id="@+id/consumer_email_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_number_id"
+            android:layout_marginTop="15dp"
+            android:text="Consumer email:" />
 
-            <EditText
-                android:id="@+id/order_number_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/order_number_text"
-                android:gravity="top"
-                android:inputType="text"
-                android:lines="@integer/input_line" />
+        <EditText
+            android:id="@+id/consumer_email_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/consumer_email_text"
+            android:inputType="textEmailAddress" />
 
-            <TextView
-                android:id="@+id/consumer_email_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/order_number_id"
-                android:layout_marginTop="15dp"
-                android:text="Consumer email:" />
-
-            <EditText
-                android:id="@+id/consumer_email_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/consumer_email_text"
-                android:inputType="textEmailAddress" />
+        <LinearLayout
+            android:id="@+id/payment_box_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/consumer_email_id"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <LinearLayout
-                android:id="@+id/payment_box_id"
-                android:layout_width="fill_parent"
+                android:id="@+id/paymentType_box"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/consumer_email_id"
-                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical"
                 android:weightSum="2">
 
-                <LinearLayout
-                    android:id="@+id/paymentType_box"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                <TextView
+                    android:id="@+id/order_amount_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="2">
+                    android:text="Order amount:" />
 
-                    <TextView
-                        android:id="@+id/order_amount_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_weight="1"
-                        android:text="Order amount:" />
-
-                    <EditText
-                        android:id="@+id/order_amount_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:inputType="numberDecimal" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/paymentCurrency_box"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                <EditText
+                    android:id="@+id/order_amount_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:id="@+id/order_currency_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_weight="1"
-                        android:text="Currency:" />
-
-                    <Spinner
-                        android:id="@+id/currency_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="1" />
-
-                </LinearLayout>
-
-
+                    android:inputType="numberDecimal" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/payment_type_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/payment_box_id"
-                android:text="Payment method:" />
-
-            <Spinner
-                android:id="@+id/paymentType_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/payment_type_text"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:hint="Payment method" />
-
-            <TextView
-                android:id="@+id/delivery_date_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/paymentType_id"
-                android:layout_marginTop="15dp"
-                android:text="Delivery date:" />
-
 
             <LinearLayout
-                android:id="@+id/deliver_date_box"
-                android:layout_width="fill_parent"
+                android:id="@+id/paymentCurrency_box"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/delivery_date_text"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <EditText
-                    android:id="@+id/deliveryDate_day_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_weight="1"
-                    android:ems="2"
-                    android:gravity="center_horizontal"
-                    android:hint="dd"
-                    android:inputType="number"
-                    android:maxLength="2" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/order_currency_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="." />
-
-                <EditText
-                    android:id="@+id/deliveryDate_month_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
                     android:layout_weight="1"
-                    android:ems="2"
-                    android:gravity="center_horizontal"
-                    android:hint="mm"
-                    android:inputType="number"
-                    android:maxLength="2" />
+                    android:text="Currency:" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="." />
+                <Spinner
+                    android:id="@+id/currency_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1" />
 
-                <EditText
-                    android:id="@+id/deliveryDate_year_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_weight="1"
-                    android:ems="4"
-                    android:gravity="center_horizontal"
-                    android:hint="yyyy"
-                    android:inputType="number"
-                    android:maxLength="4" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/trustbadgeTestImageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/payment_type_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/payment_box_id"
+            android:text="Payment method:" />
+
+        <Spinner
+            android:id="@+id/paymentType_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/payment_type_text"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:hint="Payment method" />
+
+        <TextView
+            android:id="@+id/delivery_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/paymentType_id"
+            android:layout_marginTop="15dp"
+            android:text="Delivery date:" />
+
+
+        <LinearLayout
+            android:id="@+id/deliver_date_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/delivery_date_text"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <EditText
+                android:id="@+id/deliveryDate_day_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="5dp" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:layout_weight="1"
+                android:ems="2"
+                android:gravity="center_horizontal"
+                android:hint="dd"
+                android:inputType="number"
+                android:maxLength="2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="." />
+
+            <EditText
+                android:id="@+id/deliveryDate_month_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:ems="2"
+                android:gravity="center_horizontal"
+                android:hint="mm"
+                android:inputType="number"
+                android:maxLength="2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="." />
+
+            <EditText
+                android:id="@+id/deliveryDate_year_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:ems="4"
+                android:gravity="center_horizontal"
+                android:hint="yyyy"
+                android:inputType="number"
+                android:maxLength="4" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/deliver_date_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/trustbadgeTestImageView"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="5dp" />
+                <android.support.v7.widget.AppCompatRatingBar
+                    android:id="@+id/trustedShopReviewStars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/trustbadgeTestImageView"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    style="@style/tsRatingBar"
+                    android:layout_marginTop="-15dp"
+                    android:layout_marginLeft="30dp"
+                    />
+                <TextView
+                    android:id="@+id/trustedShopReviewStarsMarkDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/trustedShopReviewStars"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="-25dp"
+                    android:text="SEHR GUT"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/trustedShopReviewStarsMarkDescription"
+                    android:layout_marginLeft="100dp"
+                    android:id="@+id/trustedShopReviewMark"
+                    android:text="1.0 / 5.0"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/trustedShopReviewStarsMarkDescription"
+                    android:layout_marginLeft="85dp"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/trustedShopsReviewCountLong" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/trustedShopsReviewCount"
+                    android:layout_below="@+id/trustedShopsReviewCountLong"
+                    android:visibility="invisible"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

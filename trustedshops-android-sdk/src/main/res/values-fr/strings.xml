@@ -7,4 +7,10 @@
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_title">Service client</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_description">Si vous avez des questions, merci de contacter cette boutique ou, si nécessaire, Trusted Shops</string>
     <string name="trustedshops_sdk_trustbadge_dialog_negative_button_text">AFFICHER LE PROFIL</string>
+    <plurals
+        name="reviewDescriptionLong">
+        <item  quantity="one">%d avis client</item>
+        <item  quantity="many">%d avis clients</item>
+        <item  quantity="other">%d avis clients</item>
+    </plurals>
 </resources>
