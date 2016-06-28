@@ -169,6 +169,17 @@ public class Trustbadge {
     }
 
 
+    /**
+     *
+     * @param activity - Current activity
+     * @param ratingBar - RatingBar instance to set the rating to
+     * @param reviewMark - TextView where to set the review mark
+     * @param reviewMarkDescription - TextView where to set the review mark description
+     * @param reviewCount - TextView where to set the review count
+     * @param reviewCountLong - TextView where to set the review count in long format
+     * @throws TrustbadgeException
+     * @throws IllegalArgumentException
+     */
     public void getTsCustomerReviews(Activity activity, RatingBar ratingBar, TextView reviewMark, TextView reviewMarkDescription, TextView reviewCount, TextView reviewCountLong) throws TrustbadgeException, IllegalArgumentException {
         _activity = activity;
         _ratingBar = ratingBar;
@@ -371,35 +382,47 @@ public class Trustbadge {
             _ratingBar.setRating((float)parsedShopObject.getReviewIndicator().getOverallMark());
             _ratingBar.setOnTouchListener(showShopProfile);
             _ratingBar.setStepSize((float)0.1);
-            _ratingBar.setNumStars(5);
+            _ratingBar.setNumStars(parsedShopObject.getReviewIndicator().getNumStars());
             _ratingBar.setIsIndicator(true);
             _ratingBar.setVisibility(View.VISIBLE);
+            if (isLoggingActive()) {
+                Log.d("TSDEBUG", "Setting rating bar rating value to " + String.valueOf(parsedShopObject.getReviewIndicator().getOverallMark()));
+            }
         }
 
 
         if (_reviewMark != null && parsedShopObject.getReviewIndicator().getOverallMark() != null && parsedShopObject.getReviewIndicator().getOverallMark() > 0 ) {
             _reviewMark.setText(String.valueOf(parsedShopObject.getReviewIndicator().getOverallMark()) + "/5.00");
             _reviewMark.setText(Html.fromHtml(String.format(Locale.ENGLISH, "%.2f", parsedShopObject.getReviewIndicator().getOverallMark() )+"<font color=#878780>/5.00</font>"));
-            _ratingBar.setVisibility(View.VISIBLE);
-
+            _reviewMark.setVisibility(View.VISIBLE);
+            if (isLoggingActive()) {
+                Log.d("TSDEBUG", "Setting review mark value to " + String.valueOf(parsedShopObject.getReviewIndicator().getOverallMark()));
+            }
         }
 
         if (_reviewMarkDescription != null && parsedShopObject.getReviewIndicator().getOverallMarkDescription() != null ) {
             _reviewMarkDescription.setText(parsedShopObject.getReviewIndicator().getOverallMarkDescription());
-            _ratingBar.setVisibility(View.VISIBLE);
-
+            _reviewMarkDescription.setVisibility(View.VISIBLE);
+            if (isLoggingActive()) {
+                Log.d("TSDEBUG", "Setting review mark description to " + parsedShopObject.getReviewIndicator().getOverallMarkDescription());
+            }
         }
 
         if (_reviewCount != null && parsedShopObject.getReviewIndicator().getActiveReviewCount() > 0 ) {
             _reviewCount.setText(String.valueOf(parsedShopObject.getReviewIndicator().getActiveReviewCount()));
-            _ratingBar.setVisibility(View.VISIBLE);
-
+            _reviewCount.setVisibility(View.VISIBLE);
+            if (isLoggingActive()) {
+                Log.d("TSDEBUG", "Setting review count " + String.valueOf(parsedShopObject.getReviewIndicator().getActiveReviewCount()));
+            }
         }
 
         if (_reviewCountLong != null && parsedShopObject.getReviewIndicator().getActiveReviewCount() > 0 ) {
             String reviewCountLongText = _activity.getResources().getQuantityString(R.plurals.reviewDescriptionLong, parsedShopObject.getReviewIndicator().getActiveReviewCount(), parsedShopObject.getReviewIndicator().getActiveReviewCount());
             _reviewCountLong.setText(reviewCountLongText);
-            _ratingBar.setVisibility(View.VISIBLE);
+            _reviewCountLong.setVisibility(View.VISIBLE);
+            if (isLoggingActive()) {
+                Log.d("TSDEBUG", "Setting review count long text to " + reviewCountLongText);
+            }
 
         }
 

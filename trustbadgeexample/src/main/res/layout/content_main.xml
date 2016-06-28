@@ -246,7 +246,6 @@
                         android:scaleX="0.5"
                         android:scaleY="0.5"
                         android:layout_gravity="center"
-
                         style="@style/tsRatingBar"
                         />
                 </FrameLayout>
@@ -292,7 +291,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:id="@+id/trustedShopsReviewCountLongFrame"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="17dp"
                     android:layout_below="@+id/trustedShopReviewStarsMarkDescriptionFrame"
                     android:textAlignment="center"
                     >
