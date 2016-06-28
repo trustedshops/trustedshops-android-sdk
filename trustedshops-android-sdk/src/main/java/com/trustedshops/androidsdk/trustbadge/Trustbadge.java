@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -133,6 +134,10 @@ public class Trustbadge {
         return _loggingActive;
     }
 
+    public void setActivity(Activity activity) {
+        _activity = activity;
+    }
+
     /**
      * @param view - ImageView to inject trustmark into
      * @throws TrustbadgeException
@@ -166,6 +171,10 @@ public class Trustbadge {
      */
     public void setCustomGetTsCustomerReviewsFetchListener(OnTsCustomerReviewsFetchCompleted listener) {
             this.listener = listener;
+
+        if (isLoggingActive()) {
+            Log.d("TSDEBUG", "Setting listener " + listener.hashCode());
+        }
     }
 
 
@@ -193,8 +202,31 @@ public class Trustbadge {
             public void onCustomerReviewsFetchCompleted(Shop shopObject) {
                 populateElementsWithQualityIndicatorsValues(shopObject);
             }
+
+            @Override
+            public void onCustomerReviewsFetchFailed(Message errorMessage) {
+                if (isLoggingActive()){
+                    Log.d("TSDEBUG", "Customer Reviews Fetch Failed " + errorMessage.obj.toString());
+                }
+            }
         };
 
+        this.setCustomGetTsCustomerReviewsFetchListener(tsCustomerReviesFetchCompletedListener);
+
+        try {
+            this.callQualityIndicatorsApi();
+        } catch (Exception e) {
+            if (isLoggingActive()) {
+                Log.d("TSDEBUG", e.getMessage());
+            }
+            throw new TrustbadgeException("Could not find reviews for shop");
+        }
+    }
+
+
+    public void getTsCustomerReviews(Activity activity, OnTsCustomerReviewsFetchCompleted tsCustomerReviesFetchCompletedListener) throws TrustbadgeException, IllegalArgumentException {
+
+        _activity = activity;
         this.setCustomGetTsCustomerReviewsFetchListener(tsCustomerReviesFetchCompletedListener);
 
         try {
@@ -446,7 +478,7 @@ public class Trustbadge {
                     //Handle UI here
                     listener.onCustomerReviewsFetchCompleted(_shopWithQualityIndicators);
                     if (isLoggingActive()) {
-                        Log.d("TSDEBUG", "Trustmark Validation successfull - setting trustmark drawable into imageview");
+                        Log.d("TSDEBUG", "Got quality indicators data from cache - running the callback");
                     }
                 }}
             );
@@ -480,6 +512,14 @@ public class Trustbadge {
 
         _client.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Call call, IOException e) {
+
+                if (listener != null) {
+                    Message errorMessage = Message.obtain();
+                    String message = e.getMessage();
+                    errorMessage.obj = message;
+                    listener.onCustomerReviewsFetchFailed(errorMessage);
+                }
+
                 if (isLoggingActive()) {
                     Log.d("TSDEBUG", e.getMessage());
                 }
@@ -499,7 +539,10 @@ public class Trustbadge {
                         @Override
                         public void run() {
                             //Handle UI here
-                            populateElementsWithQualityIndicatorsValues(_shopWithQualityIndicators);
+                            if (listener != null) {
+                                listener.onCustomerReviewsFetchCompleted(_shopWithQualityIndicators);
+                            }
+
                             if (isLoggingActive()) {
                                 Log.d("TSDEBUG", "Quality Indicators call done");
                             }
@@ -566,7 +609,6 @@ public class Trustbadge {
                         _responseReviewIndicator.setOverallMark(Float.valueOf(reviewIndicatorObject.getString("overallMark")));
                     }
 
-                    Log.d("TSDEBUG", shopJsonObject.toString());
                     if (reviewIndicatorObject.has("overallMarkDescriptionGUILang")) {
                         _responseReviewIndicator.setOverallMarkDescription(reviewIndicatorObject.getString("overallMarkDescriptionGUILang"));
                     }

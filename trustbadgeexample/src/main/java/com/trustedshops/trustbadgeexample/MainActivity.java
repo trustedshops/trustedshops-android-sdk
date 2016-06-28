@@ -1,14 +1,17 @@
 package com.trustedshops.trustbadgeexample;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Rating;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,9 +22,12 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.trustedshops.androidsdk.trustbadge.OnTsCustomerReviewsFetchCompleted;
+import com.trustedshops.androidsdk.trustbadge.Shop;
 import com.trustedshops.androidsdk.trustbadge.Trustbadge;
 import com.trustedshops.androidsdk.trustbadge.TrustbadgeException;
 
+import java.util.Locale;
 import java.util.UUID;
 
 
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         showTrustbadge();
         showReviews();
+        showReviewsCustomCallback();
         addTsIdChangeListener();
     }
 
@@ -70,20 +77,68 @@ public class MainActivity extends AppCompatActivity {
         RatingBar reviewStarsBar = (RatingBar) findViewById(R.id.trustedShopReviewStars);
         TextView trustedShopReviewStarsMarkDescription = (TextView) findViewById(R.id.trustedShopReviewStarsMarkDescription);
         TextView trustedShopReviewMark = (TextView) findViewById(R.id.trustedShopReviewMark);
-        TextView trustedShopReviewCountLong = (TextView) findViewById(R.id.trustedShopsReviewCountLong);
-        TextView trustedShopsReviewCount = (TextView) findViewById(R.id.trustedShopsReviewCount);
         String tsId = getSelectedTsId();
         Trustbadge trustbadge =new Trustbadge(tsId);
         try {
-            //trustbadge.setIconColor("#F98222");
             trustbadge.setLoggingActive(true);
-            trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, trustedShopsReviewCount, trustedShopReviewCountLong);
+            trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, null, null);
         } catch (IllegalArgumentException exception) {
             Log.d("TSDEBUG", exception.getMessage());
         } catch (TrustbadgeException exception) {
             Log.d("TSDEBUG", exception.getMessage());
         }
 
+    }
+
+
+
+
+
+    private void showReviewsCustomCallback() {
+
+        final RatingBar reviewBar = (RatingBar) findViewById(R.id.reviewBadgeGroupRightRatingBar);
+        final TextView reviewCountLong = (TextView) findViewById(R.id.trustedShopsReviewCount);
+
+        Log.d("TSDEBUG", "Custom callback call");
+        OnTsCustomerReviewsFetchCompleted tsCallBack = new OnTsCustomerReviewsFetchCompleted() {
+            @Override
+            public void onCustomerReviewsFetchCompleted(Shop shopObject) {
+                Log.d("TSDEBUG", "CustomerReviews Fetch Completed");
+
+                if (reviewBar != null && shopObject.getReviewIndicator() != null && shopObject.getReviewIndicator().getOverallMark() > 0) {
+                    reviewBar.setRating((float)shopObject.getReviewIndicator().getOverallMark());
+                    reviewBar.setStepSize((float)0.1);
+                    reviewBar.setNumStars(shopObject.getReviewIndicator().getNumStars());
+                    reviewBar.setIsIndicator(true);
+                    reviewBar.setVisibility(View.VISIBLE);
+                    Log.d("TSDEBUG", "aaaaargh");
+
+                }
+
+                if (reviewCountLong != null && shopObject.getReviewIndicator().getActiveReviewCount() > 0 ) {
+                    String reviewCountLongText = MainActivity.this.getResources().getQuantityString(com.trustedshops.androidsdk.R.plurals.reviewDescriptionLong, shopObject.getReviewIndicator().getActiveReviewCount(), shopObject.getReviewIndicator().getActiveReviewCount());
+                    reviewCountLong.setText(reviewCountLongText);
+                    reviewCountLong.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+            @Override
+            public void onCustomerReviewsFetchFailed(Message errorMessage) {
+                //do stuff if call failed
+            }
+        };
+
+        String tsId = getSelectedTsId();
+        Trustbadge trustbadge =new Trustbadge(tsId);
+        try {
+            trustbadge.setLoggingActive(true);
+            trustbadge.getTsCustomerReviews(this, tsCallBack);
+        } catch (IllegalArgumentException exception) {
+            Log.d("TSDEBUG", exception.getMessage());
+        } catch (TrustbadgeException exception) {
+            Log.d("TSDEBUG", exception.getMessage());
+        }
     }
 
     private void addTsIdChangeListener() {
@@ -94,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 showTrustbadge();
                 showReviews();
+                showReviewsCustomCallback();
             }
 
             @Override

@@ -225,6 +225,17 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reviewBadgeGroupLeft"
+                    >
+
+
+
+
+
                 <ImageView
                     android:id="@+id/trustbadgeTestImageView"
                     android:layout_width="60dp"
@@ -286,33 +297,55 @@
                 </FrameLayout>
 
 
-                <FrameLayout
-                    android:layout_width="190dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:id="@+id/trustedShopsReviewCountLongFrame"
-                    android:layout_marginTop="17dp"
-                    android:layout_below="@+id/trustedShopReviewStarsMarkDescriptionFrame"
-                    android:textAlignment="center"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/trustedShopsReviewCountLong"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        />
-                </FrameLayout>
 
 
+                </RelativeLayout>
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/trustedShopsReviewCount"
-                    android:layout_below="@+id/trustedShopsReviewCountLongFrame"
-                    android:visibility="invisible"
-                    />
+                    android:id="@+id/reviewBadgeGroupRight"
+                    android:layout_toRightOf="@+id/reviewBadgeGroupLeft"
+                    >
+
+                    <FrameLayout
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/reviewBadgeGroupRightRatingBarFrame"
+
+                        >
+                    <android.support.v7.widget.AppCompatRatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/tsRatingBarSmall"
+                        android:id="@+id/reviewBadgeGroupRightRatingBar"
+                        android:visibility="invisible"
+                        />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/reviewBadgeGroupRightReviewCountLongFrame"
+                        android:layout_below="@+id/reviewBadgeGroupRightRatingBarFrame"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/trustedShopsReviewCount"
+                            android:layout_below="@+id/trustedShopsReviewCountLongFrame"
+                            android:visibility="invisible"
+                            android:paddingLeft="3dp"
+                            android:textSize="12sp"
+                            />
+                    </FrameLayout>
+
+
+                </RelativeLayout>
+
+
             </RelativeLayout>
 
 

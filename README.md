@@ -178,7 +178,57 @@ tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
 
 - - - -
 
-## 4. About this SDK ##
+## 4. Trusted Shops Customer Reviews ##
+
+In order to display Trusted Shops Customer Reviews you should do the following:
+
+Initialize Trustbadge with your TSID
+Choose which Elements should be populated. There are currently following options to choose from:
+ - RatingBar
+ - TextView where the Review Mark will be set to
+ - TextView where to set the review mark description
+ - TextView where to set the review count
+ - TextView where to set the review count
+ - TextView where to set the review count in long format
+
+ Every item is optional, so that you can choose which elements should be popuplated and shown.
+
+```Java
+/* Set your Trusted Shops ID here */
+        Trustbadge trustbadge = new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
+        RatingBar reviewStarsBar = (RatingBar) findViewById(R.id.trustedShopReviewStars);
+        TextView trustedShopReviewStarsMarkDescription = (TextView) findViewById(R.id.trustedShopReviewStarsMarkDescription);
+        TextView trustedShopReviewMark = (TextView) findViewById(R.id.trustedShopReviewMark);
+                try {
+            trustbadge.setLoggingActive(true);
+            trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, null, null);
+        } catch (IllegalArgumentException exception) {
+            Log.d("TSDEBUG", exception.getMessage());
+        } catch (TrustbadgeException exception) {
+            Log.d("TSDEBUG", exception.getMessage());
+        }
+```
+
+If you want to implement completly different handling, you can provide yor own callback where you have an access to all the review data.
+
+```Java
+
+OnTsCustomerReviewsFetchCompleted tsCallBack = new OnTsCustomerReviewsFetchCompleted() {
+            @Override
+            public void onCustomerReviewsFetchCompleted(Shop shopObject) {
+                //do your stuff on successfull call
+            }
+             @Override
+            public void onCustomerReviewsFetchFailed(Message errorMessage) {
+                //do stuff if call failed
+            }
+
+}
+
+trustbadge.getTsCustomerReviews(this, tsCallBack);
+```
+
+## 5. About this SDK ##
 
 #### Authorization ####
 To use this SDK in your own mobile app Trusted Shops needs to authorize your app.<br>
