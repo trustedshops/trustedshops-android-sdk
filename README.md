@@ -3,18 +3,20 @@
 [![CI Status](https://travis-ci.org/trustedshops/trustedshops-android-sdk.svg?branch=master)](https://travis-ci.org/trustedshops/trustedshops-android-sdk)
 [![Bintray](https://img.shields.io/bintray/v/trustedshops/maven/trustedshops-android-sdk.svg?maxAge=2592000)]()
 
-Integrate our SDK into your shopping app and boost your conversion with **your Trustbadge** and **our buyer protection**:
-* Show the Trustbadge in any view and size and provide additional information along with a link to your certificate. 
-* Integrate the Trusted Shops buyer protection and review collecting services into your app.
+Integrate our SDK into your shopping app and boost your conversion with **Trustbadge**, **Customer Reviews** and **Buyer Protection**:
+* Show the Trustbadge in any view and size and provide additional information along with a link to your certificate
+* Show your shop's customer rating and reviews
+* Integrate the Trusted Shops buyer protection and review collecting services
 
 ![TrustedShopsAndroidSDK](https://raw.githubusercontent.com/trustedshops/trustedshops-android-sdk/master/trustbadgeexample/screenshots/Android-SDK-woText.png?raw=true "Boost your conversion with Trustbadge and buyer protection")
 
 Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 
 1. [Installation](#1-installation)
-2. [Display the Trustbadge](#2-display-the-trustbadge)
-3. [After Checkout Process](#3-after-checkout-process)
-4. [About this SDK](#4-about-this-sdk)
+2. [Display Trustbadge](#2-display-trustbadge)
+3. [Display Customer Reviews](#3-display-customer-reviews)
+4. [Integration of Buyer Protection after Checkout](#4-integration-of-buyer-protection-after-checkout)
+5. [About this SDK](#5-about-this-sdk)
 
 - - - -
 
@@ -33,7 +35,7 @@ dependencies {
 
 - - - -
 
-## 2. Display the Trustbadge ##
+## 2. Display Trustbadge ##
 
 To display the trustbadge you have to create a view container (here with the ID "trustbadgeTestImageView") in your layout.xml and add the following code in the respective java file: 
 ```Java
@@ -71,7 +73,61 @@ This is your app's TS-ID which will be provided by Trusted Shops. <br>In order t
 
 - - - -
 
-## 3. After Checkout Process ##
+## 3. Display Customer Reviews ##
+
+In order to display Trusted Shops Customer Reviews you should do the following:
+
+First initialize the trustbadge with your TSID, then chose the rating elements to be populated. Following options are available:
+
+| ID                                    | Type      | Description                 | Example              |
+| ------------------------------------- | --------- | --------------------------- | -------------------- |
+| trustedShopReviewStars                | RatingBar | stars (optional)                   |![reviewStarsBar](https://raw.githubusercontent.com/trustedshops/trustedshops-android-sdk/v1.6/trustbadgeexample/screenshots/reviewStarsBar.png "reviewStarsBar") |
+| trustedShopReviewMark                 | TextView  | review mark (optional)                 | "4.89/5.00" |
+| trustedShopReviewStarsMarkDescription | TextView  | review mark description (optional)     | "VERY GOOD"|
+| tbd                | TextView  | review count (optional)                | "384" |
+| tbd                                   | TextView  | review count in long format (optional) | "384 reviews" |
+
+In order to examine the correct integration, just have a look at the demo app in this repository.
+
+```Java
+/* Set your Trusted Shops ID here */
+Trustbadge trustbadge = new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
+RatingBar reviewStarsBar = (RatingBar) findViewById(R.id.trustedShopReviewStars);
+TextView trustedShopReviewStarsMarkDescription = (TextView) findViewById(R.id.trustedShopReviewStarsMarkDescription);
+TextView trustedShopReviewMark = (TextView) findViewById(R.id.trustedShopReviewMark);
+        try {
+    trustbadge.setLoggingActive(true);
+    trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, null, null);
+} catch (IllegalArgumentException exception) {
+    Log.d("TSDEBUG", exception.getMessage());
+} catch (TrustbadgeException exception) {
+    Log.d("TSDEBUG", exception.getMessage());
+}
+```
+
+If you want to implement completly different handling, you can provide yor own callback where you have an access to all the review data.
+
+```Java
+
+OnTsCustomerReviewsFetchCompleted tsCallBack = new OnTsCustomerReviewsFetchCompleted() {
+            @Override
+            public void onCustomerReviewsFetchCompleted(Shop shopObject) {
+                //do your stuff on successfull call
+            }
+             @Override
+            public void onCustomerReviewsFetchFailed(Message errorMessage) {
+                //do stuff if call failed
+            }
+
+}
+
+trustbadge.getTsCustomerReviews(this, tsCallBack);
+```
+
+- - - -
+
+
+## 4. Integration of Buyer Protection after Checkout ##
 
 In order to allow your customers to benefit from our buyer protection the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling. You can decide if you want to show the guarantee dialogue automatically after your checkout is finished or if you want the user to tab on a button for that.
 ```Java
@@ -177,56 +233,6 @@ tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
 ```      
 
 - - - -
-
-## 4. Trusted Shops Customer Reviews ##
-
-In order to display Trusted Shops Customer Reviews you should do the following:
-
-Initialize Trustbadge with your TSID
-Choose which Elements should be populated. There are currently following options to choose from:
- - RatingBar
- - TextView where the Review Mark will be set to
- - TextView where to set the review mark description
- - TextView where to set the review count
- - TextView where to set the review count
- - TextView where to set the review count in long format
-
- Every item is optional, so that you can choose which elements should be popuplated and shown.
-
-```Java
-/* Set your Trusted Shops ID here */
-        Trustbadge trustbadge = new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
-        RatingBar reviewStarsBar = (RatingBar) findViewById(R.id.trustedShopReviewStars);
-        TextView trustedShopReviewStarsMarkDescription = (TextView) findViewById(R.id.trustedShopReviewStarsMarkDescription);
-        TextView trustedShopReviewMark = (TextView) findViewById(R.id.trustedShopReviewMark);
-                try {
-            trustbadge.setLoggingActive(true);
-            trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, null, null);
-        } catch (IllegalArgumentException exception) {
-            Log.d("TSDEBUG", exception.getMessage());
-        } catch (TrustbadgeException exception) {
-            Log.d("TSDEBUG", exception.getMessage());
-        }
-```
-
-If you want to implement completly different handling, you can provide yor own callback where you have an access to all the review data.
-
-```Java
-
-OnTsCustomerReviewsFetchCompleted tsCallBack = new OnTsCustomerReviewsFetchCompleted() {
-            @Override
-            public void onCustomerReviewsFetchCompleted(Shop shopObject) {
-                //do your stuff on successfull call
-            }
-             @Override
-            public void onCustomerReviewsFetchFailed(Message errorMessage) {
-                //do stuff if call failed
-            }
-
-}
-
-trustbadge.getTsCustomerReviews(this, tsCallBack);
-```
 
 ## 5. About this SDK ##
 
