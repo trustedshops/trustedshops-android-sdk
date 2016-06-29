@@ -155,7 +155,7 @@ public class Trustbadge {
         _activity = activity;
         view.setTag("Trustbadge");
         try {
-            this.run();
+            this.callTrustmarkInformationApi();
         } catch (Exception e) {
             if (isLoggingActive()) {
                 Log.d("TSDEBUG", e.getMessage());
@@ -169,12 +169,20 @@ public class Trustbadge {
      * Set Custom Listener for TS Customer Reviews
      * @param listener
      */
-    public void setCustomGetTsCustomerReviewsFetchListener(OnTsCustomerReviewsFetchCompleted listener) {
+    public void setCustomTsCustomerReviewsFetchListener(OnTsCustomerReviewsFetchCompleted listener) {
             this.listener = listener;
 
         if (isLoggingActive()) {
             Log.d("TSDEBUG", "Setting listener " + listener.hashCode());
         }
+    }
+
+    /**
+     * Return the listener that was set on TS Customer Reviews Fetch Complete
+     * @return OnTsCustomerReviewsFetchCompleted listener
+     */
+    public OnTsCustomerReviewsFetchCompleted getCustomTsCustomerReviewsFetchListener() {
+        return this.listener;
     }
 
 
@@ -211,10 +219,10 @@ public class Trustbadge {
             }
         };
 
-        this.setCustomGetTsCustomerReviewsFetchListener(tsCustomerReviesFetchCompletedListener);
+        this.setCustomTsCustomerReviewsFetchListener(tsCustomerReviesFetchCompletedListener);
 
         try {
-            this.callQualityIndicatorsApi();
+            this.callQualityIndicatorsApi(UrlManager.getQualityIndicatorsApiUrl(getTsId(), getEndPoint()));
         } catch (Exception e) {
             if (isLoggingActive()) {
                 Log.d("TSDEBUG", e.getMessage());
@@ -227,10 +235,10 @@ public class Trustbadge {
     public void getTsCustomerReviews(Activity activity, OnTsCustomerReviewsFetchCompleted tsCustomerReviesFetchCompletedListener) throws TrustbadgeException, IllegalArgumentException {
 
         _activity = activity;
-        this.setCustomGetTsCustomerReviewsFetchListener(tsCustomerReviesFetchCompletedListener);
+        this.setCustomTsCustomerReviewsFetchListener(tsCustomerReviesFetchCompletedListener);
 
         try {
-            this.callQualityIndicatorsApi();
+            this.callQualityIndicatorsApi(UrlManager.getQualityIndicatorsApiUrl(getTsId(), getEndPoint()));
         } catch (Exception e) {
             if (isLoggingActive()) {
                 Log.d("TSDEBUG", e.getMessage());
@@ -306,7 +314,7 @@ public class Trustbadge {
      * @throws Exception
      */
 
-    public void run() throws Exception {
+    protected void callTrustmarkInformationApi() throws Exception {
         final Request request = new Request.Builder()
                 .url(UrlManager.getTrustMarkAPIUrl(getTsId(), getEndPoint()))
                 .build();
@@ -467,7 +475,7 @@ public class Trustbadge {
 
 
 
-    public void callQualityIndicatorsApi() throws Exception {
+    protected void callQualityIndicatorsApi(String qualityIndicatorsApiUrl) throws Exception {
 
 
         /* If we already did the api call and parsed data, do not do it again */
@@ -487,17 +495,17 @@ public class Trustbadge {
 
 
         if (isLoggingActive()) {
-            Log.d("TSDEBUG", "Calling Quality Indicators API URL: " + UrlManager.getQualityIndicatorsApiUrl(getTsId(), getEndPoint()));
+            Log.d("TSDEBUG", "Calling Quality Indicators API URL: " + qualityIndicatorsApiUrl);
         }
 
-        Locale currentLocale = _activity.getResources().getConfiguration().locale;
+        String currentLanguage = Locale.getDefault().getLanguage();
 
-        if (acceptLanguages.contains(currentLocale.getLanguage())) {
-            _acceptLanguage = currentLocale.getLanguage();
+        if (acceptLanguages.contains(currentLanguage)) {
+            _acceptLanguage = currentLanguage;
         }
 
         final Request request = new Request.Builder()
-                .url(UrlManager.getQualityIndicatorsApiUrl(getTsId(), getEndPoint()))
+                .url(qualityIndicatorsApiUrl)
                 .addHeader("accept-language", _acceptLanguage)
                 .build();
 
