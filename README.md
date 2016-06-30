@@ -91,8 +91,7 @@ TextView trustedShopReviewStarsMarkDescription = (TextView) findViewById(R.id.tr
 TextView trustedShopReviewMark = (TextView) findViewById(R.id.trustedShopReviewMark);
 ```
 
-Then, ```trustbadge.getTsCustomerReviews(this, ID_1, ID_2, ID_3, ID_4, ID_5);``` populates the customer reviews information into the respective views. Just insert your views' IDs according to the following table. 
-If you don't want to show an element, set the view ID to ```null```.
+Then, ```trustbadge.getTsCustomerReviews(this, ID_1, ID_2, ID_3, ID_4, ID_5);``` populates the customer reviews information into the respective views. If you don't want to show an element, set the view ID to ```null```.
 
 ```Java
 try {
@@ -105,6 +104,8 @@ try {
     Log.d("TSDEBUG", exception.getMessage());
 }
 ```
+
+Insert your views' IDs according to the following table:
 
 | Position                                    | Description      | Type                 | Example              |
 | ------------------------------------- | --------- | --------------------------- | -------------------- |
