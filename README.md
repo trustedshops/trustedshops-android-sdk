@@ -124,6 +124,7 @@ loads and displays
 - the stars in the RatingBar object with the ID ```reviewStarsBar```,
 - the review mark in a TextView with ID ```trustedShopReviewMark``` and 
 - the review mark description in a TextView with ID ```trustedShopReviewStarsMarkDescription```. 
+
 Review count and review count in long format are not used in this example.
 
 In order to examine the correct integration, just have a look at the demo app in this repository.
