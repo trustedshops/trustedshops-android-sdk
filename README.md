@@ -75,28 +75,29 @@ This is your app's TS-ID which will be provided by Trusted Shops. <br>In order t
 
 ## 3. Display Customer Reviews ##
 
-In order to display Trusted Shops Customer Reviews you should do the following:
+You can display your Trusted Shops Customer Reviews as follows:
 
-First initialize the trustbadge with your TSID, then chose the rating elements to be populated. Following options are available:
-
-| ID                                    | Type      | Description                 | Example              |
-| ------------------------------------- | --------- | --------------------------- | -------------------- |
-| trustedShopReviewStars                | RatingBar | stars (optional)                   |![reviewStarsBar](https://raw.githubusercontent.com/trustedshops/trustedshops-android-sdk/v1.6/trustbadgeexample/screenshots/reviewStarsBar.png "reviewStarsBar") |
-| trustedShopReviewMark                 | TextView  | review mark (optional)                 | "4.89/5.00" |
-| trustedShopReviewStarsMarkDescription | TextView  | review mark description (optional)     | "VERY GOOD"|
-| tbd                | TextView  | review count (optional)                | "384" |
-| tbd                                   | TextView  | review count in long format (optional) | "384 reviews" |
-
-In order to examine the correct integration, just have a look at the demo app in this repository.
-
+First you initialize the trustbadge with your TSID. 
 ```Java
 /* Set your Trusted Shops ID here */
 Trustbadge trustbadge = new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
+```
+
+Then reference all the views, in which customer reviews information shall be shown.
+```Java
+/* Reference the views where information shall be displayed */
 RatingBar reviewStarsBar = (RatingBar) findViewById(R.id.trustedShopReviewStars);
 TextView trustedShopReviewStarsMarkDescription = (TextView) findViewById(R.id.trustedShopReviewStarsMarkDescription);
 TextView trustedShopReviewMark = (TextView) findViewById(R.id.trustedShopReviewMark);
+```
+
+Then, ```trustbadge.getTsCustomerReviews(this, ID_1, ID_2, ID_3, ID_4, ID_5);``` populates the customer reviews information into the respective views. Just insert your views' IDs according to the following table. 
+If you don't want to show an element, set the view ID to ```null```.
+
+```Java
         try {
     trustbadge.setLoggingActive(true);
+    /* List the viewIDs in following order: stars, review mark, reviw mark description, review count, review count long format */
     trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, null, null);
 } catch (IllegalArgumentException exception) {
     Log.d("TSDEBUG", exception.getMessage());
@@ -104,6 +105,18 @@ TextView trustedShopReviewMark = (TextView) findViewById(R.id.trustedShopReviewM
     Log.d("TSDEBUG", exception.getMessage());
 }
 ```
+
+| Position                                    | Description      | Type                 | Example              |
+| ------------------------------------- | --------- | --------------------------- | -------------------- |
+| ID_1 | stars | RatingBar |![reviewStarsBar](https://raw.githubusercontent.com/trustedshops/trustedshops-android-sdk/v1.6/trustbadgeexample/screenshots/reviewStarsBar.png "reviewStarsBar") |
+| ID_2 | review mark | TextView                   | "4.89/5.00" |
+| ID_3 | review mark description | TextView       | "VERY GOOD"|
+| ID_4 | review count | TextView                  | "384" |
+| ID_5 | review count in long format | TextView   | "384 reviews" |
+
+This example ```trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, null, null);``` loads and displays the stars in the RatingBar object with the ID ```reviewStarsBar```, the review mark in a TextView with ID ```trustedShopReviewMark``` and the review mark description in a TextView with ID ```trustedShopReviewStarsMarkDescription```. Review count and review count in long format are not used in this example.
+
+In order to examine the correct integration, just have a look at the demo app in this repository.
 
 If you want to implement completly different handling, you can provide yor own callback where you have an access to all the review data.
 
