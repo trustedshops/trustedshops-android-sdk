@@ -77,13 +77,13 @@ This is your app's TS-ID which will be provided by Trusted Shops. <br>In order t
 
 You can display your Trusted Shops Customer Reviews as follows:
 
-First you initialize the trustbadge with your TSID. 
+First you initialize the trustbadge with your TSID (mandatory). 
 ```Java
 /* Set your Trusted Shops ID here */
 Trustbadge trustbadge = new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 ```
 
-Then reference all the views, in which customer reviews information shall be shown.
+Then reference all the views, in which customer reviews information shall be shown (optional).
 ```Java
 /* Reference the views where information shall be displayed */
 RatingBar reviewStarsBar = (RatingBar) findViewById(R.id.trustedShopReviewStars);
@@ -95,10 +95,10 @@ Then, ```trustbadge.getTsCustomerReviews(this, ID_1, ID_2, ID_3, ID_4, ID_5);```
 If you don't want to show an element, set the view ID to ```null```.
 
 ```Java
-        try {
-    trustbadge.setLoggingActive(true);
-    /* List the viewIDs in following order: stars, review mark, reviw mark description, review count, review count long format */
-    trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, null, null);
+try {
+  trustbadge.setLoggingActive(true);
+  /* List the viewIDs in following order: stars, review mark, reviw mark description, review count, review count long format */
+  trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, null, null);
 } catch (IllegalArgumentException exception) {
     Log.d("TSDEBUG", exception.getMessage());
 } catch (TrustbadgeException exception) {
@@ -114,7 +114,16 @@ If you don't want to show an element, set the view ID to ```null```.
 | ID_4 | review count | TextView                  | "384" |
 | ID_5 | review count in long format | TextView   | "384 reviews" |
 
-This example ```trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, null, null);``` loads and displays the stars in the RatingBar object with the ID ```reviewStarsBar```, the review mark in a TextView with ID ```trustedShopReviewMark``` and the review mark description in a TextView with ID ```trustedShopReviewStarsMarkDescription```. Review count and review count in long format are not used in this example.
+For example 
+
+```Java
+trustbadge.getTsCustomerReviews(this, reviewStarsBar, trustedShopReviewMark, trustedShopReviewStarsMarkDescription, null, null);
+``` 
+loads and displays 
+- the stars in the RatingBar object with the ID ```reviewStarsBar```,
+- the review mark in a TextView with ID ```trustedShopReviewMark``` and 
+- the review mark description in a TextView with ID ```trustedShopReviewStarsMarkDescription```. 
+Review count and review count in long format are not used in this example.
 
 In order to examine the correct integration, just have a look at the demo app in this repository.
 
