@@ -6,13 +6,9 @@ import android.os.Message;
 import com.trustedshops.androidsdk.trustbadge.OnTsCustomerReviewsFetchCompleted;
 import com.trustedshops.androidsdk.trustbadge.Shop;
 import com.trustedshops.androidsdk.trustbadge.Trustbadge;
-import com.trustedshops.androidsdk.trustbadge.Validator;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ListenerTest {
 

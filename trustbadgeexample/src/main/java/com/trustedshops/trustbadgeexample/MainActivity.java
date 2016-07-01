@@ -1,17 +1,11 @@
 package com.trustedshops.trustbadgeexample;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.Rating;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,9 +20,6 @@ import com.trustedshops.androidsdk.trustbadge.OnTsCustomerReviewsFetchCompleted;
 import com.trustedshops.androidsdk.trustbadge.Shop;
 import com.trustedshops.androidsdk.trustbadge.Trustbadge;
 import com.trustedshops.androidsdk.trustbadge.TrustbadgeException;
-
-import java.util.Locale;
-import java.util.UUID;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -111,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                     reviewBar.setNumStars(shopObject.getReviewIndicator().getNumStars());
                     reviewBar.setIsIndicator(true);
                     reviewBar.setVisibility(View.VISIBLE);
-                    Log.d("TSDEBUG", "aaaaargh");
 
                 }
 

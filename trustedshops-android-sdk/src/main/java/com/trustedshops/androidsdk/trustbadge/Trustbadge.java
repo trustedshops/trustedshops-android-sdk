@@ -5,25 +5,25 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Message;
+import android.text.Html;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.text.Html;
-
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.internal.MDButton;
 import com.trustedshops.androidsdk.R;
 
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
 import okhttp3.Cache;
 import okhttp3.Call;
@@ -31,11 +31,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
 
 
 public class Trustbadge {
@@ -340,80 +335,36 @@ public class Trustbadge {
                     }
                 }
                 String jsonData = response.body().string();
-                Shop parsedShopObject = parseApiResponse(jsonData);
-                if (parsedShopObject != null && parsedShopObject.getTrustMark()!= null && parsedShopObject.getTrustMark().getStatus().equals("VALID")) {
-                    setShop(parsedShopObject);
-                    _activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //Handle UI here
-                            _imageView.setImageResource(R.drawable.ts_seal);
-                            _imageView.setOnClickListener(showTrustcard);
-                            if (isLoggingActive()) {
-                                Log.d("TSDEBUG", "Trustmark Validation successfull - setting trustmark drawable into imageview");
-                            }
-                        }
-                    });
 
-                } else {
+                try {
+                    Shop parsedShopObject = Shop.createFromTrustmarkInformationApi(jsonData);
+                    if (parsedShopObject.getTrustMark()!= null && parsedShopObject.getTrustMark().getStatus().equals("VALID")) {
+                        setShop(parsedShopObject);
+                        _activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //Handle UI here
+                                _imageView.setImageResource(R.drawable.ts_seal);
+                                _imageView.setOnClickListener(showTrustcard);
+                                if (isLoggingActive()) {
+                                    Log.d("TSDEBUG", "Trustmark Validation successfull - setting trustmark drawable into imageview");
+                                }
+                            }
+                        });
+                    } else {
+                        if (isLoggingActive()) {
+                            Log.d("TSDEBUG", "No valid certificate found");
+                        }
+                    }
+                } catch (Exception e) {
                     if (isLoggingActive()) {
-                        Log.d("TSDEBUG", "No valid certificate found");
+                        Log.d("TSDEBUG", "Could not parse api response. " + e.getMessage());
                     }
                 }
             }
         });
     }
 
-    /**
-     * @param jsonData
-     * @return Parsed API Response
-     */
-    protected Shop parseApiResponse(String jsonData) {
-        Shop s = null;
-
-        try {
-            Shop _responseShop = new Shop();
-            JSONObject Jobject = new JSONObject(jsonData);
-            JSONObject responseJsonObject = Jobject.getJSONObject("response");
-            JSONObject dataJsonObject = responseJsonObject.getJSONObject("data");
-            JSONObject shopJsonObject = dataJsonObject.getJSONObject("shop");
-
-            _responseShop.setLanguageISO2(shopJsonObject.getString("languageISO2"));
-            _responseShop.setTargetMarketISO3(shopJsonObject.getString("targetMarketISO3"));
-            _responseShop.setUrl(shopJsonObject.getString("url"));
-            _responseShop.setTsId(shopJsonObject.getString("tsId"));
-            _responseShop.setName(shopJsonObject.getString("name"));
-
-            TrustMark _responseTrustMark = new TrustMark();
-
-            if (shopJsonObject.has("trustMark")) {
-                JSONObject trustMarkJsonObject = shopJsonObject.getJSONObject("trustMark");
-
-                if (trustMarkJsonObject.has("status")) {
-                    _responseTrustMark.setStatus(trustMarkJsonObject.getString("status"));
-
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-                    if (trustMarkJsonObject.has("validFrom")) {
-                        _responseTrustMark.setValidFrom(format.parse(trustMarkJsonObject.getString("validFrom")));
-                    }
-
-                    if (trustMarkJsonObject.has("validTo")) {
-                        _responseTrustMark.setValidTo(format.parse(trustMarkJsonObject.getString("validTo")));
-                    }
-                }
-                _responseShop.setTrustMark(_responseTrustMark);
-            }
-
-            return _responseShop;
-
-        } catch (Exception e) {
-            if (isLoggingActive()) {
-                Log.d("TSDEBUG", "Could not parse JSON Response " + e.getMessage());
-            }
-        }
-
-        return s;
-    }
 
     protected void populateElementsWithQualityIndicatorsValues(Shop parsedShopObject){
 
@@ -472,8 +423,6 @@ public class Trustbadge {
 
             _activity.runOnUiThread(_runnable);
     }
-
-
 
     protected void callQualityIndicatorsApi(String qualityIndicatorsApiUrl) throws Exception {
 
@@ -539,101 +488,35 @@ public class Trustbadge {
                         Log.d("TSDEBUG", "Quality Indicators call unsuccessfull " + response);
                     }
                 }
-                String jsonData = response.body().string();
-                final Shop parsedShopObject = parseQualityIndicatorsApiResponse(jsonData);
-                if (parsedShopObject != null && parsedShopObject.getReviewIndicator()!= null && parsedShopObject.getReviewIndicator().getActiveReviewCount() > 0) {
-                    _shopWithQualityIndicators = parsedShopObject;
-                    runOnUiThread(_activity, new Runnable() {
-                        @Override
-                        public void run() {
-                            //Handle UI here
-                            if (listener != null) {
-                                listener.onCustomerReviewsFetchCompleted(_shopWithQualityIndicators);
-                            }
+                try {
+                    String jsonData = response.body().string();
+                    final Shop parsedShopObject = Shop.createFromQualityIndicatorsApiResponse(jsonData);
+                    if (parsedShopObject.getReviewIndicator()!= null && parsedShopObject.getReviewIndicator().getActiveReviewCount() > 0) {
+                        _shopWithQualityIndicators = parsedShopObject;
+                        runOnUiThread(_activity, new Runnable() {
+                            @Override
+                            public void run() {
+                                //Handle UI here
+                                if (listener != null) {
+                                    listener.onCustomerReviewsFetchCompleted(_shopWithQualityIndicators);
+                                }
 
-                            if (isLoggingActive()) {
-                                Log.d("TSDEBUG", "Quality Indicators call done");
-                            }
-                        }}
-                    );
+                                if (isLoggingActive()) {
+                                    Log.d("TSDEBUG", "Quality Indicators call done");
+                                }
+                            }});
+                    } else {
+                        if (isLoggingActive()) {
+                            Log.d("TSDEBUG", "No reviews found for this shop");
+                        }
+                    }
 
-                } else {
+                } catch (Exception e) {
                     if (isLoggingActive()) {
-                        Log.d("TSDEBUG", "No valid certificate found");
+                        Log.d("TSDEBUG", "Could not parse JSON Response " + e.getMessage());
                     }
                 }
             }
         });
-    }
-
-
-    /**
-     * @param jsonData
-     * @return Parsed API Response
-     */
-    protected Shop parseQualityIndicatorsApiResponse(String jsonData) {
-        Shop s = null;
-
-        try {
-            Shop _responseShop = new Shop();
-            JSONObject Jobject = new JSONObject(jsonData);
-            JSONObject responseJsonObject = Jobject.getJSONObject("response");
-            JSONObject dataJsonObject = responseJsonObject.getJSONObject("data");
-            JSONObject shopJsonObject = dataJsonObject.getJSONObject("shop");
-
-            _responseShop.setLanguageISO2(shopJsonObject.getString("languageISO2"));
-            _responseShop.setTargetMarketISO3(shopJsonObject.getString("targetMarketISO3"));
-            _responseShop.setUrl(shopJsonObject.getString("url"));
-            _responseShop.setTsId(shopJsonObject.getString("tsId"));
-            _responseShop.setName(shopJsonObject.getString("name"));
-
-            ReviewIndicator _responseReviewIndicator = new ReviewIndicator();
-
-            if (shopJsonObject.has("qualityIndicators")) {
-
-
-                JSONObject qualityIndicatorsObject = shopJsonObject.getJSONObject("qualityIndicators");
-
-
-                if (qualityIndicatorsObject.has("reviewIndicator")) {
-
-
-                    JSONObject reviewIndicatorObject = qualityIndicatorsObject.getJSONObject("reviewIndicator");
-
-
-
-                    _responseReviewIndicator.setActiveReviewCount(reviewIndicatorObject.getInt("activeReviewCount"));
-
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    if (reviewIndicatorObject.has("reviewsCountedSince")) {
-                        _responseReviewIndicator.setReviewsScountedSince(format.parse(reviewIndicatorObject.getString("reviewsCountedSince")));
-                    }
-
-                    if (reviewIndicatorObject.has("totalReviewCount")) {
-                        _responseReviewIndicator.setTotalReviewCount(reviewIndicatorObject.getInt("totalReviewCount"));
-                    }
-
-                    if (reviewIndicatorObject.has("overallMark")) {
-                        _responseReviewIndicator.setOverallMark(Float.valueOf(reviewIndicatorObject.getString("overallMark")));
-                    }
-
-                    if (reviewIndicatorObject.has("overallMarkDescriptionGUILang")) {
-                        _responseReviewIndicator.setOverallMarkDescription(reviewIndicatorObject.getString("overallMarkDescriptionGUILang"));
-                    }
-
-                    _responseShop.setReviewIndicator(_responseReviewIndicator);
-
-                }
-            }
-
-            return _responseShop;
-
-        } catch (Exception e) {
-            if (isLoggingActive()) {
-                Log.d("TSDEBUG", "Could not parse JSON Response " + e.getMessage());
-            }
-        }
-
-        return s;
     }
 }
