@@ -109,7 +109,7 @@ Insert your views' IDs according to the following table:
 
 | Position | Description | Type          | Example EN              | Example DE              |
 | -------- | ----------- | ------------- | ----------------------- | ---------------------- |
-| ID_1 | stars | RatingBar |![reviewStarsBar](https://raw.githubusercontent.com/trustedshops/trustedshops-android-sdk/v1.6/trustbadgeexample/screenshots/reviewStarsBar.png "reviewStarsBar") |![reviewStarsBar](https://raw.githubusercontent.com/trustedshops/trustedshops-android-sdk/v1.6/trustbadgeexample/screenshots/reviewStarsBar.png "reviewStarsBar") |
+| ID_1 | stars | RatingBar |![reviewStarsBar](trustbadgeexample/screenshots/reviewStarsBar.png "reviewStarsBar") |![reviewStarsBar](trustbadgeexample/screenshots/reviewStarsBar.png "reviewStarsBar") |
 | ID_2 | review mark | TextView                   | "4.89/5.00" |  "4.89/5.00" | 
 | ID_3 | review mark description | TextView       | "VERY GOOD"| "SEHR GUT |
 | ID_4 | review count | TextView                  | "384" | "384" |
