@@ -43,4 +43,13 @@ public class UrlManager {
     public static String getQualityIndicatorsApiUrl(String tsId, String apiEndPoint) {
         return String.format("https://api.trustedshops.com/rest/public/v2/shops/%s/quality/reviews.json", tsId);
     }
-}
+
+    public static String getProductReviewsListApiUrl(String SKU, String apiEndPoint){
+        return "http://cdn1.api.trustedshops.com/shops/XF40AD5250283D0082830EE5AA7A111A3/products/skus/303031303937393038343033303936/productreviewstickers/v1/reviews.json";
+    }
+
+
+    public static String getProductSummaryApiUrl(String SKU, String apiEndPoint){
+        return "http://cdn1.api.trustedshops.com/shops/XF40AD5250283D0082830EE5AA7A111A3/products/skus/303031303937393038343033303936/productstickersummaries/v1/quality/reviews.json";
+    }
+ }

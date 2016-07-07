@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.trustedshops.androidsdk.trustbadge.OnTsCustomerReviewsFetchCompleted;
+import com.trustedshops.androidsdk.trustbadge.OnTsProductReviewsFetchCompleted;
+import com.trustedshops.androidsdk.trustbadge.Product;
 import com.trustedshops.androidsdk.trustbadge.Shop;
 import com.trustedshops.androidsdk.trustbadge.Trustbadge;
 import com.trustedshops.androidsdk.trustbadge.TrustbadgeException;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         showTrustbadge();
         showReviews();
         showReviewsCustomCallback();
+        showProductReviewsListCustomCallback();
+        showProductReviewsSummaryCustomCallback();
         addTsIdChangeListener();
     }
 
@@ -124,6 +128,67 @@ public class MainActivity extends AppCompatActivity {
         try {
             trustbadge.setLoggingActive(true);
             trustbadge.getTsCustomerReviews(this, tsCallBack);
+        } catch (IllegalArgumentException exception) {
+            Log.d("TSDEBUG", exception.getMessage());
+        } catch (TrustbadgeException exception) {
+            Log.d("TSDEBUG", exception.getMessage());
+        }
+    }
+
+
+    private void showProductReviewsListCustomCallback() {
+
+
+        Log.d("TSDEBUG", "Custom callback call");
+        OnTsProductReviewsFetchCompleted tsCallBack = new OnTsProductReviewsFetchCompleted() {
+            @Override
+            public void onProductReviewsFetchCompleted(Product productObject) {
+                Log.d("TSDEBUG", "Product Reviews Fetch Completed");
+
+
+            }
+
+            @Override
+            public void onProductReviewsFetchFailed(Message errorMessage) {
+                //do stuff if call failed
+            }
+        };
+
+        String tsId = getSelectedTsId();
+        Trustbadge trustbadge =new Trustbadge(tsId);
+        try {
+            trustbadge.setLoggingActive(true);
+            trustbadge.getProductReviewsList(this, tsCallBack);
+        } catch (IllegalArgumentException exception) {
+            Log.d("TSDEBUG", exception.getMessage());
+        } catch (TrustbadgeException exception) {
+            Log.d("TSDEBUG", exception.getMessage());
+        }
+    }
+
+    private void showProductReviewsSummaryCustomCallback() {
+
+
+        Log.d("TSDEBUG", "Custom callback call");
+        OnTsProductReviewsFetchCompleted tsCallBack = new OnTsProductReviewsFetchCompleted() {
+            @Override
+            public void onProductReviewsFetchCompleted(Product productObject) {
+                Log.d("TSDEBUG", "Product Reviews Summary Fetch Completed");
+
+
+            }
+
+            @Override
+            public void onProductReviewsFetchFailed(Message errorMessage) {
+                //do stuff if call failed
+            }
+        };
+
+        String tsId = getSelectedTsId();
+        Trustbadge trustbadge =new Trustbadge(tsId);
+        try {
+            trustbadge.setLoggingActive(true);
+            trustbadge.getProductReviewsSummary(this, tsCallBack);
         } catch (IllegalArgumentException exception) {
             Log.d("TSDEBUG", exception.getMessage());
         } catch (TrustbadgeException exception) {

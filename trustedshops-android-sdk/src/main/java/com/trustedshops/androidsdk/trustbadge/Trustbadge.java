@@ -45,7 +45,11 @@ public class Trustbadge {
     protected RatingBar _ratingBar;
     protected Shop _shopWithQualityIndicators;
     protected TextView _reviewMark, _reviewMarkDescription, _reviewCount, _reviewCountLong;
+    protected Product _productWithReviewsList;
+    protected Product _productWithQuaityIndicators;
+
     private OnTsCustomerReviewsFetchCompleted listener;
+    private OnTsProductReviewsFetchCompleted productReviewsListener;
     static final Set<String> acceptLanguages = new HashSet<String>(Arrays.asList("de", "fr","es","pl","en"));
     private String _acceptLanguage = "en";
     public Trustbadge() {
@@ -173,6 +177,28 @@ public class Trustbadge {
     }
 
     /**
+     * Return the listener that was set on TS Product Reviews Fetch Complete
+     * @return OnTsCustomerReviewsFetchCompleted listener
+     */
+    public OnTsProductReviewsFetchCompleted getCustomTsProductReviewsFetchListener() {
+        return this.productReviewsListener;
+    }
+
+
+
+    /**
+     * Set Custom Listener for TS Product Reviews
+     * @param listener
+     */
+    public void setCustomTsProductReviewsFetchListener(OnTsProductReviewsFetchCompleted listener) {
+        this.productReviewsListener = listener;
+
+        if (isLoggingActive()) {
+            Log.d("TSDEBUG", "Setting product reviews listener " + listener.hashCode());
+        }
+    }
+
+    /**
      * Return the listener that was set on TS Customer Reviews Fetch Complete
      * @return OnTsCustomerReviewsFetchCompleted listener
      */
@@ -239,6 +265,38 @@ public class Trustbadge {
                 Log.d("TSDEBUG", e.getMessage());
             }
             throw new TrustbadgeException("Could not find reviews for shop");
+        }
+    }
+
+
+    public void getProductReviewsList(Activity activity, OnTsProductReviewsFetchCompleted tsProductReviesFetchCompletedListener) throws TrustbadgeException, IllegalArgumentException {
+
+        _activity = activity;
+        this.setCustomTsProductReviewsFetchListener(tsProductReviesFetchCompletedListener);
+
+        try {
+            this.callProductReviewsListApi(UrlManager.getProductReviewsListApiUrl(getTsId(), getEndPoint()));
+        } catch (Exception e) {
+            if (isLoggingActive()) {
+                Log.d("TSDEBUG", e.getMessage());
+            }
+            throw new TrustbadgeException("Could not find reviews for product");
+        }
+    }
+
+
+    public void getProductReviewsSummary(Activity activity, OnTsProductReviewsFetchCompleted tsProductReviesFetchCompletedListener) throws TrustbadgeException, IllegalArgumentException {
+
+        _activity = activity;
+        this.setCustomTsProductReviewsFetchListener(tsProductReviesFetchCompletedListener);
+
+        try {
+            this.callProductReviewsSummaryApi(UrlManager.getProductSummaryApiUrl(getTsId(), getEndPoint()));
+        } catch (Exception e) {
+            if (isLoggingActive()) {
+                Log.d("TSDEBUG", e.getMessage());
+            }
+            throw new TrustbadgeException("Could not find reviews for product");
         }
     }
 
@@ -508,6 +566,204 @@ public class Trustbadge {
                     } else {
                         if (isLoggingActive()) {
                             Log.d("TSDEBUG", "No reviews found for this shop");
+                        }
+                    }
+
+                } catch (Exception e) {
+                    if (isLoggingActive()) {
+                        Log.d("TSDEBUG", "Could not parse JSON Response " + e.getMessage());
+                    }
+                }
+            }
+        });
+    }
+
+
+    protected void callProductReviewsListApi(String productReviewsListApi) throws Exception {
+
+
+        /* If we already did the api call and parsed data, do not do it again */
+        if (_productWithReviewsList != null && listener != null) {
+            runOnUiThread(_activity, new Runnable() {
+                @Override
+                public void run() {
+                    //Handle UI here
+                    productReviewsListener.onProductReviewsFetchCompleted(_productWithReviewsList);
+                    if (isLoggingActive()) {
+                        Log.d("TSDEBUG", "Got product with reviews list from cache - running the callback");
+                    }
+                }}
+            );
+
+        }
+
+
+        if (isLoggingActive()) {
+            Log.d("TSDEBUG", "Calling Product Reviews List API URL: " + productReviewsListApi);
+        }
+
+//        String currentLanguage = Locale.getDefault().getLanguage();
+//
+//        if (acceptLanguages.contains(currentLanguage)) {
+//            _acceptLanguage = currentLanguage;
+//        }
+
+        final Request request = new Request.Builder()
+                .url(productReviewsListApi)
+//                .addHeader("accept-language", _acceptLanguage)
+                .build();
+
+
+        int cacheSize = 10 * 1024 * 1024; // 10 MiB
+        File cacheDirectory = new File(_activity.getCacheDir().getAbsolutePath(), "HttpCacheQualityIndicatorApi");
+        Cache cache = new Cache(cacheDirectory, cacheSize);
+        _client = new OkHttpClient.Builder()
+                .cache(cache)
+                .build();
+
+
+        _client.newCall(request).enqueue(new Callback() {
+            @Override public void onFailure(Call call, IOException e) {
+
+                if (productReviewsListener != null) {
+                    Message errorMessage = Message.obtain();
+                    String message = e.getMessage();
+                    errorMessage.obj = message;
+                    productReviewsListener.onProductReviewsFetchFailed(errorMessage);
+                }
+
+                if (isLoggingActive()) {
+                    Log.d("TSDEBUG", e.getMessage());
+                }
+            }
+
+            @Override public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful())  {
+                    if (isLoggingActive()) {
+                        Log.d("TSDEBUG", "Product Reviews list call unsuccessfull " + response);
+                    }
+                }
+                try {
+                    String jsonData = response.body().string();
+                    final Product parsedProductObject = Product.createFromReviewsListApi(jsonData);
+
+
+                    if (parsedProductObject.getProductReviewArrayList()!= null && parsedProductObject.getProductReviewArrayList().size() > 0) {
+                        _productWithReviewsList = parsedProductObject;
+                        runOnUiThread(_activity, new Runnable() {
+                            @Override
+                            public void run() {
+                                //Handle UI here
+                                if (productReviewsListener != null) {
+                                    productReviewsListener.onProductReviewsFetchCompleted(_productWithReviewsList);
+                                }
+
+                                if (isLoggingActive()) {
+                                    Log.d("TSDEBUG", "Quality Indicators call done");
+                                }
+                            }});
+                    } else {
+                        if (isLoggingActive()) {
+                            Log.d("TSDEBUG", "No reviews found for this shop");
+                        }
+                    }
+
+                } catch (Exception e) {
+                    if (isLoggingActive()) {
+                        Log.d("TSDEBUG", "Could not parse JSON Response " + e.getMessage());
+                    }
+                }
+            }
+        });
+    }
+
+
+    protected void callProductReviewsSummaryApi(String productReviewsSummaryApi) throws Exception {
+
+
+        /* If we already did the api call and parsed data, do not do it again */
+        if (_productWithQuaityIndicators != null && listener != null) {
+            runOnUiThread(_activity, new Runnable() {
+                @Override
+                public void run() {
+                    //Handle UI here
+                    productReviewsListener.onProductReviewsFetchCompleted(_productWithQuaityIndicators);
+                    if (isLoggingActive()) {
+                        Log.d("TSDEBUG", "Got product with reviews list from cache - running the callback");
+                    }
+                }}
+            );
+
+        }
+
+
+        if (isLoggingActive()) {
+            Log.d("TSDEBUG", "Calling Product Reviews Summary API URL: " + productReviewsSummaryApi);
+        }
+
+//        String currentLanguage = Locale.getDefault().getLanguage();
+//
+//        if (acceptLanguages.contains(currentLanguage)) {
+//            _acceptLanguage = currentLanguage;
+//        }
+
+        final Request request = new Request.Builder()
+                .url(productReviewsSummaryApi)
+//                .addHeader("accept-language", _acceptLanguage)
+                .build();
+
+
+        int cacheSize = 10 * 1024 * 1024; // 10 MiB
+        File cacheDirectory = new File(_activity.getCacheDir().getAbsolutePath(), "HttpCacheQualityIndicatorApi");
+        Cache cache = new Cache(cacheDirectory, cacheSize);
+        _client = new OkHttpClient.Builder()
+                .cache(cache)
+                .build();
+
+
+        _client.newCall(request).enqueue(new Callback() {
+            @Override public void onFailure(Call call, IOException e) {
+
+                if (productReviewsListener != null) {
+                    Message errorMessage = Message.obtain();
+                    String message = e.getMessage();
+                    errorMessage.obj = message;
+                    productReviewsListener.onProductReviewsFetchFailed(errorMessage);
+                }
+
+                if (isLoggingActive()) {
+                    Log.d("TSDEBUG", e.getMessage());
+                }
+            }
+
+            @Override public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful())  {
+                    if (isLoggingActive()) {
+                        Log.d("TSDEBUG", "Product Reviews Summary call unsuccessful " + response);
+                    }
+                }
+                try {
+                    String jsonData = response.body().string();
+                    final Product parsedProductObject = Product.createFromSummaryApi(jsonData);
+
+
+                    if (parsedProductObject.getReviewIndicator()!= null && parsedProductObject.getReviewIndicator().getTotalReviewCount() > 0) {
+                        _productWithQuaityIndicators = parsedProductObject;
+                        runOnUiThread(_activity, new Runnable() {
+                            @Override
+                            public void run() {
+                                //Handle UI here
+                                if (productReviewsListener != null) {
+                                    productReviewsListener.onProductReviewsFetchCompleted(_productWithQuaityIndicators);
+                                }
+
+                                if (isLoggingActive()) {
+                                    Log.d("TSDEBUG", "Product Reviews Summary call done");
+                                }
+                            }});
+                    } else {
+                        if (isLoggingActive()) {
+                            Log.d("TSDEBUG", "No product reviews summary found for this product");
                         }
                     }
 

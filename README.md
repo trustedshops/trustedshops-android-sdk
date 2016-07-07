@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.6.0'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.7.0-beta'
 }
 ```
 

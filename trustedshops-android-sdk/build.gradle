@@ -12,7 +12,7 @@ ext {
     siteUrl = 'https://github.com/trustedshops/trustedshops-android-sdk'
     gitUrl = 'https://github.com/trustedshops/trustedshops-android-sdk.git'
 
-    libraryVersion = '1.6.0'
+    libraryVersion = '1.7.0-beta'
 
     developerId = 'trustedshops'
     developerName = 'Timur Olzhabayev'
