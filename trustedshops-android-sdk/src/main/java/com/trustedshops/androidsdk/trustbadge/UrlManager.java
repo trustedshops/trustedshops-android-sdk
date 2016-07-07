@@ -38,6 +38,9 @@ public class UrlManager {
 
     public static String getTrustMarkAPIUrl(String tsId, String apiEndPoint) {
         return String.format("https://"+apiEndPoint+"/shops/%s/mobiles/v1/sdks/trustmarks.json", tsId);
+    }
 
+    public static String getQualityIndicatorsApiUrl(String tsId, String apiEndPoint) {
+        return String.format("https://api.trustedshops.com/rest/public/v2/shops/%s/quality/reviews.json", tsId);
     }
 }
