@@ -12,7 +12,7 @@ ext {
     siteUrl = 'https://github.com/trustedshops/trustedshops-android-sdk'
     gitUrl = 'https://github.com/trustedshops/trustedshops-android-sdk.git'
 
-    libraryVersion = '1.5.1'
+    libraryVersion = '1.6.0-beta'
 
     developerId = 'trustedshops'
     developerName = 'Timur Olzhabayev'
@@ -24,7 +24,7 @@ ext {
 }
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     lintOptions {
         abortOnError false
@@ -49,9 +49,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
-    compile('com.github.afollestad.material-dialogs:core:0.8.+@aar') {
-        transitive = true
-    }
+    compile 'com.afollestad.material-dialogs:core:0.8.+'
+    testCompile 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    testCompile 'org.json:json:20160212'
 }
 
 apply plugin: 'com.github.dcendents.android-maven'

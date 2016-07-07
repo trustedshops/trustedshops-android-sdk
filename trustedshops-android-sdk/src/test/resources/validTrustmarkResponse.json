@@ -1,0 +1,24 @@
+{
+  "response": {
+    "code": 200,
+    "data": {
+      "shop": {
+        "tsId": "X330A2E7D449E31E467D2F53A55DDD070",
+        "url": "demoshop.trustedshops.com/ch",
+        "name": "demoshop.trustedshops.com/ch",
+        "languageISO2": "de",
+        "targetMarketISO3": "CHE",
+        "trustMark": {
+          "status": "VALID",
+          "validFrom": "2016-02-04T00:00:00+01:00",
+          "validTo": "2017-02-03T00:00:00+01:00"
+        }
+      }
+    },
+    "message": "SUCCESS",
+    "responseInfo": {
+      "apiVersion": "2.4.5"
+    },
+    "status": "SUCCESS"
+  }
+}

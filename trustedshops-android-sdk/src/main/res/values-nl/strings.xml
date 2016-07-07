@@ -7,4 +7,10 @@
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_title">Klantenservice</string>
     <string name="trustedshops_sdk_trustbadge_dialog_certified_point3_description">Neem bij vragen contact op met deze webwinkel of zo nodig met Trusted Shops</string>
     <string name="trustedshops_sdk_trustbadge_dialog_negative_button_text">CERTIFICAAT</string>
+    <plurals
+        name="reviewDescriptionLong">
+        <item  quantity="one">%d beoordeling</item>
+        <item  quantity="many">%d beoordelingen</item>
+        <item  quantity="other">%d beoordelingen</item>
+    </plurals>
 </resources>

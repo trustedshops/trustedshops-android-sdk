@@ -1,0 +1,100 @@
+{
+  "response": {
+    "code": 200,
+    "data": {
+      "shop": {
+        "tsId": "XCA12643A583EFD786EAE2615D7C437DF",
+        "url": "www.trustedshops.nl",
+        "name": "Testzertifikat für Shopsystempartner NL",
+        "languageISO2": "nl",
+        "targetMarketISO3": "NLD",
+        "qualityIndicators": {
+          "reviewIndicator": {
+            "activePeriodInDays": 365,
+            "activeReviewCount": 0,
+            "reviewsCountedSince": "2007-08-12",
+            "totalReviewCount": 1,
+            "overallMark": 0,
+            "reviewIndicatorPeriodSummary": {
+              "reviewIndicatorPeriods": [
+                {
+                  "startDate": "2015-07-01",
+                  "endDate": "2016-07-01",
+                  "periodReviewCount": 0,
+                  "activeReviewCount": 0,
+                  "overallMark": 0,
+                  "reviewIndicatorCriteria": [
+                    {
+                      "criterionDescription": "DELIVERY",
+                      "criterionDescriptionGUILanguage": "LIEFERUNG",
+                      "periodCriterionCount": 0,
+                      "mark": 0
+                    },
+                    {
+                      "criterionDescription": "GOODS",
+                      "criterionDescriptionGUILanguage": "WARE",
+                      "periodCriterionCount": 0,
+                      "mark": 0
+                    },
+                    {
+                      "criterionDescription": "SERVICE",
+                      "criterionDescriptionGUILanguage": "KUNDENSERVICE",
+                      "periodCriterionCount": 0,
+                      "mark": 0
+                    }
+                  ],
+                  "reviewIndicatorMarkSummaries": [
+                    {
+                      "markDescription": "EXCELLENT",
+                      "markDescriptionGUILanguage": "SEHR GUT",
+                      "periodMarkCount": 0
+                    },
+                    {
+                      "markDescription": "GOOD",
+                      "markDescriptionGUILanguage": "GUT",
+                      "periodMarkCount": 0
+                    },
+                    {
+                      "markDescription": "FAIR",
+                      "markDescriptionGUILanguage": "BEFRIEDIGEND",
+                      "periodMarkCount": 0
+                    },
+                    {
+                      "markDescription": "POOR",
+                      "markDescriptionGUILanguage": "AUSREICHEND",
+                      "periodMarkCount": 0
+                    },
+                    {
+                      "markDescription": "VERY_POOR",
+                      "markDescriptionGUILanguage": "MANGELHAFT",
+                      "periodMarkCount": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "message": "SUCCESS",
+    "responseInfo": {
+      "apiVersion": "2.4.12",
+      "parameters": [
+        {
+          "name": "startDate",
+          "value": "2015-07-01"
+        },
+        {
+          "name": "endDate",
+          "value": "2016-07-01"
+        },
+        {
+          "name": "timeDimension",
+          "value": "YEAR"
+        }
+      ]
+    },
+    "status": "SUCCESS"
+  }
+}
