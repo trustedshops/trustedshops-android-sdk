@@ -153,8 +153,12 @@ trustbadge.getTsCustomerReviews(this, tsCallBack);
 
 There are two functions to integrate product reviews in your application.
 First - getProductReviewsSummary retrieves the product summary without reviews list
+
+[Example](trustbadgeexample/src/main/java/com/trustedshops/trustbadgeexample/ProductReviewsActivity.java#L61-L90)
+
 Second - getProductReviewsList retrieves the product reviews list
 
+[Example](trustbadgeexample/src/main/java/com/trustedshops/trustbadgeexample/ProductReviewsActivity.java#L93-L127)
 
 
 ```
