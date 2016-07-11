@@ -42,11 +42,13 @@ public class Trustbadge {
     protected int _iconColor;
     protected Shop _shop;
     protected String _endPoint = "cdn1.api.trustedshops.com";
+    protected String _endPointDebug = "cdn1.api-qa.trustedshops.com";
     protected RatingBar _ratingBar;
     protected Shop _shopWithQualityIndicators;
     protected TextView _reviewMark, _reviewMarkDescription, _reviewCount, _reviewCountLong;
     protected Product _productWithReviewsList;
     protected Product _productWithQuaityIndicators;
+    protected String _productSKU;
 
     private OnTsCustomerReviewsFetchCompleted listener;
     private OnTsProductReviewsFetchCompleted productReviewsListener;
@@ -135,6 +137,25 @@ public class Trustbadge {
 
     public void setActivity(Activity activity) {
         _activity = activity;
+    }
+
+    public void setProductSKU(String sku) {
+        this._productSKU = sku;
+    }
+
+    public String getProductSKU() {
+        return this._productSKU;
+    }
+
+
+    public void enableDebugmode() {
+        this.setLoggingActive(true);
+        this.setEndPoint(_endPointDebug);
+    }
+
+    public void disableDebugmode() {
+        this.setLoggingActive(false);
+        this.setEndPoint(_endPoint);
     }
 
     /**
@@ -268,14 +289,23 @@ public class Trustbadge {
         }
     }
 
+    /**
+     * Get Product Reviews List
+     * @param activity
+     * @param SKU
+     * @param tsProductReviesFetchCompletedListener
+     * @throws TrustbadgeException
+     * @throws IllegalArgumentException
+     */
 
-    public void getProductReviewsList(Activity activity, OnTsProductReviewsFetchCompleted tsProductReviesFetchCompletedListener) throws TrustbadgeException, IllegalArgumentException {
+    public void getProductReviewsList(Activity activity, String SKU, OnTsProductReviewsFetchCompleted tsProductReviesFetchCompletedListener) throws TrustbadgeException, IllegalArgumentException {
 
         _activity = activity;
+        this.setProductSKU(SKU);
         this.setCustomTsProductReviewsFetchListener(tsProductReviesFetchCompletedListener);
 
         try {
-            this.callProductReviewsListApi(UrlManager.getProductReviewsListApiUrl(getTsId(), getEndPoint()));
+            this.callProductReviewsListApi(getTsId(), getProductSKU());
         } catch (Exception e) {
             if (isLoggingActive()) {
                 Log.d("TSDEBUG", e.getMessage());
@@ -285,13 +315,22 @@ public class Trustbadge {
     }
 
 
-    public void getProductReviewsSummary(Activity activity, OnTsProductReviewsFetchCompleted tsProductReviesFetchCompletedListener) throws TrustbadgeException, IllegalArgumentException {
+    /**
+     * Get Product Reviews Summary
+     * @param activity
+     * @param SKU
+     * @param tsProductReviesFetchCompletedListener
+     * @throws TrustbadgeException
+     * @throws IllegalArgumentException
+     */
+    public void getProductReviewsSummary(Activity activity, String SKU, OnTsProductReviewsFetchCompleted tsProductReviesFetchCompletedListener) throws TrustbadgeException, IllegalArgumentException {
 
         _activity = activity;
+        this.setProductSKU(SKU);
         this.setCustomTsProductReviewsFetchListener(tsProductReviesFetchCompletedListener);
 
         try {
-            this.callProductReviewsSummaryApi(UrlManager.getProductSummaryApiUrl(getTsId(), getEndPoint()));
+            this.callProductReviewsSummaryApi(getTsId(), getProductSKU());
         } catch (Exception e) {
             if (isLoggingActive()) {
                 Log.d("TSDEBUG", e.getMessage());
@@ -299,9 +338,6 @@ public class Trustbadge {
             throw new TrustbadgeException("Could not find reviews for product");
         }
     }
-
-
-
 
 
     /**
@@ -422,7 +458,6 @@ public class Trustbadge {
             }
         });
     }
-
 
     protected void populateElementsWithQualityIndicatorsValues(Shop parsedShopObject){
 
@@ -578,8 +613,7 @@ public class Trustbadge {
         });
     }
 
-
-    protected void callProductReviewsListApi(String productReviewsListApi) throws Exception {
+    protected void callProductReviewsListApi(String tsId, String SKU) throws Exception {
 
 
         /* If we already did the api call and parsed data, do not do it again */
@@ -597,22 +631,16 @@ public class Trustbadge {
 
         }
 
-
-        if (isLoggingActive()) {
-            Log.d("TSDEBUG", "Calling Product Reviews List API URL: " + productReviewsListApi);
-        }
-
-//        String currentLanguage = Locale.getDefault().getLanguage();
-//
-//        if (acceptLanguages.contains(currentLanguage)) {
-//            _acceptLanguage = currentLanguage;
-//        }
+        final String productReviewsListApi = UrlManager.getProductReviewsListApiUrl(getEndPoint(), tsId, TextUtil.encodeHex(SKU.getBytes()));
 
         final Request request = new Request.Builder()
                 .url(productReviewsListApi)
 //                .addHeader("accept-language", _acceptLanguage)
                 .build();
 
+        if (isLoggingActive()) {
+            Log.d("TSDEBUG", "Calling Product Reviews List API URL: " + productReviewsListApi);
+        }
 
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
         File cacheDirectory = new File(_activity.getCacheDir().getAbsolutePath(), "HttpCacheQualityIndicatorApi");
@@ -677,8 +705,7 @@ public class Trustbadge {
         });
     }
 
-
-    protected void callProductReviewsSummaryApi(String productReviewsSummaryApi) throws Exception {
+    protected void callProductReviewsSummaryApi(String tsId, String SKU) throws Exception {
 
 
         /* If we already did the api call and parsed data, do not do it again */
@@ -697,21 +724,18 @@ public class Trustbadge {
         }
 
 
-        if (isLoggingActive()) {
-            Log.d("TSDEBUG", "Calling Product Reviews Summary API URL: " + productReviewsSummaryApi);
-        }
 
-//        String currentLanguage = Locale.getDefault().getLanguage();
-//
-//        if (acceptLanguages.contains(currentLanguage)) {
-//            _acceptLanguage = currentLanguage;
-//        }
+
+
+        final String productReviewsSummaryApi = UrlManager.getProductSummaryApiUrl(getEndPoint(), tsId, TextUtil.encodeHex(SKU.getBytes()));
 
         final Request request = new Request.Builder()
                 .url(productReviewsSummaryApi)
 //                .addHeader("accept-language", _acceptLanguage)
                 .build();
-
+        if (isLoggingActive()) {
+            Log.d("TSDEBUG", "Calling Product Reviews Summary API URL: " + productReviewsSummaryApi);
+        }
 
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
         File cacheDirectory = new File(_activity.getCacheDir().getAbsolutePath(), "HttpCacheQualityIndicatorApi");
@@ -775,4 +799,6 @@ public class Trustbadge {
             }
         });
     }
+
+
 }

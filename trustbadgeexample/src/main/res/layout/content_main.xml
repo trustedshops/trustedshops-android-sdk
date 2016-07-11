@@ -8,7 +8,7 @@
     android:fillViewport="true"
     android:scrollbars="none"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.trustedshops.trustbadgeexample.MainActivity"
+    tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
     <RelativeLayout

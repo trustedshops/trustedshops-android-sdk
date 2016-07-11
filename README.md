@@ -149,9 +149,18 @@ trustbadge.getTsCustomerReviews(this, tsCallBack);
 ```
 
 - - - -
+## 4. Display Product Reviews ##
+
+There are two functions to integrate product reviews in your application.
+First - getProductReviewsSummary retrieves the product summary without reviews list
+Second - getProductReviewsList retrieves the product reviews list
 
 
-## 4. Integration of Buyer Protection after Checkout ##
+
+```
+
+- - - -
+## 5. Integration of Buyer Protection after Checkout ##
 
 In order to allow your customers to benefit from our buyer protection the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling. You can decide if you want to show the guarantee dialogue automatically after your checkout is finished or if you want the user to tab on a button for that.
 ```Java
@@ -258,7 +267,7 @@ tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
 
 - - - -
 
-## 5. About this SDK ##
+## 6. About this SDK ##
 
 #### Authorization ####
 To use this SDK in your own mobile app Trusted Shops needs to authorize your app.<br>

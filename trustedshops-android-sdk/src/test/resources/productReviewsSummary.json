@@ -1,0 +1,24 @@
+{
+  "response": {
+    "code": 200,
+    "data": {
+      "product": {
+        "sku": "1001",
+        "name": "Kommode \"Peter\" aus Massivholz",
+        "uuid": "7753712cf3b039bc8c990034f9b07996",
+        "qualityIndicators": {
+          "reviewIndicator": {
+            "totalReviewCount": 5,
+            "overallMark": 4.6,
+            "overallMarkDescription": "EXCELLENT"
+          }
+        }
+      }
+    },
+    "message": "SUCCESS",
+    "responseInfo": {
+      "apiVersion": "2.4.8"
+    },
+    "status": "SUCCESS"
+  }
+}

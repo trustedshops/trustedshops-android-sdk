@@ -3,6 +3,7 @@ package com.androidsdktests;
 
 import android.test.suitebuilder.annotation.SmallTest;
 
+import com.trustedshops.androidsdk.trustbadge.Product;
 import com.trustedshops.androidsdk.trustbadge.ReviewIndicator;
 import com.trustedshops.androidsdk.trustbadge.Shop;
 import com.trustedshops.androidsdk.trustbadge.Validator;
@@ -19,15 +20,20 @@ import java.util.Date;
 public class ApiParserTest {
     protected Shop _testShopTrustMarkApi, _testShopWithReviewsQualityIndicators, _testShopWithoutReviewsQualityIndicators;
 
+    protected Product _testPorductWithReviewsList, _testProductWithSummary;
     @Before
     public void setUp() {
         String jsonDataTrustmark = readFile(getFileFromPath(this, "validTrustmarkResponse.json"));
         String jsonDataQualityIndicatorsWithReviews = readFile(getFileFromPath(this, "shopWithReviews.json"));
         String jsonDataQualityIndicatorsWithoutReviews = readFile(getFileFromPath(this, "shopWithoutReviews.json"));
+        String jsonDataProductReviewsList = readFile(getFileFromPath(this, "productReviewsList.json"));
+        String jsonDataProductReviewsSummary = readFile(getFileFromPath(this, "productReviewsSummary.json"));
         try {
             _testShopTrustMarkApi = Shop.createFromTrustmarkInformationApi(jsonDataTrustmark);
             _testShopWithReviewsQualityIndicators = Shop.createFromQualityIndicatorsApiResponse(jsonDataQualityIndicatorsWithReviews);
             _testShopWithoutReviewsQualityIndicators = Shop.createFromQualityIndicatorsApiResponse(jsonDataQualityIndicatorsWithoutReviews);
+            _testPorductWithReviewsList = Product.createFromReviewsListApi(jsonDataProductReviewsList);
+            _testProductWithSummary = Product.createFromSummaryApi(jsonDataProductReviewsSummary);
         } catch (Exception e) {
             throw new AssertionError(e.getMessage());
         }
@@ -180,6 +186,45 @@ public class ApiParserTest {
             }
         }
     }
+
+    @Test
+    public void testProductReviewsListCount() {
+        if (!(_testPorductWithReviewsList.getProductReviewArrayList().size() > 0)) {
+            throw new AssertionError("Review List Not parsed properly");
+        }
+    }
+
+    @Test
+    public void testProductReviewsListData() {
+        if (!(_testPorductWithReviewsList.getTsCheckoutProductSKU().length() > 0)) {
+            throw new AssertionError("Review List SKU not parsed properly");
+        }
+
+        if (!(_testPorductWithReviewsList.getUuid().length() > 0)) {
+            throw new AssertionError("Review List UUID not parsed properly");
+        }
+
+        if (!(_testPorductWithReviewsList.getTsCheckoutProductName().length() > 0)) {
+            throw new AssertionError("Review List Name not parsed properly");
+        }
+    }
+
+    @Test
+    public void testProductReviewsSummaryData() {
+        if (!(_testProductWithSummary.getReviewIndicator().getOverallMark() > 0)) {
+            throw new AssertionError("Review Summary overall mark not parsed properly");
+        }
+
+        if (!(_testProductWithSummary.getUuid().length() > 0)) {
+            throw new AssertionError("Review Summary UUID not parsed properly");
+        }
+
+        if (!(_testProductWithSummary.getReviewIndicator().getTotalReviewCount() > 0)) {
+            throw new AssertionError("Review Summary count not parsed properly");
+        }
+    }
+
+
 
     private static String getFileFromPath(Object obj, String fileName) {
         ClassLoader classLoader = obj.getClass().getClassLoader();

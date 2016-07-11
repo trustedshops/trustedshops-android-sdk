@@ -12,7 +12,7 @@ ext {
     siteUrl = 'https://github.com/trustedshops/trustedshops-android-sdk'
     gitUrl = 'https://github.com/trustedshops/trustedshops-android-sdk.git'
 
-    libraryVersion = '1.7.0-beta'
+    libraryVersion = '1.7.0'
 
     developerId = 'trustedshops'
     developerName = 'Timur Olzhabayev'
@@ -50,6 +50,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
     compile 'com.afollestad.material-dialogs:core:0.8.+'
+    compile 'org.apache.directory.studio:org.apache.commons.codec:1.8'
     testCompile 'org.apache.directory.studio:org.apache.commons.io:2.4'
     testCompile 'org.json:json:20160212'
 }

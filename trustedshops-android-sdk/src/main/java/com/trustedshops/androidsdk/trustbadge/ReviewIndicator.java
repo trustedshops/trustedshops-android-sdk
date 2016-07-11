@@ -6,7 +6,6 @@ import java.util.Date;
 public class ReviewIndicator extends QualityIndicator {
     private final int numStars = 5;
     private final float maxRating = 5.0f;
-    private QualityIndicatorType type = QualityIndicatorType.REVIEW_INDICATOR;
     protected Integer activeReviewCount;
     protected Integer totalReviewCount;
     protected Date reviewsScountedSince;
@@ -103,7 +102,7 @@ public class ReviewIndicator extends QualityIndicator {
 
     @Override
     public QualityIndicatorType getType() {
-        return this.type;
+        return QualityIndicatorType.REVIEW_INDICATOR;
     }
 
 }

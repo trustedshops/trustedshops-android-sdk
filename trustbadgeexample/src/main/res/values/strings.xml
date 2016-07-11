@@ -77,5 +77,10 @@
         <item>PREPAYMENT</item>
         <item>AMAZON_PAYMENTS</item>
     </string-array>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_product_reviews">Product Reviews Demo</string>
 
 </resources>

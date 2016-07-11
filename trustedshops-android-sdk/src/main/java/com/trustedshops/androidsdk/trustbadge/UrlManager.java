@@ -44,12 +44,12 @@ public class UrlManager {
         return String.format("https://api.trustedshops.com/rest/public/v2/shops/%s/quality/reviews.json", tsId);
     }
 
-    public static String getProductReviewsListApiUrl(String SKU, String apiEndPoint){
-        return "http://cdn1.api.trustedshops.com/shops/XF40AD5250283D0082830EE5AA7A111A3/products/skus/303031303937393038343033303936/productreviewstickers/v1/reviews.json";
+    public static String getProductReviewsListApiUrl(String apiEndPoint, String tsId, String encodedSKU){
+        return String.format("http://%s/shops/%s/products/skus/%s/productreviewstickers/v1/reviews.json", apiEndPoint, tsId, encodedSKU);
+
     }
 
-
-    public static String getProductSummaryApiUrl(String SKU, String apiEndPoint){
-        return "http://cdn1.api.trustedshops.com/shops/XF40AD5250283D0082830EE5AA7A111A3/products/skus/303031303937393038343033303936/productstickersummaries/v1/quality/reviews.json";
+    public static String getProductSummaryApiUrl(String apiEndPoint, String tsId, String encodedSKU){
+        return String.format("http://%s/shops/%s/products/skus/%s/productstickersummaries/v1/quality/reviews.json", apiEndPoint, tsId, encodedSKU);
     }
  }

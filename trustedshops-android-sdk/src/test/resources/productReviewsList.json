@@ -1,0 +1,75 @@
+{
+  "response": {
+    "code": 200,
+    "data": {
+      "product": {
+        "sku": "1001",
+        "name": "Kommode \"Peter\" aus Massivholz",
+        "uuid": "7753712cf3b039bc8c990034f9b07996",
+        "reviews": [
+          {
+            "creationDate": "2016-03-08T10:11:17+01:00",
+            "comment": "Tolles Produkt, absolut stabil und robust und toll verarbeitet. Bin zufrieden",
+            "criteria": [
+              {
+                "mark": "5",
+                "type": "Total"
+              }
+            ],
+            "mark": "5",
+            "reviewer": {
+              "uuid": "c1b6768850e0452af3972054cd0f1cb3",
+              "profile": {
+                "firstname": "Christian",
+                "lastname": "S.",
+                "city": "Bremen",
+                "url": "https://www.trustedshops.com/user/de_DE/c1b6768850e0452af3972054cd0f1cb3",
+                "avatar60URL": "https://static.trustedshops.com/avatar/60/c1b/c1b6768850e0452af3972054cd0f1cb3.png"
+              }
+            },
+            "UID": "ebaa97eaf88004cf63f22c9dbcb338ce"
+          },
+          {
+            "creationDate": "2016-03-08T09:37:44+01:00",
+            "comment": "Nach langem Hin und Her war es an der Zeit, eine Kommode fürs Esszimmer zu bestellen. Wir finden ältere Möbel und klassische Holzkombinationen total schön. Daher passte \"Peter\" wunderbar. Ich bin rundum zufrieden. Lediglich der Preis ist meiner Meinung nach ein bissche zu hoch.",
+            "criteria": [
+              {
+                "mark": "4",
+                "type": "Total"
+              }
+            ],
+            "mark": "4",
+            "UID": "1580c471e71fe4b69fa90da31a7f8a72"
+          },
+          {
+            "creationDate": "2016-03-03T18:12:59+01:00",
+            "comment": "Ein tolles Produkt. Ich habe die Kommode gekauft, um endlich die Spielsachen meiner Kinder zu verstauen. Hat wunderbar geklappt. Absolut robust",
+            "criteria": [
+              {
+                "mark": "5",
+                "type": "Total"
+              }
+            ],
+            "mark": "5",
+            "reviewer": {
+              "uuid": "c1b6768850e0452af3972054cd0f1cb3",
+              "profile": {
+                "firstname": "Christian",
+                "lastname": "S.",
+                "city": "Bremen",
+                "url": "https://www.trustedshops.com/user/de_DE/c1b6768850e0452af3972054cd0f1cb3",
+                "avatar60URL": "https://static.trustedshops.com/avatar/60/c1b/c1b6768850e0452af3972054cd0f1cb3.png"
+              }
+            },
+            "UID": "8447f149700390e6be74faefb3c5c553"
+          }
+        ]
+      }
+    },
+    "message": "SUCCESS",
+    "responseInfo": {
+      "apiVersion": "2.4.7"
+    },
+    "status": "SUCCESS"
+  }
+}
