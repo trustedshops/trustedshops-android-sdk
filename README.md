@@ -160,10 +160,8 @@ Second - getProductReviewsList retrieves the product reviews list
 
 [Example](trustbadgeexample/src/main/java/com/trustedshops/trustbadgeexample/ProductReviewsActivity.java#L93-L127)
 
-
-```
-
 - - - -
+
 ## 5. Integration of Buyer Protection after Checkout ##
 
 In order to allow your customers to benefit from our buyer protection the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling. You can decide if you want to show the guarantee dialogue automatically after your checkout is finished or if you want the user to tab on a button for that.
