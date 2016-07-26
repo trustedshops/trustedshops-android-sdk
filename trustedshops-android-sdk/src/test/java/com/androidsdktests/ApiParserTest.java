@@ -159,33 +159,33 @@ public class ApiParserTest {
         }
     }
 
-    @Test
-    public void testShopWithReviewsHasOverallMarkDescription() {
-        String overAllMarkDescr = _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMarkDescription();
-        Float overAllMark = _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark();
-
-        if (overAllMark > 1 && overAllMark < 1.5) {
-            if (!(overAllMarkDescr.equals("MANGELHAFT"))) {
-                throw new AssertionError("Overall Mark Description should be MANGELHAFT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
-            }
-        } else if (overAllMark >= 1.5 && overAllMark < 2.5) {
-            if (!(overAllMarkDescr.equals("AUSREICHEND"))) {
-                throw new AssertionError("Overall Mark Description should be AUSREICHEND. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
-            }
-        } else if (overAllMark >= 2.5 && overAllMark < 3.5) {
-            if (!(overAllMarkDescr.equals("BEFRIEDIGEND"))) {
-                throw new AssertionError("Overall Mark Description should be BEFRIEDIGEND. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
-            }
-        } else if (overAllMark >= 3.5 && overAllMark < 4.5) {
-            if (!(overAllMarkDescr.equals("GUT"))) {
-                throw new AssertionError("Overall Mark Description should be GUT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
-            }
-        } else if (overAllMark >= 4.5) {
-            if (!(overAllMarkDescr.equals("SEHR GUT"))) {
-                throw new AssertionError("Overall Mark Description should be SEHR GUT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
-            }
-        }
-    }
+//    @Test
+//    public void testShopWithReviewsHasOverallMarkDescription() {
+//        String overAllMarkDescr = _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMarkDescription();
+//        Float overAllMark = _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark();
+//
+//        if (overAllMark > 1 && overAllMark < 1.5) {
+//            if (!(overAllMarkDescr.equals("MANGELHAFT"))) {
+//                throw new AssertionError("Overall Mark Description should be MANGELHAFT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
+//            }
+//        } else if (overAllMark >= 1.5 && overAllMark < 2.5) {
+//            if (!(overAllMarkDescr.equals("AUSREICHEND"))) {
+//                throw new AssertionError("Overall Mark Description should be AUSREICHEND. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
+//            }
+//        } else if (overAllMark >= 2.5 && overAllMark < 3.5) {
+//            if (!(overAllMarkDescr.equals("BEFRIEDIGEND"))) {
+//                throw new AssertionError("Overall Mark Description should be BEFRIEDIGEND. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
+//            }
+//        } else if (overAllMark >= 3.5 && overAllMark < 4.5) {
+//            if (!(overAllMarkDescr.equals("GUT"))) {
+//                throw new AssertionError("Overall Mark Description should be GUT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
+//            }
+//        } else if (overAllMark >= 4.5) {
+//            if (!(overAllMarkDescr.equals("SEHR GUT"))) {
+//                throw new AssertionError("Overall Mark Description should be SEHR GUT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
+//            }
+//        }
+//    }
 
     @Test
     public void testProductReviewsListCount() {
