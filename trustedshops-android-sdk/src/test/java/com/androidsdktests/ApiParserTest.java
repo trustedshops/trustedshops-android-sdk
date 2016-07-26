@@ -3,6 +3,7 @@ package com.androidsdktests;
 
 import android.test.suitebuilder.annotation.SmallTest;
 
+import com.trustedshops.androidsdk.trustbadge.Product;
 import com.trustedshops.androidsdk.trustbadge.ReviewIndicator;
 import com.trustedshops.androidsdk.trustbadge.Shop;
 import com.trustedshops.androidsdk.trustbadge.Validator;
@@ -19,15 +20,20 @@ import java.util.Date;
 public class ApiParserTest {
     protected Shop _testShopTrustMarkApi, _testShopWithReviewsQualityIndicators, _testShopWithoutReviewsQualityIndicators;
 
+    protected Product _testPorductWithReviewsList, _testProductWithSummary;
     @Before
     public void setUp() {
         String jsonDataTrustmark = readFile(getFileFromPath(this, "validTrustmarkResponse.json"));
         String jsonDataQualityIndicatorsWithReviews = readFile(getFileFromPath(this, "shopWithReviews.json"));
         String jsonDataQualityIndicatorsWithoutReviews = readFile(getFileFromPath(this, "shopWithoutReviews.json"));
+        String jsonDataProductReviewsList = readFile(getFileFromPath(this, "productReviewsList.json"));
+        String jsonDataProductReviewsSummary = readFile(getFileFromPath(this, "productReviewsSummary.json"));
         try {
             _testShopTrustMarkApi = Shop.createFromTrustmarkInformationApi(jsonDataTrustmark);
             _testShopWithReviewsQualityIndicators = Shop.createFromQualityIndicatorsApiResponse(jsonDataQualityIndicatorsWithReviews);
             _testShopWithoutReviewsQualityIndicators = Shop.createFromQualityIndicatorsApiResponse(jsonDataQualityIndicatorsWithoutReviews);
+            _testPorductWithReviewsList = Product.createFromReviewsListApi(jsonDataProductReviewsList);
+            _testProductWithSummary = Product.createFromSummaryApi(jsonDataProductReviewsSummary);
         } catch (Exception e) {
             throw new AssertionError(e.getMessage());
         }
@@ -153,33 +159,72 @@ public class ApiParserTest {
         }
     }
 
-    @Test
-    public void testShopWithReviewsHasOverallMarkDescription() {
-        String overAllMarkDescr = _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMarkDescription();
-        Float overAllMark = _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark();
+//    @Test
+//    public void testShopWithReviewsHasOverallMarkDescription() {
+//        String overAllMarkDescr = _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMarkDescription();
+//        Float overAllMark = _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark();
+//
+//        if (overAllMark > 1 && overAllMark < 1.5) {
+//            if (!(overAllMarkDescr.equals("MANGELHAFT"))) {
+//                throw new AssertionError("Overall Mark Description should be MANGELHAFT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
+//            }
+//        } else if (overAllMark >= 1.5 && overAllMark < 2.5) {
+//            if (!(overAllMarkDescr.equals("AUSREICHEND"))) {
+//                throw new AssertionError("Overall Mark Description should be AUSREICHEND. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
+//            }
+//        } else if (overAllMark >= 2.5 && overAllMark < 3.5) {
+//            if (!(overAllMarkDescr.equals("BEFRIEDIGEND"))) {
+//                throw new AssertionError("Overall Mark Description should be BEFRIEDIGEND. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
+//            }
+//        } else if (overAllMark >= 3.5 && overAllMark < 4.5) {
+//            if (!(overAllMarkDescr.equals("GUT"))) {
+//                throw new AssertionError("Overall Mark Description should be GUT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
+//            }
+//        } else if (overAllMark >= 4.5) {
+//            if (!(overAllMarkDescr.equals("SEHR GUT"))) {
+//                throw new AssertionError("Overall Mark Description should be SEHR GUT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
+//            }
+//        }
+//    }
 
-        if (overAllMark > 1 && overAllMark < 1.5) {
-            if (!(overAllMarkDescr.equals("MANGELHAFT"))) {
-                throw new AssertionError("Overall Mark Description should be MANGELHAFT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
-            }
-        } else if (overAllMark >= 1.5 && overAllMark < 2.5) {
-            if (!(overAllMarkDescr.equals("AUSREICHEND"))) {
-                throw new AssertionError("Overall Mark Description should be AUSREICHEND. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
-            }
-        } else if (overAllMark >= 2.5 && overAllMark < 3.5) {
-            if (!(overAllMarkDescr.equals("BEFRIEDIGEND"))) {
-                throw new AssertionError("Overall Mark Description should be BEFRIEDIGEND. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
-            }
-        } else if (overAllMark >= 3.5 && overAllMark < 4.5) {
-            if (!(overAllMarkDescr.equals("GUT"))) {
-                throw new AssertionError("Overall Mark Description should be GUT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
-            }
-        } else if (overAllMark >= 4.5) {
-            if (!(overAllMarkDescr.equals("SEHR GUT"))) {
-                throw new AssertionError("Overall Mark Description should be SEHR GUT. Found "+ _testShopWithReviewsQualityIndicators.getReviewIndicator().getOverallMark() + " instead");
-            }
+    @Test
+    public void testProductReviewsListCount() {
+        if (!(_testPorductWithReviewsList.getProductReviewArrayList().size() > 0)) {
+            throw new AssertionError("Review List Not parsed properly");
         }
     }
+
+    @Test
+    public void testProductReviewsListData() {
+        if (!(_testPorductWithReviewsList.getTsCheckoutProductSKU().length() > 0)) {
+            throw new AssertionError("Review List SKU not parsed properly");
+        }
+
+        if (!(_testPorductWithReviewsList.getUuid().length() > 0)) {
+            throw new AssertionError("Review List UUID not parsed properly");
+        }
+
+        if (!(_testPorductWithReviewsList.getTsCheckoutProductName().length() > 0)) {
+            throw new AssertionError("Review List Name not parsed properly");
+        }
+    }
+
+    @Test
+    public void testProductReviewsSummaryData() {
+        if (!(_testProductWithSummary.getReviewIndicator().getOverallMark() > 0)) {
+            throw new AssertionError("Review Summary overall mark not parsed properly");
+        }
+
+        if (!(_testProductWithSummary.getUuid().length() > 0)) {
+            throw new AssertionError("Review Summary UUID not parsed properly");
+        }
+
+        if (!(_testProductWithSummary.getReviewIndicator().getTotalReviewCount() > 0)) {
+            throw new AssertionError("Review Summary count not parsed properly");
+        }
+    }
+
+
 
     private static String getFileFromPath(Object obj, String fileName) {
         ClassLoader classLoader = obj.getClass().getClassLoader();

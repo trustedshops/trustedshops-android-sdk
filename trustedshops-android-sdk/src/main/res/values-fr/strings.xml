@@ -13,4 +13,9 @@
         <item  quantity="many">%d avis clients</item>
         <item  quantity="other">%d avis clients</item>
     </plurals>
+    <string name="trustedshops_MARK_A">Très bien</string>
+    <string name="trustedshops_MARK_B">Bien</string>
+    <string name="trustedshops_MARK_C">Moyen</string>
+    <string name="trustedshops_MARK_D">Insuffisant</string>
+    <string name="trustedshops_MARK_E">Nul</string>
 </resources>

@@ -25,6 +25,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.trustedshops.trustbadgeexample.MainActivity" />
         </activity>
+        <activity
+            android:name=".ProductReviewsActivity"
+            android:label="@string/title_activity_product_reviews"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

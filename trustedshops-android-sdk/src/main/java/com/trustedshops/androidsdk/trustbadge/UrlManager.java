@@ -41,6 +41,15 @@ public class UrlManager {
     }
 
     public static String getQualityIndicatorsApiUrl(String tsId, String apiEndPoint) {
-        return String.format("https://api.trustedshops.com/rest/public/v2/shops/%s/quality/reviews.json", tsId);
+        return String.format("https://%s/shops/%s/mobiles/v1/sdks/android/quality/reviews.json", apiEndPoint, tsId);
     }
-}
+
+    public static String getProductReviewsListApiUrl(String apiEndPoint, String tsId, String encodedSKU){
+        return String.format("https://%s/shops/%s/products/skus/%s/mobiles/v1/sdks/android/reviews.json", apiEndPoint, tsId, encodedSKU);
+
+    }
+
+    public static String getProductSummaryApiUrl(String apiEndPoint, String tsId, String encodedSKU){
+        return String.format("https://%s/shops/%s/products/skus/%s/mobiles/v1/sdks/android/quality/reviews.json", apiEndPoint, tsId, encodedSKU);
+    }
+ }

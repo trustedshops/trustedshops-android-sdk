@@ -3,10 +3,11 @@
 [![CI Status](https://travis-ci.org/trustedshops/trustedshops-android-sdk.svg?branch=master)](https://travis-ci.org/trustedshops/trustedshops-android-sdk)
 [![Bintray](https://img.shields.io/bintray/v/trustedshops/maven/trustedshops-android-sdk.svg?maxAge=2592000)]()
 
-Integrate our SDK into your shopping app and boost your conversion with **Trustbadge**, **Customer Reviews** and **Buyer Protection**:
-* Show the Trustbadge in any view and size and provide additional information along with a link to your certificate
-* Show your shop's customer rating and reviews
-* Integrate the Trusted Shops buyer protection and review collecting services
+By integrating our SDK into your shopping app you can leverage the following features included in your Trusted Shops membership: 
+* **Trustbadge**: Show the Trustbadge in any view and size and provide additional information along with a link to your certificate
+* **Customer Reviews**: Show your shop's customer rating and reviews
+* **Product Reviews**: Show your product ratings and reviews
+* **Buyer Protection**: Integrate the Trusted Shops buyer protection and review collecting services
 
 ![TrustedShopsAndroidSDK](https://raw.githubusercontent.com/trustedshops/trustedshops-android-sdk/master/trustbadgeexample/screenshots/Android-SDK-woText.png?raw=true "Boost your conversion with Trustbadge and buyer protection")
 
@@ -15,8 +16,9 @@ Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 1. [Installation](#1-installation)
 2. [Display Trustbadge](#2-display-trustbadge)
 3. [Display Customer Reviews](#3-display-customer-reviews)
-4. [Integration of Buyer Protection after Checkout](#4-integration-of-buyer-protection-after-checkout)
-5. [About this SDK](#5-about-this-sdk)
+4. [Display Product Reviews](#3-display-customer-reviews)
+5. [Integration of Buyer Protection after Checkout](#4-integration-of-buyer-protection-after-checkout)
+6. [About this SDK](#5-about-this-sdk)
 
 - - - -
 
@@ -29,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.6.0'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.7.0'
 }
 ```
 
@@ -149,9 +151,20 @@ trustbadge.getTsCustomerReviews(this, tsCallBack);
 ```
 
 - - - -
+## 4. Display Product Reviews ##
 
+There are two functions to integrate product reviews in your application.
+First - getProductReviewsSummary retrieves the product summary without reviews list
 
-## 4. Integration of Buyer Protection after Checkout ##
+[Example](trustbadgeexample/src/main/java/com/trustedshops/trustbadgeexample/ProductReviewsActivity.java#L61-L90)
+
+Second - getProductReviewsList retrieves the product reviews list
+
+[Example](trustbadgeexample/src/main/java/com/trustedshops/trustbadgeexample/ProductReviewsActivity.java#L93-L127)
+
+- - - -
+
+## 5. Integration of Buyer Protection after Checkout ##
 
 In order to allow your customers to benefit from our buyer protection the following code has to be added. By this you provide the necessary checkout parameters for guarantee handling. You can decide if you want to show the guarantee dialogue automatically after your checkout is finished or if you want the user to tab on a button for that.
 ```Java
@@ -258,7 +271,7 @@ tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
 
 - - - -
 
-## 5. About this SDK ##
+## 6. About this SDK ##
 
 #### Authorization ####
 To use this SDK in your own mobile app Trusted Shops needs to authorize your app.<br>

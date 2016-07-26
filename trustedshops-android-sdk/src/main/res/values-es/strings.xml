@@ -13,4 +13,9 @@
         <item  quantity="many">%d valoraciones</item>
         <item  quantity="other">%d valoraciones</item>
     </plurals>
+    <string name="trustedshops_MARK_A">Excelente</string>
+    <string name="trustedshops_MARK_B">Bueno</string>
+    <string name="trustedshops_MARK_C">Suficiente</string>
+    <string name="trustedshops_MARK_D">Malo</string>
+    <string name="trustedshops_MARK_E">Muy malo</string>
 </resources>
