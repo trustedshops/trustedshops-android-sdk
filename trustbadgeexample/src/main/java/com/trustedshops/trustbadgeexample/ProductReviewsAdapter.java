@@ -2,7 +2,6 @@ package com.trustedshops.trustbadgeexample;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatRatingBar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

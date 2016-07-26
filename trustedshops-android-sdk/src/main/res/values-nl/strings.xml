@@ -13,4 +13,9 @@
         <item  quantity="many">%d beoordelingen</item>
         <item  quantity="other">%d beoordelingen</item>
     </plurals>
+    <string name="trustedshops_MARK_A">Uitstekend</string>
+    <string name="trustedshops_MARK_B">Goed</string>
+    <string name="trustedshops_MARK_C">Redelijk</string>
+    <string name="trustedshops_MARK_D">Matig</string>
+    <string name="trustedshops_MARK_E">Slecht</string>
 </resources>

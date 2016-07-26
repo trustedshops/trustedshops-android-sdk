@@ -583,7 +583,10 @@ public class Trustbadge {
                 }
                 try {
                     String jsonData = response.body().string();
-                    final Shop parsedShopObject = Shop.createFromQualityIndicatorsApiResponse(jsonData);
+                    Shop parsedShopObject = Shop.createFromQualityIndicatorsApiResponse(jsonData);
+
+                    parsedShopObject.getReviewIndicator().setOverallMarkDescription(_activity.getResources().getString(parsedShopObject.getReviewIndicator().getTranslatedRatingMark(parsedShopObject.getReviewIndicator().getOverallMarkDescription())).toUpperCase());
+
                     if (parsedShopObject.getReviewIndicator()!= null && parsedShopObject.getReviewIndicator().getActiveReviewCount() > 0) {
                         _shopWithQualityIndicators = parsedShopObject;
                         runOnUiThread(_activity, new Runnable() {

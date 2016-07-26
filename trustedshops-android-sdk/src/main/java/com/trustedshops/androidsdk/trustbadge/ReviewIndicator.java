@@ -1,6 +1,8 @@
 package com.trustedshops.androidsdk.trustbadge;
 
 
+import com.trustedshops.androidsdk.R;
+
 import java.util.Date;
 
 public class ReviewIndicator extends QualityIndicator {
@@ -103,6 +105,23 @@ public class ReviewIndicator extends QualityIndicator {
     @Override
     public QualityIndicatorType getType() {
         return QualityIndicatorType.REVIEW_INDICATOR;
+    }
+
+    public int getTranslatedRatingMark(String ratingMark) {
+        int responseMark = R.string.trustedshops_MARK_E;
+
+        if (ratingMark.equals("VERY_POOR")) {
+            responseMark = R.string.trustedshops_MARK_E;
+        } else if (ratingMark.equals("POOR")) {
+            responseMark = R.string.trustedshops_MARK_D;
+        } else if (ratingMark.equals("FAIR")) {
+            responseMark = R.string.trustedshops_MARK_C;
+        } else if (ratingMark.equals("GOOD")) {
+            responseMark = R.string.trustedshops_MARK_B;
+        } else if (ratingMark.equals("EXCELLENT")) {
+            responseMark = R.string.trustedshops_MARK_A;
+        }
+        return responseMark;
     }
 
 }

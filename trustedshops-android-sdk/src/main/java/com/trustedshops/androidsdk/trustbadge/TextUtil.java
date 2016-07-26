@@ -2,8 +2,8 @@ package com.trustedshops.androidsdk.trustbadge;
 
 import android.util.Log;
 
-import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
 
 public class TextUtil {
 

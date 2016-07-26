@@ -135,8 +135,8 @@ public class Shop {
                     _responseReviewIndicator.setOverallMark((float) reviewIndicatorObject.getDouble("overallMark"));
                 }
 
-                if (reviewIndicatorObject.has("overallMarkDescriptionGUILang")) {
-                    _responseReviewIndicator.setOverallMarkDescription(reviewIndicatorObject.getString("overallMarkDescriptionGUILang"));
+                if (reviewIndicatorObject.has("overallMarkDescription")) {
+                    _responseReviewIndicator.setOverallMarkDescription(reviewIndicatorObject.getString("overallMarkDescription"));
                 }
 
                 _responseShop.setReviewIndicator(_responseReviewIndicator);
