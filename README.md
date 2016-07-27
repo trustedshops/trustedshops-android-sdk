@@ -16,9 +16,9 @@ Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 1. [Installation](#1-installation)
 2. [Display Trustbadge](#2-display-trustbadge)
 3. [Display Customer Reviews](#3-display-customer-reviews)
-4. [Display Product Reviews](#3-display-customer-reviews)
-5. [Integration of Buyer Protection after Checkout](#4-integration-of-buyer-protection-after-checkout)
-6. [About this SDK](#5-about-this-sdk)
+4. [Display Product Reviews](#4-display-product-reviews)
+5. [Integration of Buyer Protection after Checkout](#5-integration-of-buyer-protection-after-checkout)
+6. [About this SDK](#6-about-this-sdk)
 
 - - - -
 
