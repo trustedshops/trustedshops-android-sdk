@@ -18,7 +18,8 @@ Our SDK supports the following languages: DE, EN, FR, ES, IT, NL, PL.
 3. [Display Customer Reviews](#3-display-customer-reviews)
 4. [Display Product Reviews](#4-display-product-reviews)
 5. [Integration of Buyer Protection after Checkout](#5-integration-of-buyer-protection-after-checkout)
-6. [About this SDK](#6-about-this-sdk)
+6. [Audit and Authorization](#6-audit-and-authorization)
+7. [About this SDK](#7-about-this-sdk)
 
 - - - -
 
@@ -272,13 +273,14 @@ tsCheckoutTrustbadgeOrder.addCheckoutProductItem(checkoutProduct1);
 
 - - - -
 
-## 6. About this SDK ##
+## 6. Audit and Authorization ##
+To use this SDK in your own mobile app Trusted Shops needs to audit and authorize your app.<br>
 
-#### Authorization ####
-To use this SDK in your own mobile app Trusted Shops needs to authorize your app.<br>
-Please contact us via [productfeedback@trustedshops.com](mailto:productfeedback@trustedshops.com) to get your apps authorized.  
+Please contact your customer success manager directly or via [members@trustedshops.com](mailto:members@trustedshops.com) to start the process.
 
-For testing and certification purposes the following TS-ID can be used: ```X330A2E7D449E31E467D2F53A55DDD070```
+- - - -
+
+## 7. About this SDK ##
 
 #### Requirements & Dependencies ####
 * We support Android API 16 and above.
