@@ -8,6 +8,9 @@ import android.webkit.JavascriptInterface;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class JsInterface {
     public String someString;
     Context mContext;
@@ -21,6 +24,11 @@ public class JsInterface {
         mCallback = checkoutCallback;
     }
 
+    public JsInterface(MaterialDialog dialog, Callback resizeCallback) {
+        mDialog = dialog;
+        mCallback = resizeCallback;
+    }
+
     @JavascriptInterface
     public void dialogDismiss(){
         mDialog.dismiss();
@@ -28,6 +36,25 @@ public class JsInterface {
             Message dismissMessage = Message.obtain();
             dismissMessage.what = TrustedShopsCheckout._dismissCallNumber;
             mCallback.handleMessage(dismissMessage);
+        }
+    }
+
+    @JavascriptInterface
+    public void resizeDialog(String widthCommaHeight) {
+//        Log.v("JS STUFF", "got something from js: " + widthCommaHeight);
+        try {
+            JSONObject temp = new JSONObject(widthCommaHeight);
+//            Log.v("JS STUFF", "created JSON object...");
+
+            if (mCallback != null) {
+                Message resizeMessage = Message.obtain();
+                resizeMessage.arg1 = temp.getInt("width");
+                resizeMessage.arg2 = temp.getInt("height");
+                mCallback.handleMessage(resizeMessage);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

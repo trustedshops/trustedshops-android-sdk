@@ -4,18 +4,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.internal.MDButton;
 import com.trustedshops.androidsdk.R;
 
 import java.io.File;
@@ -32,6 +35,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static android.R.attr.width;
+
 
 public class Trustbadge {
     OkHttpClient _client;
@@ -39,16 +44,20 @@ public class Trustbadge {
     protected ImageView _imageView;
     protected Activity _activity;
     protected boolean _loggingActive = false;
+    protected boolean _debugActive = false;
     protected int _iconColor;
     protected Shop _shop;
-    protected String _endPoint = "cdn1.api.trustedshops.com";
-    protected String _endPointDebug = "cdn1.api-qa.trustedshops.com";
+    private String _endPoint = "cdn1.api.trustedshops.com";
+    private String _endPointDebug = "cdn1.api-qa.trustedshops.com";
+    private String _trustcardEndpoint = "widgets.trustedshops.com";
+    private String _trustcardEndpointDebug = "widgets-qa.trustedshops.com";
     protected RatingBar _ratingBar;
     protected Shop _shopWithQualityIndicators;
     protected TextView _reviewMark, _reviewMarkDescription, _reviewCount, _reviewCountLong;
     protected Product _productWithReviewsList;
     protected Product _productWithQuaityIndicators;
     protected String _productSKU;
+    protected boolean _alreadyInjected = false;
 
     private OnTsCustomerReviewsFetchCompleted listener;
     private OnTsProductReviewsFetchCompleted productReviewsListener;
@@ -90,6 +99,12 @@ public class Trustbadge {
 
     /**
      *
+     * @param debugActive boolean
+     */
+    public void setDebugActive(boolean debugActive) { this._debugActive = debugActive; }
+
+    /**
+     *
      * @param iconColor String
      */
     public void setIconColor(String iconColor) {
@@ -107,18 +122,18 @@ public class Trustbadge {
 
     /**
      *
-     * @param endPoint for API to use
+     * @return String endPoint
      */
-    public void setEndPoint(String endPoint) {
-        _endPoint = endPoint;
+    public String getEndPoint() {
+        return _debugActive ? _endPointDebug : _endPoint;
     }
 
     /**
      *
-     * @return String endPoint
+     * @return String trustcardEndpoint
      */
-    public String getEndPoint() {
-        return _endPoint;
+    public String getTrustcardEndpoint() {
+        return _debugActive ? _trustcardEndpointDebug: _trustcardEndpoint;
     }
 
     /**
@@ -133,6 +148,13 @@ public class Trustbadge {
      */
     public boolean isLoggingActive() {
         return _loggingActive;
+    }
+
+    /**
+     * @return debugActive boolean
+     */
+    public boolean isDebugActive() {
+        return _debugActive;
     }
 
     public void setActivity(Activity activity) {
@@ -150,12 +172,12 @@ public class Trustbadge {
 
     public void enableDebugmode() {
         this.setLoggingActive(true);
-        this.setEndPoint(_endPointDebug);
+        this.setDebugActive(true);
     }
 
     public void disableDebugmode() {
         this.setLoggingActive(false);
-        this.setEndPoint(_endPoint);
+        this.setDebugActive(false);
     }
 
     /**
@@ -345,45 +367,85 @@ public class Trustbadge {
      */
     protected ImageView.OnClickListener showTrustcard = new ImageView.OnClickListener() {
         public void onClick(View v) {
-            boolean wrapInScrollView = true;
-            MaterialDialog dialog = new MaterialDialog.Builder(_activity)
-                    .customView(R.layout.trustcard, wrapInScrollView)
-                    .positiveText(android.R.string.ok)
-                    .negativeText(R.string.trustedshops_sdk_trustbadge_dialog_negative_button_text)
-                    .onNegative(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(MaterialDialog dialog, DialogAction which) {
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(UrlManager.getShopProfileUrl(_shop)));
-                            _activity.startActivity(browserIntent);
+            _alreadyInjected = false;
+            final WebView webView = new WebView(_activity);
+            webView.clearCache(true);
+            webView.setWebChromeClient(new WebChromeClient(){
+                public void onProgressChanged(WebView view, int newProgress) {
+                    if (newProgress == 100 && !_alreadyInjected) {
+
+                        // TODO: finish js injection and such
+                        view.loadUrl("javascript:injectTrustbadge('"+ getTsId() +"', '"+ getTrustcardEndpoint() +"')");
+
+                        if (isLoggingActive()) {
+                            Log.d("TSDEBUG","Page loaded");
                         }
-                    })
-                    .positiveColor(getIconColor())
-                    .negativeColor(getIconColor())
-                    .build();
-            try {
-
-                TextView trustcard_icon_1 = (TextView) dialog.getCustomView().findViewById(R.id.trustcard_icon_1);
-                TextView trustcard_icon_2 = (TextView) dialog.getCustomView().findViewById(R.id.trustcard_icon_2);
-                TextView trustcard_icon_3 = (TextView) dialog.getCustomView().findViewById(R.id.trustcard_icon_3);
-                if (getIconColor() != 0) {
-                    trustcard_icon_1.setTextColor(getIconColor());
-                    trustcard_icon_2.setTextColor(getIconColor());
-                    trustcard_icon_3.setTextColor(getIconColor());
-                    MDButton negative = dialog.getActionButton(DialogAction.NEUTRAL);
-                    negative.setTextColor(getIconColor());
-
-                } else {
-                    Log.d("TSDEBUG","NOT SETTING COLOR " + getIconColor());
+                        _alreadyInjected = true;
+                    }
                 }
+            });
 
-                dialog.show();
-            } catch (Exception e) {
-                if (isLoggingActive()) {
-                    Log.d("TSDEBUG", e.getMessage());
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setDisplayZoomControls(false);
+            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+            webView.setBackgroundColor(Color.parseColor("#FFDC0F"));
+            webView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return (event.getAction() == MotionEvent.ACTION_MOVE);
                 }
+            });
+
+            if (isLoggingActive()) {
+                webView.setWebContentsDebuggingEnabled(true);
             }
 
-
+            final MaterialDialog dialog = new MaterialDialog.Builder(_activity)
+                    .customView(webView, false)
+                    .build();
+            WebView.setWebContentsDebuggingEnabled(true);
+            Handler.Callback resizeCallback = new Handler.Callback() {
+                @Override
+                public boolean handleMessage(Message msg) {
+                    final float scale = _activity.getResources().getDisplayMetrics().density;
+                    final int width = (int)((float) msg.arg1 * scale);
+                    final int height = (int)((float)msg.arg2 * scale);
+//                    final int width = msg.arg1;
+//                    final int height = msg.arg2;
+//                    Log.v("JS STUFF", "successfully reached a handler callback; width: " + width + " height: " + height);
+                    _activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int oldWidth = webView.getWidth();
+                            int oldHeight = webView.getHeight();
+                            int offset = (int) ((oldWidth - width) / 1.0f) - 1;
+                            offset = offset < 0 ? 0 : offset;
+                            if ((oldWidth != width || oldHeight != height) && width != 0 && height != 0) {
+                                dialog.getWindow().setLayout(width + offset, height + offset);
+                                ViewGroup.LayoutParams params = webView.getLayoutParams();
+                                params.width = width;
+                                params.height = height;
+                                webView.setLayoutParams(params);
+                                webView.requestLayout();
+                            }
+//                            int newHeight = (int) ((float) oldWidth * ((float) height / (float) width));
+//                            if (oldHeight != newHeight && width != 0 && height != 0) {
+//                                dialog.getWindow().setLayout(oldWidth, newHeight);
+//                                ViewGroup.LayoutParams params = webView.getLayoutParams();
+//                                params.width = oldWidth;
+//                                params.height = newHeight;
+//                                webView.setLayoutParams(params);
+//                                webView.requestLayout();
+//                            }
+                        }
+                    });
+                    return true; //unused return value
+                }
+            };
+            JsInterface jsInterface = new JsInterface(dialog, resizeCallback);
+            webView.addJavascriptInterface(jsInterface, "jsInterface");
+            webView.loadUrl("file:///android_asset/trustcard_page.html");
+            dialog.show();
         }
     };
 

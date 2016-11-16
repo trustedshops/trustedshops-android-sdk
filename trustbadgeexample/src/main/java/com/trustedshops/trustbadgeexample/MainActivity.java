@@ -104,7 +104,8 @@ public class MainActivity extends AppCompatActivity
         Trustbadge trustbadge = new Trustbadge(tsId);
         try {
             //trustbadge.setIconColor("#F98222");
-            trustbadge.setLoggingActive(true);
+//            trustbadge.setLoggingActive(true);
+            trustbadge.enableDebugmode();
             trustbadge.getTrustbadge(testImageView, this);
         } catch (IllegalArgumentException exception) {
             Log.d("TSDEBUG", exception.getMessage());
