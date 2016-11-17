@@ -1,6 +1,7 @@
 package com.trustedshops.androidsdk.trustbadge;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -57,7 +58,8 @@ public class Trustbadge {
     protected Product _productWithReviewsList;
     protected Product _productWithQuaityIndicators;
     protected String _productSKU;
-    protected boolean _alreadyInjected = false;
+    private WebView _webView;
+    private boolean _alreadyInjected = false;
 
     private OnTsCustomerReviewsFetchCompleted listener;
     private OnTsProductReviewsFetchCompleted productReviewsListener;
@@ -368,9 +370,9 @@ public class Trustbadge {
     protected ImageView.OnClickListener showTrustcard = new ImageView.OnClickListener() {
         public void onClick(View v) {
             _alreadyInjected = false;
-            final WebView webView = new WebView(_activity);
-            webView.clearCache(true);
-            webView.setWebChromeClient(new WebChromeClient(){
+            _webView = new WebView(_activity);
+            _webView.clearCache(true);
+            _webView.setWebChromeClient(new WebChromeClient(){
                 public void onProgressChanged(WebView view, int newProgress) {
                     if (newProgress == 100 && !_alreadyInjected) {
 
@@ -385,66 +387,67 @@ public class Trustbadge {
                 }
             });
 
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.getSettings().setDisplayZoomControls(false);
-            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-            webView.setBackgroundColor(Color.parseColor("#FFDC0F"));
-            webView.setOnTouchListener(new View.OnTouchListener() {
+            _webView.getSettings().setJavaScriptEnabled(true);
+            _webView.getSettings().setDisplayZoomControls(false);
+            _webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+            _webView.setBackgroundColor(Color.parseColor("#FFDC0F"));
+            _webView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     return (event.getAction() == MotionEvent.ACTION_MOVE);
                 }
             });
 
-            if (isLoggingActive()) {
-                webView.setWebContentsDebuggingEnabled(true);
+            if (isDebugActive()) {
+                _webView.setWebContentsDebuggingEnabled(true);
             }
 
             final MaterialDialog dialog = new MaterialDialog.Builder(_activity)
-                    .customView(webView, false)
+                    .customView(_webView, false)
+                    .dismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            if (_webView != null) {
+                                _webView.loadUrl("about:blank");
+                                _webView = null;
+                            }
+                        }
+                    })
+                    .backgroundColor(Color.parseColor("#FFDC0F"))
                     .build();
-            WebView.setWebContentsDebuggingEnabled(true);
             Handler.Callback resizeCallback = new Handler.Callback() {
                 @Override
                 public boolean handleMessage(Message msg) {
                     final float scale = _activity.getResources().getDisplayMetrics().density;
                     final int width = (int)((float) msg.arg1 * scale);
                     final int height = (int)((float)msg.arg2 * scale);
-//                    final int width = msg.arg1;
-//                    final int height = msg.arg2;
-//                    Log.v("JS STUFF", "successfully reached a handler callback; width: " + width + " height: " + height);
                     _activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            int oldWidth = webView.getWidth();
-                            int oldHeight = webView.getHeight();
-                            int offset = (int) ((oldWidth - width) / 1.0f) - 1;
-                            offset = offset < 0 ? 0 : offset;
+                            if (_webView == null) {return;}
+                            int oldWidth = _webView.getWidth();
+                            int oldHeight = _webView.getHeight();
                             if ((oldWidth != width || oldHeight != height) && width != 0 && height != 0) {
-                                dialog.getWindow().setLayout(width + offset, height + offset);
-                                ViewGroup.LayoutParams params = webView.getLayoutParams();
+                                int offsetW = 0;
+                                int offsetH = 0;
+                                View containingView = dialog.getWindow().getDecorView();
+                                offsetW = containingView.getPaddingLeft() + containingView.getPaddingRight();
+                                offsetH = containingView.getPaddingTop() + containingView.getPaddingBottom();
+                                dialog.getWindow().setLayout(width + offsetW, height + offsetH);
+                                ViewGroup.LayoutParams params = _webView.getLayoutParams();
                                 params.width = width;
                                 params.height = height;
-                                webView.setLayoutParams(params);
-                                webView.requestLayout();
+                                _webView.setLayoutParams(params);
+                                _webView.forceLayout();
                             }
-//                            int newHeight = (int) ((float) oldWidth * ((float) height / (float) width));
-//                            if (oldHeight != newHeight && width != 0 && height != 0) {
-//                                dialog.getWindow().setLayout(oldWidth, newHeight);
-//                                ViewGroup.LayoutParams params = webView.getLayoutParams();
-//                                params.width = oldWidth;
-//                                params.height = newHeight;
-//                                webView.setLayoutParams(params);
-//                                webView.requestLayout();
-//                            }
                         }
                     });
                     return true; //unused return value
                 }
             };
             JsInterface jsInterface = new JsInterface(dialog, resizeCallback);
-            webView.addJavascriptInterface(jsInterface, "jsInterface");
-            webView.loadUrl("file:///android_asset/trustcard_page.html");
+            _webView.addJavascriptInterface(jsInterface, "jsInterface");
+            _webView.loadUrl("file:///android_asset/trustcard_page.html");
             dialog.show();
         }
     };

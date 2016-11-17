@@ -41,11 +41,8 @@ public class JsInterface {
 
     @JavascriptInterface
     public void resizeDialog(String widthCommaHeight) {
-//        Log.v("JS STUFF", "got something from js: " + widthCommaHeight);
         try {
             JSONObject temp = new JSONObject(widthCommaHeight);
-//            Log.v("JS STUFF", "created JSON object...");
-
             if (mCallback != null) {
                 Message resizeMessage = Message.obtain();
                 resizeMessage.arg1 = temp.getInt("width");

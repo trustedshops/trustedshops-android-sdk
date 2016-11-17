@@ -25,7 +25,6 @@
     </style>
     <script>
 		
-	/* This will be used in the future to determine resizing */
 	window.addEventListener("trustbadge_event_maximized_size_changed", function() { sendResizeMessage(); } );
 	window.addEventListener("trustbadge_event_maximized", function() { window.setTimeout(sendResizeMessage, 100); } );
 	window.addEventListener("trustbadge_event_minimized", function() { sendResizeMessage(); } );
@@ -51,9 +50,8 @@
     }
 	
 	function showAndAdaptCard() {
-		/* window.setTimeout(function(){ window.trustbadge.showCard();}, 500); */
 		window.trustbadge.showCard();
-		/* window.setTimeout(sendResizeMessage, 100); */
+		setInterval(sendResizeMessage, 300);
 	}
 	
 	function sendResizeMessage() {
@@ -78,5 +76,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
+<p>&nbsp;</p>
 </body>
 </html>
