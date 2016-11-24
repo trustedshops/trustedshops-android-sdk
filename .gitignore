@@ -2,6 +2,10 @@
 *.apk
 *.ap_
 
+# actual sdk deployment file (contains bintray username etc.)
+# ensure to create your local copy from gradle.properties.example
+gradle.properties
+
 # files for the dex VM
 *.dex
 
