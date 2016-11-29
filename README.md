@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.7.1'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.9.0'
 }
 ```
 
@@ -64,10 +64,14 @@ new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below. There you also find a TS-ID for testing.
 
 #### Optional Paramters ####
- ```Java
+ ~~```Java
  .setIconColor("#F98222");
  ```
- Sets the icon color in the lightbox in HEX Format.
+ Sets the icon color in the lightbox in HEX Format.~~ As of version 1.7.0 custom colors are deprecated. Setting a color won't change the displayed trustcard.
+ Note that, however, the trustcard is now the same that is displayed in your webshop, so the look is more consistent over the various media that may show your certificate. 
+ This also means that the trustcard includes more interactive behavior for your customer, depending on what services you booked at Trusted Shops. 
+ For example, the trustcard may show not just a link to your certificate, but also display sample reviews given by your customers. 
+ It also explains the buyer protection (depending on services) inline, so customers won't leave your app while checking up on that. 
  
  ```Java
  .setLoggingActive(true);
@@ -177,12 +181,12 @@ tsCheckoutTrustbadgeOrder.setTsId("YOUR-TRUSTED-SHOPS-ID");
 
 /* Mandatory shopping cart parameter*/
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderNr("checkoutOrderNumber"); 
-tsCheckoutTrustbadgeOrder.setTsCheckoutBuyerEmail("tester@example.com"); 
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderAmount("150,00"); 
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderCurrency("EUR"); 
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderPaymentType("PAYPAL");
 
 /* Optional shopping cart parameter */
+tsCheckoutTrustbadgeOrder.setTsCheckoutBuyerEmail("tester@example.com"); 
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderEstDeliveryDate("2016-06-30");
 
 /* Add callback for dialog dismiss */
@@ -218,7 +222,6 @@ This is your app's TS-ID which will be provided by Trusted Shops. <br>In order t
 
 ```Java
 .setTsCheckoutOrderNr("0123456789"); 
-.setTsCheckoutBuyerEmail("testbuyer@testprovider.com"); 
 .setTsCheckoutOrderAmount("150,00"); 
 .setTsCheckoutOrderCurrency("EUR"); 
 ```
@@ -248,6 +251,10 @@ Allowed payment type values are:<br>
 `"AMAZON_PAYMENTS"`
 
 #### Optional Parameters ####
+```Java
+.setTsCheckoutBuyerEmail("testbuyer@testprovider.com"); 
+```
+Sets the email address of the customer. Only leave this out if you do not have it! The trustbadge needs the customer's email to process the purchase of the buyer protection. If you don't specify it, the card will open a new page in a browser where the customer can fill it in manually. If you already to know the email of your customer and provide it, the trustcard won't have to switch to a browser, all necessary user interaction is done in the card, and thus in your app.
 ```Java
 .setTsCheckoutOrderEstDeliveryDate("Y-m-d");
 ```
