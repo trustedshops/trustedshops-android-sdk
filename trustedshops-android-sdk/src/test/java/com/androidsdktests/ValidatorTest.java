@@ -29,7 +29,6 @@ public class ValidatorTest {
     ));
 
     protected final ArrayList<String> invalidEmails = new ArrayList<String>(Arrays.asList(
-            "",
             "userexample.com",
             "userexamplecom",
             "user@example"
