@@ -422,7 +422,7 @@ public class Trustbadge {
                                 int offsetW = 0;
                                 int offsetH = 0;
                                 int height2 = height;
-                                if (height2 > 900) { height2 = 900; }
+//                                if (height2 > 900) { height2 = 900; }
                                 View containingView = dialog.getWindow().getDecorView();
                                 offsetW = containingView.getPaddingLeft() + containingView.getPaddingRight();
                                 offsetH = containingView.getPaddingTop() + containingView.getPaddingBottom();
