@@ -389,10 +389,6 @@ public class Trustbadge {
                 _webView.setWebContentsDebuggingEnabled(true);
             }
 
-//            _webView.setLayoutParams(new ViewGroup.LayoutParams(600, 400));
-//            _webView.setForegroundGravity(Gravity.BOTTOM);
-//            _webView.setBottom(0);
-
             final MaterialDialog dialog = new MaterialDialog.Builder(_activity)
                     .customView(_webView, false)
                     .dismissListener(new DialogInterface.OnDismissListener() {
@@ -419,17 +415,13 @@ public class Trustbadge {
                             int oldWidth = _webView.getWidth();
                             int oldHeight = _webView.getHeight();
                             if ((oldWidth != width || oldHeight != height) && width != 0 && height != 0) {
-                                int offsetW = 0;
-                                int offsetH = 0;
-                                int height2 = height;
-//                                if (height2 > 900) { height2 = 900; }
                                 View containingView = dialog.getWindow().getDecorView();
-                                offsetW = containingView.getPaddingLeft() + containingView.getPaddingRight();
-                                offsetH = containingView.getPaddingTop() + containingView.getPaddingBottom();
-                                dialog.getWindow().setLayout(width + offsetW, height2 + offsetH);
+                                int offsetW = containingView.getPaddingLeft() + containingView.getPaddingRight();
+                                int offsetH = containingView.getPaddingTop() + containingView.getPaddingBottom();
+                                dialog.getWindow().setLayout(width + offsetW, height + offsetH);
                                 ViewGroup.LayoutParams params = _webView.getLayoutParams();
                                 params.width = width;
-                                params.height = height2;
+                                params.height = height;
                                 _webView.setLayoutParams(params);
                                 _webView.forceLayout();
                                 if (!dialog.isShowing()) {
@@ -455,16 +447,10 @@ public class Trustbadge {
                             Log.d("TSDEBUG","Page loaded");
                         }
                         _alreadyInjected = true;
-
-//                        dialog.show();
-                        Log.d("GERODEV", "Would show now!");
                     }
                 }
             });
-//            dialog.getWindow().setLayout(996, 1317);
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
-//            dialog.getCustomView().getRootView().setBackgroundColor(Color.parseColor("#FFDC0F"));
-//            dialog.show();
         }
     };
 

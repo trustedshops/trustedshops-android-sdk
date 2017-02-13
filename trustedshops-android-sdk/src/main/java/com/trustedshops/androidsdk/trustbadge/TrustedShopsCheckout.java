@@ -9,6 +9,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.trustedshops.androidsdk.R;
 
 import java.util.ArrayList;
 
@@ -164,6 +165,7 @@ public class TrustedShopsCheckout {
         //webView.loadUrl("http://www.google.de");
         JsInterface jsInterface = new JsInterface(dialog, _trustbadgeOrder, checkoutCallback);
         webView.addJavascriptInterface(jsInterface, "jsInterface");
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
         webView.loadUrl("file:///android_asset/checkout_page.html");
         dialog.show();
 
