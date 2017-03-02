@@ -14,7 +14,9 @@
     <plurals
         name="reviewDescriptionLong">
         <item  quantity="one">%d Bewertung</item>
+        <item  quantity="few">%d Bewertungen</item>
         <item  quantity="many">%d Bewertungen</item>
+        <item  quantity="other">%d Bewertungen</item>
     </plurals>
     <string name="trustedshops_MARK_A">Excellent</string>
     <string name="trustedshops_MARK_B">Good</string>

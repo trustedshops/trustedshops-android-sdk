@@ -139,7 +139,7 @@ public class TrustedShopsCheckout {
         webView.getSettings().setDisplayZoomControls(false);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
-        if (isDebugmodeEnabled()) {
+        if (isDebugmodeEnabled() && android.os.Build.VERSION.SDK_INT >= 19) {
             webView.setWebContentsDebuggingEnabled(true);
         }
 

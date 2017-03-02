@@ -31,7 +31,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 15
         targetSdkVersion 25
         versionCode 0
         versionName libraryVersion

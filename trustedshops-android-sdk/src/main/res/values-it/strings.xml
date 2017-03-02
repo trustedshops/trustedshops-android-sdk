@@ -10,6 +10,7 @@
     <plurals
         name="reviewDescriptionLong">
         <item  quantity="one">%d recensione</item>
+        <item  quantity="few">%d recensioni</item>
         <item  quantity="many">%d recensioni</item>
         <item  quantity="other">%d recensioni</item>
     </plurals>
