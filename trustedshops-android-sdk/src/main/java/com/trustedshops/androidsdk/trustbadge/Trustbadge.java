@@ -8,12 +8,15 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
+import android.util.LayoutDirection;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -34,8 +37,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static android.R.attr.width;
 
 
 public class Trustbadge {
@@ -371,20 +372,7 @@ public class Trustbadge {
             _alreadyInjected = false;
             _webView = new WebView(_activity);
             _webView.clearCache(true);
-            _webView.setWebChromeClient(new WebChromeClient(){
-                public void onProgressChanged(WebView view, int newProgress) {
-                    if (newProgress == 100 && !_alreadyInjected) {
 
-                        // TODO: finish js injection and such
-                        view.loadUrl("javascript:injectTrustbadge('"+ getTsId() +"', '"+ getTrustcardEndpoint() +"')");
-
-                        if (isLoggingActive()) {
-                            Log.d("TSDEBUG","Page loaded");
-                        }
-                        _alreadyInjected = true;
-                    }
-                }
-            });
 
             _webView.getSettings().setJavaScriptEnabled(true);
             _webView.getSettings().setDisplayZoomControls(false);
@@ -427,17 +415,18 @@ public class Trustbadge {
                             int oldWidth = _webView.getWidth();
                             int oldHeight = _webView.getHeight();
                             if ((oldWidth != width || oldHeight != height) && width != 0 && height != 0) {
-                                int offsetW = 0;
-                                int offsetH = 0;
                                 View containingView = dialog.getWindow().getDecorView();
-                                offsetW = containingView.getPaddingLeft() + containingView.getPaddingRight();
-                                offsetH = containingView.getPaddingTop() + containingView.getPaddingBottom();
+                                int offsetW = containingView.getPaddingLeft() + containingView.getPaddingRight();
+                                int offsetH = containingView.getPaddingTop() + containingView.getPaddingBottom();
                                 dialog.getWindow().setLayout(width + offsetW, height + offsetH);
                                 ViewGroup.LayoutParams params = _webView.getLayoutParams();
                                 params.width = width;
                                 params.height = height;
                                 _webView.setLayoutParams(params);
                                 _webView.forceLayout();
+                                if (!dialog.isShowing()) {
+                                    dialog.show();
+                                }
                             }
                         }
                     });
@@ -447,7 +436,21 @@ public class Trustbadge {
             JsInterface jsInterface = new JsInterface(dialog, resizeCallback);
             _webView.addJavascriptInterface(jsInterface, "jsInterface");
             _webView.loadUrl("file:///android_asset/trustcard_page.html");
-            dialog.show();
+            _webView.setWebChromeClient(new WebChromeClient(){
+                public void onProgressChanged(WebView view, int newProgress) {
+                    if (newProgress == 100 && !_alreadyInjected) {
+
+                        // TODO: finish js injection and such
+                        view.loadUrl("javascript:injectTrustbadge('"+ getTsId() +"', '"+ getTrustcardEndpoint() +"')");
+
+                        if (isLoggingActive()) {
+                            Log.d("TSDEBUG","Page loaded");
+                        }
+                        _alreadyInjected = true;
+                    }
+                }
+            });
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
         }
     };
 
