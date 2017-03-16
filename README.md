@@ -64,10 +64,11 @@ new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below. There you also find a TS-ID for testing.
 
 #### Optional Paramters ####
- ~~```Java
- .setIconColor("#F98222");
- ```
- Sets the icon color in the lightbox in HEX Format.~~ As of version 1.7.0 custom colors are deprecated. Setting a color won't change the displayed trustcard.
+
+ ~~`.setIconColor("#F98222");`~~
+ 
+ ~~Sets the icon color in the lightbox in HEX Format.~~ 
+ As of version 1.7.0 custom colors are deprecated. Setting a color won't change the displayed trustcard.
  Note that, however, the trustcard is now the same that is displayed in your webshop, so the look is more consistent over the various media that may show your certificate. 
  This also means that the trustcard includes more interactive behavior for your customer, depending on what services you booked at Trusted Shops. 
  For example, the trustcard may show not just a link to your certificate, but also display sample reviews given by your customers. 
