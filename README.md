@@ -61,7 +61,7 @@ ImageView imageView = (ImageView) findViewById(R.id.trustbadgeTestImageView);
 ```Java
 new Trustbadge("YOUR-TRUSTED-SHOPS-ID");
 ```
-This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below. There you also find a TS-ID for testing.
+This is your app's TS-ID which will be provided by Trusted Shops. <br>In order to get your TS-ID authorized please see the "Authorization" section below.
 
 #### Optional Paramters ####
 
