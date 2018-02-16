@@ -50,8 +50,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
     compile 'com.afollestad.material-dialogs:core:0.9.3.0'
-    compile 'org.apache.directory.studio:org.apache.commons.codec:1.8'
-    testCompile 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
+    testCompile 'commons-io:commons-io:2.4'
     testCompile 'org.json:json:20160212'
 
 }
