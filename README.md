@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.9.1'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.9.2'
 }
 ```
 
