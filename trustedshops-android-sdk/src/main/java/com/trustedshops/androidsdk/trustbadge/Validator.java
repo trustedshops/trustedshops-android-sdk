@@ -32,7 +32,7 @@ public class Validator {
         ArrayList<Error> errorList = new ArrayList<Error>();
 
         /* check if minimum required fields are set */
-        if (order.getTsId() == null || order.getTsCheckoutOrderAmount() == null || order.getTsCheckoutOrderPaymentType() == null || order.getTsCheckoutOrderNr() == null || order.getTsCheckoutBuyerEmail() == null) {
+        if (order.getTsId() == null || order.getTsCheckoutOrderAmount() == null || order.getTsCheckoutOrderPaymentType() == null || order.getTsCheckoutOrderNr() == null) {
             errorList.add(new Error("Required parameter are no set, you have to provide: tsCheckoutOrderAmont, tsCheckoutOrderPaymentType, tsCheckoutOrderNr, tsCheckoutBuyerEmail"));
         }
 
