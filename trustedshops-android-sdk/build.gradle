@@ -12,7 +12,7 @@ ext {
     siteUrl = 'https://github.com/trustedshops/trustedshops-android-sdk'
     gitUrl = 'https://github.com/trustedshops/trustedshops-android-sdk.git'
 
-    libraryVersion = '1.9.2'
+    libraryVersion = '1.9.3'
 
     developerId = 'trustedshops'
     developerName = 'Gero Herkenrath'
@@ -23,7 +23,7 @@ ext {
     allLicenses = ["MIT"]
 }
 android {
-    compileSdkVersion 25
+    compileSdkVersion 27
     buildToolsVersion "27.0.3"
 
     lintOptions {
@@ -32,7 +32,7 @@ android {
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 0
         versionName libraryVersion
     }
@@ -46,13 +46,13 @@ android {
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.squareup.okhttp3:okhttp:3.9.1'
-    compile 'com.afollestad.material-dialogs:core:0.9.4.5'
-    compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
-    testCompile 'commons-io:commons-io:2.4'
-    testCompile 'org.json:json:20160212'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.11'
+    testImplementation 'commons-io:commons-io:2.4'
+    testImplementation 'org.json:json:20160212'
 
 }
 

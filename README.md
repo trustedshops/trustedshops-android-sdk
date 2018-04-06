@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.9.2'
+    compile 'com.trustedshops.androidsdk:trustedshops-android-sdk:1.9.3'
 }
 ```
 
@@ -187,7 +187,7 @@ tsCheckoutTrustbadgeOrder.setTsCheckoutOrderCurrency("EUR");
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderPaymentType("PAYPAL");
 
 /* Optional shopping cart parameter */
-tsCheckoutTrustbadgeOrder.setTsCheckoutBuyerEmail("tester@example.com"); 
+tsCheckoutTrustbadgeOrder.setTsCheckoutBuyerEmail("tester@example.com");
 tsCheckoutTrustbadgeOrder.setTsCheckoutOrderEstDeliveryDate("2016-06-30");
 
 /* Add callback for dialog dismiss */
@@ -255,7 +255,7 @@ Allowed payment type values are:<br>
 ```Java
 .setTsCheckoutBuyerEmail("testbuyer@testprovider.com"); 
 ```
-Sets the email address of the customer. Only leave this out if you do not have it! The trustbadge needs the customer's email to process the purchase of the buyer protection. If you don't specify it, the card will open a new page in a browser where the customer can fill it in manually. If you already to know the email of your customer and provide it, the trustcard won't have to switch to a browser, all necessary user interaction is done in the card, and thus in your app.
+Sets the email address of the customer. Only leave this out (i.e. leave it as null or provide "") if you do not have it! The trustbadge needs the customer's email to process the purchase of the buyer protection. If you don't specify it, the card will open a new page in a browser where the customer can fill it in manually. If you already to know the email of your customer and provide it, the trustcard won't have to switch to a browser, all necessary user interaction is done in the card, and thus in your app.
 ```Java
 .setTsCheckoutOrderEstDeliveryDate("Y-m-d");
 ```
@@ -291,8 +291,8 @@ Please contact your customer success manager directly or via [members@trustedsho
 ## 7. About this SDK ##
 
 #### Requirements & Dependencies ####
-* We support Android API 15 and above.
-* Trustedshops Android SDK depends on:
+ * We support Android API 15 and above.
+ * Trustedshops Android SDK depends on:
  * Square's popular [OkHTTP](http://square.github.io/okhttp/) library
  * afollestad [material dialogs](https://github.com/afollestad/material-dialogs) library
 
