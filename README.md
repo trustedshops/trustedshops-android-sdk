@@ -291,8 +291,8 @@ Please contact your customer success manager directly or via [members@trustedsho
 ## 7. About this SDK ##
 
 #### Requirements & Dependencies ####
-* We support Android API 15 and above.
-* Trustedshops Android SDK depends on:
+ * We support Android API 15 and above.
+ * Trustedshops Android SDK depends on:
  * Square's popular [OkHTTP](http://square.github.io/okhttp/) library
  * afollestad [material dialogs](https://github.com/afollestad/material-dialogs) library
 
