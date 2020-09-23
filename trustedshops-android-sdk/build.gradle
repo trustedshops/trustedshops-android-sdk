@@ -23,8 +23,7 @@ ext {
     allLicenses = ["MIT"]
 }
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 30
 
     lintOptions {
         abortOnError false
@@ -32,7 +31,7 @@ android {
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 30
         versionCode 0
         versionName libraryVersion
     }
@@ -48,11 +47,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.2'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.11'
     testImplementation 'commons-io:commons-io:2.4'
-    testImplementation 'org.json:json:20160212'
+    testImplementation 'org.json:json:20180813'
 
 }
 
