@@ -38,7 +38,7 @@
         android:layout_below="@+id/productTitle"
         android:layout_alignLeft="@+id/productTitle"
          />
-    <android.support.v7.widget.AppCompatRatingBar
+    <androidx.appcompat.widget.AppCompatRatingBar
         android:layout_below="@+id/productSKU"
         android:layout_alignLeft="@+id/productSKU"
         android:layout_width="wrap_content"
