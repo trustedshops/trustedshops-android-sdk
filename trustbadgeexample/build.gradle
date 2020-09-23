@@ -27,6 +27,6 @@ dependencies {
     implementation project(':trustedshops-android-sdk') // remove this if you only imported the example project
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
-    implementation 'com.google.code.gson:gson:2.8.2'
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
