@@ -49,7 +49,7 @@ public class ProductReviewsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Picasso.with(this).load("http://demoshop.trustedshops.com/out/pictures/master/product/1/kommode.jpg").resize(150, 110).centerCrop().into((ImageView) findViewById(R.id.productImage));
+        Picasso.get().load("http://demoshop.trustedshops.com/out/pictures/master/product/1/kommode.jpg").resize(150, 110).centerCrop().into((ImageView) findViewById(R.id.productImage));
         productReviewsList = (ListView) findViewById(R.id.productReviewList);
         getProductReviewsList();
         getProductReviewsSummary();
