@@ -1,7 +1,10 @@
 # Trusted Shops SDK for Android #
-
 [![CI Status](https://travis-ci.org/trustedshops/trustedshops-android-sdk.svg?branch=master)](https://travis-ci.org/trustedshops/trustedshops-android-sdk)
 [![Bintray](https://img.shields.io/bintray/v/trustedshops/maven/trustedshops-android-sdk.svg?maxAge=3600)]()
+
+---
+> # ⚠️ This project is no longer supported, maintained and has been replaced by [trustedshops-public/etrusted-android-trustbadge-library](https://github.com/trustedshops-public/etrusted-android-trustbadge-library).
+---
 
 By integrating our SDK into your shopping app you can leverage the following features included in your Trusted Shops membership: 
 * **Trustbadge**: Show the Trustbadge in any view and size and provide additional information along with a link to your certificate
